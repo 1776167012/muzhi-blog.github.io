@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>11.父类和子类 - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="1.如何定义父类和子类？简单来说，当存在一个类Fath...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">11.父类和子类</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">11.父类和子类</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 15, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>4361</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="1-如何定义父类和子类？"><a href="#1-如何定义父类和子类？" class="headerlink" title="1.如何定义父类和子类？"></a>1.如何定义父类和子类？</h1><p>简单来说，当存在一个类Father，当我们使用关键字extends,class写出下面语句：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Son</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Father</span>&#123;<br>.....<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>我们就定义了Son和Father之间的父子关系。</p>
+<p>上面定义的是一个名为Son的新类，和直接用class Son{}不同，它使用extends继承了Father类。<br>类Son和Father的关系是: Son是Father的子类，Father是Son的父类。</p>
+<h2 id="2-子类继承了父类的什么？"><a href="#2-子类继承了父类的什么？" class="headerlink" title="2.子类继承了父类的什么？"></a>2.子类继承了父类的什么？</h2><p><strong>子类继承了父类一部分的变量和方法。</strong></p>
+<p>我们知道类的两个重要的成员：变量和方法。<br>父类有自己的变量和方法，子类继承了父类的一些成员，所以子类不仅拥有自己的变量和方法，而且子类也可以拥有父类定义的一些变量和方法。<br>子类可以直接使用它继承的父类中的成员和方法。</p>
+<p><strong>我们都知道类是通过它的构造方法来为自己分配变量内存空间的， 由于子类继承了父类，<br>所以子类的构造方法默认会先调用父类的构造方法，然后再用自己的构造法方法。</strong>（但这并不是继承，即子类不继承父类的构造方法）<br><strong>继承很好的解决了代码复用以及功能纵向扩展。</strong></p>
+<p>例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Father</span>&#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">money</span> <span class="hljs-operator">=</span> <span class="hljs-number">1000000</span>;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">fight</span><span class="hljs-params">()</span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;I will kill you&quot;</span>)<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Son</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Father</span>&#123;<br>     <span class="hljs-type">int</span> <span class="hljs-variable">weight</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在这一段代码中，Son继承了Father的money变量和fight方法。相当于Son的实际定义是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Son</span>&#123;<br><span class="hljs-type">int</span> <span class="hljs-variable">money</span> <span class="hljs-operator">=</span> <span class="hljs-number">1000000</span>;<br><span class="hljs-type">int</span> weight=<span class="hljs-number">10</span>;<br> <span class="hljs-keyword">void</span> <span class="hljs-title function_">fight</span><span class="hljs-params">()</span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;I will kill you&quot;</span>)<br>  &#125;<br> &#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="3-继承的限制"><a href="#3-继承的限制" class="headerlink" title="3.继承的限制"></a>3.继承的限制</h1><p>子类并不能继承父类的所有变量和方法，它是有限制的。</p>
+<ul>
+<li>子类和父类在同一包中的继承性：除了private成员变量和方法，其他public,protected,无修饰符的变量和方法都继承了。</li>
+<li>子类和父类不在同一包中：子类只继承父类的protected和public成员。（这里protected和友好类的差别出现了）</li>
+</ul>
+<h1 id="4-类的树形结构"><a href="#4-类的树形结构" class="headerlink" title="4.类的树形结构"></a>4.类的树形结构</h1><p>Object是所有的类的祖先类，系统默认。</p>
+<p>类似于：</p>
+<pre class="mermaid">graph TB
+Object--> Son1
+Object--> Son2
+Son1--> grandSon1
+Son1--> grandSon2
+Son2--> grandSon3
+Son2--> grandSon4</pre>
+
+<p>其中Object是系统默认的祖先类，即它是任何一个类的祖先类,祖先类和孙子类之间也存在继承关系。</p>
+<h1 id="5-Object类中的方法（先了解需要了解的）"><a href="#5-Object类中的方法（先了解需要了解的）" class="headerlink" title="5.Object类中的方法（先了解需要了解的）"></a>5.Object类中的方法（先了解需要了解的）</h1><h2 id="5-1-protected-Object-clone"><a href="#5-1-protected-Object-clone" class="headerlink" title="5.1 protected Object clone()"></a>5.1 protected Object clone()</h2><h3 id="5-1-1-方法介绍"><a href="#5-1-1-方法介绍" class="headerlink" title="5.1.1 方法介绍"></a>5.1.1 方法介绍</h3><p>创建并返回此对象的克隆副本。（副本和本体是两个独立的对象）<br><strong>注意：这个方法是用protected修饰符修饰的。</strong></p>
+<p>用protected修饰的成员变量和方法被称为受保护的成员变量和方法。<br>当在另外一个类中用一个类创建了一个对象后，<br><strong>如果两个类在同一包中</strong>，那么该对象可以访问该类的protected变量和方法，否则不可见。</p>
+<p>所以，当我们在自己的包中新建一个类并使用Object创建对象的时候，我们是不能直接使用其clone方法的。</p>
+<h3 id="5-1-2-使用教程"><a href="#5-1-2-使用教程" class="headerlink" title="5.1.2 使用教程"></a>5.1.2 使用教程</h3><p>既然我们知道Object是所有类的父类，那么我们就可以通过super关键字来调用啊。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ObjectStudy</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException &#123;<br>        <span class="hljs-type">ObjectStudy</span> <span class="hljs-variable">objectStudy</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectStudy</span>();<br>        System.out.println(objectStudy.Test().toString());<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">Test</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">super</span>.clone();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>当我们运行上面的示例时，我们看到程序运行抛出了一个异常：<br><strong>CloneNotSupportedException</strong></p>
+<p>通过查看源码我发现了下面这段话：</p>
+<p><strong>if the object’s class does not support the Cloneable interface. Subclasses that override the clone method can also throw this exception to indicate that an instance cannot be cloned</strong></p>
+<p>翻译过来就是：</p>
+<p><strong>如果对象的类不支持Cloneable接口。重写克隆方法的子类也可以抛出此异常，以表明无法克隆实例</strong></p>
+<p>通过这里我们得知，想要实现对一个对象的克隆，其类定义需要实现Cloneable接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ObjectStudy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Cloneable</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException &#123;<br>        <span class="hljs-type">ObjectStudy</span> <span class="hljs-variable">objectStudy</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectStudy</span>();<br>        System.out.println(objectStudy.Test().toString());<br>    &#125;<br>    <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">Test</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">super</span>.clone();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">Base.exa11.ObjectCloneStudy@677327b6<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+<p>再运行的时候，发现成功了。</p>
+<h2 id="5-2-public-boolean-equals-Object-obj"><a href="#5-2-public-boolean-equals-Object-obj" class="headerlink" title="5.2 public boolean equals(Object obj)"></a>5.2 public boolean equals(Object obj)</h2><h3 id="5-2-1-方法介绍"><a href="#5-2-1-方法介绍" class="headerlink" title="5.2.1 方法介绍"></a>5.2.1 方法介绍</h3><p>通过名称我们可以知道，这个方法用来判断对象本身和另一个对象是否相等。<br>通过查看方法体:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">equals</span><span class="hljs-params">(Object obj)</span> &#123;<br>    <span class="hljs-keyword">return</span> (<span class="hljs-built_in">this</span> == obj);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们知道在Object中，此方法在Object的默认实现是通过比较对象引用的值来判断两个对象是否相等。</p>
+<h3 id="5-2-2-使用教程"><a href="#5-2-2-使用教程" class="headerlink" title="5.2.2 使用教程"></a>5.2.2 使用教程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ObjectEqualsStudy</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">Object</span> <span class="hljs-variable">ojb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>();<br>        <span class="hljs-type">Object</span> <span class="hljs-variable">ojb2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>();<br>        System.out.println(<span class="hljs-string">&quot;ojb: &quot;</span>+ojb);<br>        System.out.println(<span class="hljs-string">&quot;ojb2: &quot;</span> +ojb2);<br>        System.out.println(ojb.equals(ojb2));<br>        System.out.println(ojb.equals(ojb));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">ojb: java.lang.Object@677327b6<br>ojb2: java.lang.Object@14ae5a5<br>false<br>true<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<h2 id="5-3-int-hashCode"><a href="#5-3-int-hashCode" class="headerlink" title="5.3  int hashCode()"></a>5.3  int hashCode()</h2><h3 id="5-3-1-方法介绍"><a href="#5-3-1-方法介绍" class="headerlink" title="5.3.1 方法介绍"></a>5.3.1 方法介绍</h3><p>这个方法的作用就是返回对象的唯一哈希码值（理论上）</p>
+<h3 id="5-3-2-使用教程"><a href="#5-3-2-使用教程" class="headerlink" title="5.3.2 使用教程"></a>5.3.2 使用教程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ObjectHashCodeStudy</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">Object</span> <span class="hljs-variable">obj</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>();<br>        System.out.println(obj.hashCode());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">1735600054<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<h2 id="5-4-String-toString"><a href="#5-4-String-toString" class="headerlink" title="5.4 String toString()"></a>5.4 String toString()</h2><h3 id="5-4-1-方法介绍"><a href="#5-4-1-方法介绍" class="headerlink" title="5.4.1 方法介绍"></a>5.4.1 方法介绍</h3><p>返回此对象的字符串表示</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> String <span class="hljs-title function_">toString</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-comment">//这个Integer.toHexString()是十进制转为无符号的16进制字符串表示</span><br>    <span class="hljs-keyword">return</span> getClass().getName() + <span class="hljs-string">&quot;@&quot;</span> + Integer.toHexString(hashCode());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="5-4-2-使用教程"><a href="#5-4-2-使用教程" class="headerlink" title="5.4.2 使用教程"></a>5.4.2 使用教程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ObjectToStringStudy</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">Object</span> <span class="hljs-variable">o</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>();<br>        System.out.println(o.toString());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">java.lang.Object@677327b6<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<p>代码地址：<br><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/exa11">Java基础学习&#x2F;src&#x2F;main&#x2F;java&#x2F;exa11 · 严家豆&#x2F;Study - 码云 - 开源中国 (gitee.com)</a></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/15/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E5%9F%BA%E7%A1%80/11-%E7%88%B6%E7%B1%BB%E5%92%8C%E5%AD%90%E7%B1%BB,Object%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;15&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;11-%E7%88%B6%E7%B1%BB%E5%92%8C%E5%AD%90%E7%B1%BB,Object%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;15&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;11-%E7%88%B6%E7%B1%BB%E5%92%8C%E5%AD%90%E7%B1%BB,Object%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80/" rel="tag">Java基础</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2023/05/15/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E5%9F%BA%E7%A1%80/10-JRE%E6%89%A9%E5%B1%95%E5%92%8Cjar%E6%96%87%E4%BB%B6%E4%BB%A5%E5%8F%8A%E6%96%87%E6%A1%A3%E7%94%9F%E6%88%90%E5%99%A8/"><i class="iconfont iconleft"></i>10.JRE扩展和Jar文件以及文档生成器</a>
+    <a href="/2023/05/15/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E5%9F%BA%E7%A1%80/12-%E5%AD%90%E7%B1%BB%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%89%B9%E6%80%A7%EF%BC%8Cinstanceof%EF%BC%8Csuper,this/">12.子类对象的特性<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E7%88%B6%E7%B1%BB%E5%92%8C%E5%AD%90%E7%B1%BB%EF%BC%9F"><span class="toc-text">1.如何定义父类和子类？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AD%90%E7%B1%BB%E7%BB%A7%E6%89%BF%E4%BA%86%E7%88%B6%E7%B1%BB%E7%9A%84%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">2.子类继承了父类的什么？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E7%BB%A7%E6%89%BF%E7%9A%84%E9%99%90%E5%88%B6"><span class="toc-text">3.继承的限制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E7%B1%BB%E7%9A%84%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84"><span class="toc-text">4.类的树形结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Object%E7%B1%BB%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%88%E5%85%88%E4%BA%86%E8%A7%A3%E9%9C%80%E8%A6%81%E4%BA%86%E8%A7%A3%E7%9A%84%EF%BC%89"><span class="toc-text">5.Object类中的方法（先了解需要了解的）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-protected-Object-clone"><span class="toc-text">5.1 protected Object clone()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-1-%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="toc-text">5.1.1 方法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-2-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-text">5.1.2 使用教程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-public-boolean-equals-Object-obj"><span class="toc-text">5.2 public boolean equals(Object obj)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-1-%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="toc-text">5.2.1 方法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-2-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-text">5.2.2 使用教程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-int-hashCode"><span class="toc-text">5.3  int hashCode()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-1-%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="toc-text">5.3.1 方法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-2-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-text">5.3.2 使用教程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-String-toString"><span class="toc-text">5.4 String toString()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-1-%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="toc-text">5.4.1 方法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-2-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-text">5.4.2 使用教程</span></a></li></ol></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

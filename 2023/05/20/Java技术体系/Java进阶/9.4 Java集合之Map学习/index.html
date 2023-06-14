@@ -1,0 +1,624 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>9.4 Java集合之Map学习 - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="1.Map接口graph LR
+SortedMap -...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">9.4 Java集合之Map学习</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">9.4 Java集合之Map学习</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 20, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>11599</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="1-Map接口"><a href="#1-Map接口" class="headerlink" title="1.Map接口"></a>1.Map接口</h1><pre class="mermaid">graph LR
+SortedMap --extend--> Map
+NavigableMap --extend--> SortedMap</pre>
+
+<p>从上图中我们知道Map是个独立的接口,它和Collection是一个层次的,他们之间不存在继承关系，但可能存在组合关系。<br>Map是用来存储键值对的数据结构。</p>
+<h2 id="1-1-Map接口定义"><a href="#1-1-Map接口定义" class="headerlink" title="1.1 Map接口定义"></a>1.1 Map接口定义</h2><table>
+<thead>
+<tr>
+<th>方法定义</th>
+<th>方法描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int size()</td>
+<td>获得Map中存储键值对个数</td>
+</tr>
+<tr>
+<td>boolean isEmpty()</td>
+<td>判断Map是否为空</td>
+</tr>
+<tr>
+<td>boolean containsKey(Object key)</td>
+<td>判断Map中是否包含指定键</td>
+</tr>
+<tr>
+<td>boolean containsValue(Object value)</td>
+<td>判断Map中是否包含指定值</td>
+</tr>
+<tr>
+<td>V get(Object key)</td>
+<td>根据键对象在Map中获取对应的值</td>
+</tr>
+<tr>
+<td>V put(K key,V value)</td>
+<td>向Map中添加键值对</td>
+</tr>
+<tr>
+<td>V remove(Object key)</td>
+<td>从Map中删除指定键对应的键值对</td>
+</tr>
+</tbody></table>
+<p>等等.</p>
+<p>从上面我们可以看到，如果我们想得到包含键值对的集合对Map进行遍历，我们可以对Map.Entry来进行操作。</p>
+<p>下面我们就来学习一下Map中对于Entry的定义</p>
+<h2 id="1-2-Entry接口"><a href="#1-2-Entry接口" class="headerlink" title="1.2 Entry接口"></a>1.2 Entry接口</h2><table>
+<thead>
+<tr>
+<th>方法定义</th>
+<th>方法描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>K getKey()</td>
+<td>获取Key值</td>
+</tr>
+<tr>
+<td>V getValue()</td>
+<td>获取Value值</td>
+</tr>
+<tr>
+<td>V setValue(V value)</td>
+<td>设置value并返回旧值</td>
+</tr>
+</tbody></table>
+<p>等等.</p>
+<h1 id="2-Map具体实现"><a href="#2-Map具体实现" class="headerlink" title="2. Map具体实现"></a>2. Map具体实现</h1><table>
+<thead>
+<tr>
+<th>集合类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ArrayList</td>
+<td>一种可以动态增长和缩减的索引序列</td>
+</tr>
+<tr>
+<td>LinkedList</td>
+<td>一种可以在任何位置进行高效地插入和删除操作的有序序列</td>
+</tr>
+<tr>
+<td>ArrayDeque</td>
+<td>一种用循环数组实现的双端队列</td>
+</tr>
+<tr>
+<td>HashSet</td>
+<td>一种没有重复元素的无序集合</td>
+</tr>
+<tr>
+<td>TreeSet</td>
+<td>一种没有重复元素的有序集合</td>
+</tr>
+<tr>
+<td>EnumSet</td>
+<td>一种包含枚举类型值的集</td>
+</tr>
+<tr>
+<td>LinkedHashSet</td>
+<td>一种可以记住元素插入次序的集</td>
+</tr>
+<tr>
+<td>PriorityQueue</td>
+<td>一种允许高效删除最小&#x2F;大元素的集合</td>
+</tr>
+<tr>
+<td>HashMap</td>
+<td>存储key-value结构的数据结构</td>
+</tr>
+<tr>
+<td>TreeMap</td>
+<td>存储key有序的key-value的数据结构</td>
+</tr>
+<tr>
+<td>EnumMap</td>
+<td>一种键值属于枚举类型的映射表</td>
+</tr>
+<tr>
+<td>LinkedHashMap</td>
+<td>一种可以记录键值插入顺序的结构</td>
+</tr>
+<tr>
+<td>WeakHashMap</td>
+<td>一种其值没用后可以被垃圾回收器回收的结构</td>
+</tr>
+<tr>
+<td>IdentityHashMap</td>
+<td>一种用&#x3D;&#x3D;而不是用equals比较键值的结构</td>
+</tr>
+</tbody></table>
+<p>从图中可以看到实现的Map的类有：<br>HashMap, TreeMap, EnumMap, LinkedHashMap, WeakHashMap, IdentityHashMap 6个，<br>如果算上AbstractMap，就是7个了。</p>
+<h2 id="2-1-AbstractMap"><a href="#2-1-AbstractMap" class="headerlink" title="2.1 AbstractMap"></a>2.1 AbstractMap</h2><p>在Jdk中，和Collection体系一样，也提供了抽象类AbstractMap，其中包含了一些可复用的代码，方便在编写具体实现类时不做重复的工作。<br>我们可以参考它的实现来学习如何去实现一个Map<br>我们可以看一下其中的一些实现方法</p>
+<h3 id="2-1-1-put方法实现"><a href="#2-1-1-put方法实现" class="headerlink" title="2.1.1 put方法实现"></a>2.1.1 put方法实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">*  向Map中添加一个键值对</span><br><span class="hljs-comment">**/</span><br><span class="hljs-keyword">public</span> V <span class="hljs-title function_">put</span><span class="hljs-params">(K key, V value)</span> &#123;<br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UnsupportedOperationException</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>从这里我们可以看到，AbstractMap中是不提供put方法的实现的，因为它是随着存储原理的不同而不同的。</strong></p>
+<h3 id="2-1-2-get方法实现"><a href="#2-1-2-get方法实现" class="headerlink" title="2.1.2 get方法实现"></a>2.1.2 get方法实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 根据key在Map中获取它的value, 提供了基础实现，</span><br><span class="hljs-comment">* 实现类逻辑很简单，就是先获得Entry的集合的迭代器，然后进行遍历比较key</span><br><span class="hljs-comment">**/</span><br><span class="hljs-keyword">public</span> V <span class="hljs-title function_">get</span><span class="hljs-params">(Object key)</span> &#123;<br>    Iterator&lt;Entry&lt;K,V&gt;&gt; i = entrySet().iterator();<br>    <span class="hljs-keyword">if</span> (key==<span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">while</span> (i.hasNext()) &#123;<br>            Entry&lt;K,V&gt; e = i.next();<br>            <span class="hljs-keyword">if</span> (e.getKey()==<span class="hljs-literal">null</span>)<br>                <span class="hljs-keyword">return</span> e.getValue();<br>        &#125;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">while</span> (i.hasNext()) &#123;<br>            Entry&lt;K,V&gt; e = i.next();<br>            <span class="hljs-keyword">if</span> (key.equals(e.getKey()))<br>                <span class="hljs-keyword">return</span> e.getValue();<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>从这里我们可以看到，在Map中是允许key为null的数据存储。</strong></p>
+<h3 id="2-1-3-size-方法实现"><a href="#2-1-3-size-方法实现" class="headerlink" title="2.1.3 size()方法实现"></a>2.1.3 size()方法实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 这里取得就是Entry的集合的大小</span><br><span class="hljs-comment">**/</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">size</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-keyword">return</span> entrySet().size();<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> Set&lt;Entry&lt;K,V&gt;&gt; <span class="hljs-title function_">entrySet</span><span class="hljs-params">()</span>;<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-1-4-isEmpty方法实现"><a href="#2-1-4-isEmpty方法实现" class="headerlink" title="2.1.4 isEmpty方法实现"></a>2.1.4 isEmpty方法实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 通过判断size()得到的值是否为0</span><br><span class="hljs-comment">**/</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isEmpty</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-keyword">return</span> size() == <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-1-5-containsKey方法实现"><a href="#2-1-5-containsKey方法实现" class="headerlink" title="2.1.5 containsKey方法实现"></a>2.1.5 containsKey方法实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 实现类逻辑很简单，就是先获得Entry的集合的迭代器，然后进行遍历比较key</span><br><span class="hljs-comment">**/</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">containsKey</span><span class="hljs-params">(Object key)</span> &#123;<br>    Iterator&lt;Map.Entry&lt;K,V&gt;&gt; i = entrySet().iterator();<br>    <span class="hljs-keyword">if</span> (key==<span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">while</span> (i.hasNext()) &#123;<br>            Entry&lt;K,V&gt; e = i.next();<br>            <span class="hljs-keyword">if</span> (e.getKey()==<span class="hljs-literal">null</span>)<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">while</span> (i.hasNext()) &#123;<br>            Entry&lt;K,V&gt; e = i.next();<br>            <span class="hljs-keyword">if</span> (key.equals(e.getKey()))<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-1-6-containsValue方法实现"><a href="#2-1-6-containsValue方法实现" class="headerlink" title="2.1.6 containsValue方法实现"></a>2.1.6 containsValue方法实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 实现类逻辑很简单，就是先获得Entry的集合的迭代器，然后进行遍历比较value</span><br><span class="hljs-comment">**/</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">containsValue</span><span class="hljs-params">(Object value)</span> &#123;<br>    Iterator&lt;Entry&lt;K,V&gt;&gt; i = entrySet().iterator();<br>    <span class="hljs-keyword">if</span> (value==<span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">while</span> (i.hasNext()) &#123;<br>            Entry&lt;K,V&gt; e = i.next();<br>            <span class="hljs-keyword">if</span> (e.getValue()==<span class="hljs-literal">null</span>)<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">while</span> (i.hasNext()) &#123;<br>            Entry&lt;K,V&gt; e = i.next();<br>            <span class="hljs-keyword">if</span> (value.equals(e.getValue()))<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>更多实现大家可以自行查阅源码进行学习。</p>
+<h2 id="2-2-HashMap"><a href="#2-2-HashMap" class="headerlink" title="2.2 HashMap"></a>2.2 HashMap</h2><p>学习HashMap，首先我们要学习的是数据的存储结构：<br>通过阅读源码我们知道了，HashMap的存储结构是数组+链表+红黑树存储，将数据存放到Node类型的数组中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">transient</span> Node&lt;K,V&gt;[] table;<br><br><span class="hljs-comment">//可以知道Node实现了Entry接口</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span>&lt;K,V&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Map</span>.Entry&lt;K,V&gt; &#123;<br>    <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> hash;<br>    <span class="hljs-keyword">final</span> K key;<br>    V value;<br>    Node&lt;K,V&gt; next;<br>  &#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-2-1-扩容机制"><a href="#2-2-1-扩容机制" class="headerlink" title="2.2.1 扩容机制"></a>2.2.1 扩容机制</h3><p>既然是数组存储结构，那么它的扩容机制是我们一定要了解的！！<br>HashMap的扩容逻辑放在方法resize()中，其逻辑如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java">如果是oldCap=<span class="hljs-number">0</span>且oldThr=<span class="hljs-number">0</span>，初始化容量为：<span class="hljs-number">16</span>，负载因子为：<span class="hljs-number">0.75</span>  初始扩容阈值为：<span class="hljs-number">16</span>*<span class="hljs-number">0.75</span>=<span class="hljs-number">12</span><br>如果oldCap&gt;<span class="hljs-number">0</span>:<br>    如果oldCap&gt;=(<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">30</span>), 将阈值调为<span class="hljs-number">2</span>^<span class="hljs-number">31</span>-<span class="hljs-number">1.</span>,不进行扩容. <br>    如果oldCap&lt;(<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">30</span>), 则newCap = oldCap*<span class="hljs-number">2</span>, newThr = oldThr *<span class="hljs-number">2</span><br>如果oldCap&lt;=<span class="hljs-number">0</span>&amp;&amp;oldThr&gt;<span class="hljs-number">0</span><br>   newCap = oldThr<br>如果oldThr = <span class="hljs-number">0</span>, 计算之： newThr = newCap*loadFactor || MAX_VALUE<br>然后进行新数组创建，旧数组的数据迁移到新数组中,在这个迁移过程中可能会出现树转链表的操作。<br></code></pre></td></tr></table></figure>
+
+<p>总而言之,一般情况下HashMap的默认初始容量为16,负载因子为0.75, 扩容机制为2倍扩容。</p>
+<h3 id="2-2-2-存储原理"><a href="#2-2-2-存储原理" class="headerlink" title="2.2.2 存储原理"></a>2.2.2 存储原理</h3><p>对于HashMap的存储原理，我们可以分为两类：</p>
+<ul>
+<li><p>不存在hash冲突的存储原理：如果不存在hash冲突，其存储原理是通过Key的（hash值 &amp; 数组长度-1）取余计算出该Node在Node数组中存储的位置，然后通过newNode方法新建一个Node并存储到指定位置。</p>
+</li>
+<li><p>存在hash冲突的存储原理：首先我们要知道为啥存在冲突了呢？ 通过前面的存储原理我们知道元素存储的位置是通过(n - 1) &amp; hash计算出来的，那么 在n-1不变的情况下，不同的Key的hash值和n-1通过与运算可能得到相同的结果，相同的Key的hash值就更不用说了，所以hash冲突发生从情况有两种：</p>
+<ul>
+<li>使用相同的Key进行put: 对原有位置的value进行覆盖为最新的。</li>
+<li>使用不同的Key进行put:<br>如果冲突的个数小于8个，采用链接法进行解决，就是将原有位置上最外层的元素的next指向它，如图：</li>
+</ul>
+</li>
+</ul>
+<p> ![img.png](9.4 Java集合之Map学习&#x2F;img.png)</p>
+<p><strong>如果冲突的个数大于了8个，如果数组的长度大于或等于了最小树化容量（默认64）,则进行树化（链表转为红黑树），否则进行扩容操作。</strong></p>
+<p><strong>何时转会链表？</strong><br>当树的大小小于7的时候，会将树转回链表结构。<br><strong>为何要转成树结构？</strong><br>因为长度过长的化链表的检索速度是比较慢的O(n)，而树结构则检索比较快O(logn)。</p>
+<p><strong>为何树结构用的是红黑树，而不是平衡二叉查找树？</strong></p>
+<ul>
+<li><p>AVL 和RBT 都是二叉查找树的优化。其性能要远远好于二叉查找树。他们之间都有自己的优势，其应用上也有不同。</p>
+</li>
+<li><p>结构对比： AVL的结构高度平衡，RBT的结构基本平衡。平衡度AVL &gt; RBT.</p>
+</li>
+<li><p>查找对比： AVL 查找时间复杂度最好，最坏情况都是O(logN)。RBT 查找时间复杂度最好为O(logN)，最坏情况下比AVL略差。</p>
+</li>
+<li><p>插入删除对比：<br><strong>AVL的插入和删除结点很容易造成树结构的不平衡，而RBT的平衡度要求较低。因此在大量数据插入的情况下，RBT需要通过旋转变色操作来重新达到平衡的频度要小于AVL。<br>如果需要平衡处理时，RBT比AVL多一种变色操作，而且变色的时间复杂度在O(logN)数量级上。但是由于操作简单，所以在实践中这种变色仍然是非常快速的。<br>当插入一个结点都引起了树的不平衡，AVL和RBT都最多需要2次旋转操作。但删除一个结点引起不平衡后，AVL最多需要logN 次旋转操作，而RBT最多只需要3次。因此两者插入一个结点的代价差不多，但删除一个结点的代价RBT要低一些。</strong><br>AVL和RBT的插入删除代价主要还是消耗在查找待操作的结点上。因此时间复杂度基本上都是与O(logN) 成正比的。</p>
+</li>
+</ul>
+<p><strong>总体评价：大量数据实践证明，RBT的总体统计性能要好于平衡二叉树。</strong></p>
+<h3 id="2-2-3-性能测试实例"><a href="#2-2-3-性能测试实例" class="headerlink" title="2.2.3 性能测试实例"></a>2.2.3 性能测试实例</h3><p>HashMap的存取效率都很高。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>   HashMap&lt;Integer,Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>   <span class="hljs-comment">//测试存储效率</span><br>    <span class="hljs-type">long</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10000000</span>;i++)&#123;<br>        map.put(i+ (<span class="hljs-type">int</span>) (Math.random() * <span class="hljs-number">100</span>),i);<br>    &#125;<br>    <span class="hljs-type">long</span> <span class="hljs-variable">end1</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>    System.out.println(<span class="hljs-string">&quot;存储耗时： &quot;</span>+ (end1-start)+<span class="hljs-string">&quot;ms&quot;</span>);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10000000</span>;i++)&#123;<br>        map.get(i);<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;查询耗时：&quot;</span>+(System.currentTimeMillis()-end1)+<span class="hljs-string">&quot;ms&quot;</span>);<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">存储耗时： 4829ms<br>查询耗时：154ms<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<p>使用HashMap存取1000万的数据耗时在10秒以内，可见其存取效率了。</p>
+<h2 id="2-3-TreeMap"><a href="#2-3-TreeMap" class="headerlink" title="2.3 TreeMap"></a>2.3 TreeMap</h2><h3 id="2-3-1-存储原理"><a href="#2-3-1-存储原理" class="headerlink" title="2.3.1 存储原理"></a>2.3.1 存储原理</h3><p>TreeMap是Map的有序实现，它会根据键的顺序将元素组织为一个搜索树，使用的存储结构是红黑树。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">transient</span> Entry&lt;K,V&gt; root;<br><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Entry</span>&lt;K,V&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Map</span>.Entry&lt;K,V&gt; &#123;<br>    K key;<br>    V value;<br>    Entry&lt;K,V&gt; left;<br>    Entry&lt;K,V&gt; right;<br>    Entry&lt;K,V&gt; parent;<br>    <span class="hljs-type">boolean</span> <span class="hljs-variable">color</span> <span class="hljs-operator">=</span> BLACK;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>关于红黑树，感兴趣的同学可以仔细阅读源码，看看它是如何实现增删改查操作的。<br><strong>TreeMap默认的存储是根据Key的大小顺序存储的，也就是说遍历的时候是Key有序的遍历。默认是按 key 的升序排序</strong></p>
+<h3 id="2-3-2-性能测试实例"><a href="#2-3-2-性能测试实例" class="headerlink" title="2.3.2 性能测试实例"></a>2.3.2 性能测试实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    TreeMap&lt;Integer,Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();<br>    <span class="hljs-comment">//测试存储效率</span><br>    <span class="hljs-type">long</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10000000</span>;i++)&#123;<br>        map.put(i+ (<span class="hljs-type">int</span>) (Math.random() * <span class="hljs-number">100</span>),i);<br>    &#125;<br>    <span class="hljs-type">long</span> <span class="hljs-variable">end1</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>    System.out.println(<span class="hljs-string">&quot;存储耗时： &quot;</span>+ (end1-start)+<span class="hljs-string">&quot;ms&quot;</span>);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10000000</span>;i++)&#123;<br>        map.get(i);<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;查询耗时：&quot;</span>+(System.currentTimeMillis()-end1)+<span class="hljs-string">&quot;ms&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">存储耗时： 5466ms<br>查询耗时：1136ms<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<p>TreeMap在相同条件下的存储性能还要略好于HashMap, 但其查询性能略低于HashMap， 但是它有着HashMap难以实现的特性：它可以实现有序存储。</p>
+<h2 id="2-4-EnumMap"><a href="#2-4-EnumMap" class="headerlink" title="2.4 EnumMap"></a>2.4 EnumMap</h2><h3 id="2-4-1-存储原理"><a href="#2-4-1-存储原理" class="headerlink" title="2.4.1 存储原理"></a>2.4.1 存储原理</h3><p>基于数组实现，但是其中不存在扩容机制。<br>这个Map实现比较特殊，它的Key只能是枚举类型的, 因为枚举类型的对象自带唯一属性，所以使用它无需考虑冲突问题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 从这里可以看出,EnumMap在构造时已经将长度定义好了：</span><br><span class="hljs-comment">*  就是枚举类中枚举值的数量</span><br><span class="hljs-comment">**/</span><br><span class="hljs-keyword">public</span> <span class="hljs-title function_">EnumMap</span><span class="hljs-params">(Class&lt;K&gt; keyType)</span> &#123;<br>    <span class="hljs-built_in">this</span>.keyType = keyType;<br>    keyUniverse = getKeyUniverse(keyType);<br>    vals = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[keyUniverse.length];<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> V <span class="hljs-title function_">put</span><span class="hljs-params">(K key, V value)</span> &#123;<br>    typeCheck(key);<br><br>    <span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> key.ordinal();<br>    <span class="hljs-type">Object</span> <span class="hljs-variable">oldValue</span> <span class="hljs-operator">=</span> vals[index];<br>    vals[index] = maskNull(value);<br>    <span class="hljs-keyword">if</span> (oldValue == <span class="hljs-literal">null</span>)<br>        size++;<br>    <span class="hljs-keyword">return</span> unmaskNull(oldValue);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>EnumMap的特性是存取效率极高，但是使用范围有限。</strong></p>
+<h3 id="2-4-2-使用实例"><a href="#2-4-2-使用实例" class="headerlink" title="2.4.2 使用实例"></a>2.4.2 使用实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">EnumMapStudy</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        EnumMap&lt;TestEnum, String&gt; enumMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EnumMap</span>&lt;&gt;(TestEnum.class);<br>        enumMap.put(TestEnum.ONE, <span class="hljs-string">&quot;333&quot;</span>);<br>        enumMap.put(TestEnum.ONE,<span class="hljs-string">&quot;999&quot;</span>);<br>        <span class="hljs-keyword">for</span> (Map.Entry&lt;TestEnum, String&gt; entry : enumMap.entrySet()) &#123;<br>            System.out.println(entry.getKey()+<span class="hljs-string">&quot;:&quot;</span>+entry.getValue());<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">enum</span> <span class="hljs-title class_">TestEnum</span>&#123;<br>    ONE,TWO, THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,TEN;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">ONE:999<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-5-LinkedHashMap"><a href="#2-5-LinkedHashMap" class="headerlink" title="2.5 LinkedHashMap"></a>2.5 LinkedHashMap</h2><h3 id="2-5-1-存储原理"><a href="#2-5-1-存储原理" class="headerlink" title="2.5.1 存储原理"></a>2.5.1 存储原理</h3><p>LinkedHashMap继承了HashMap实现，是对HashMap的一种增强：<br>它会记住插入元素的顺序，这样在使用迭代器进行遍历的时候，遍历元素则是有序的。<br>LinkedHashMap通过重写newNode方法，让其在新创建Node的时候<strong>将其插入顺序通过双向链表结构记录下来。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">transient</span> LinkedHashMap.Entry&lt;K,V&gt; head;<br><span class="hljs-keyword">transient</span> LinkedHashMap.Entry&lt;K,V&gt; tail;<br></code></pre></td></tr></table></figure>
+
+<p>注意：它和TreeMap的差别。</p>
+<h3 id="2-5-2-性能测试实例"><a href="#2-5-2-性能测试实例" class="headerlink" title="2.5.2 性能测试实例"></a>2.5.2 性能测试实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    LinkedHashMap&lt;Integer,Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedHashMap</span>&lt;&gt;();<br>    <span class="hljs-comment">//测试存储效率</span><br>    <span class="hljs-type">long</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10000000</span>;i++)&#123;<br>        map.put(i+ (<span class="hljs-type">int</span>) (Math.random() * <span class="hljs-number">100</span>),i);<br>    &#125;<br>    <span class="hljs-type">long</span> <span class="hljs-variable">end1</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>    System.out.println(<span class="hljs-string">&quot;存储耗时： &quot;</span>+ (end1-start)+<span class="hljs-string">&quot;ms&quot;</span>);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10000000</span>;i++)&#123;<br>        map.get(i);<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;查询耗时：&quot;</span>+(System.currentTimeMillis()-end1)+<span class="hljs-string">&quot;ms&quot;</span>);<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">存储耗时： 3030ms<br>查询耗时：2076ms<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<p>由于它继承了HashMap，所以它在性能上和HashMap差不多，但是在能力上，它具有记忆键值对插入顺序的能力。</p>
+<h2 id="2-6-WeakHashMap"><a href="#2-6-WeakHashMap" class="headerlink" title="2.6 WeakHashMap"></a>2.6 WeakHashMap</h2><p>简单来说这个Map实现能有效的节省空间，当使用它存储键值对的时候，当值没有地方用它的时候可以被垃圾回收器回收从而提高空间利用率。</p>
+<h3 id="2-6-1-存储原理"><a href="#2-6-1-存储原理" class="headerlink" title="2.6.1 存储原理"></a>2.6.1 存储原理</h3><p>通过阅读源码我们可以知道：<br>Entry&lt;K,V&gt;[] table;<br>WeakHashMap的存储方式是通过数组实现的，存储计算逻辑和HashMap类似，通过计算Key的hash,然后和数组最大索引值进行按位与运算，获得存储位置。</p>
+<h3 id="2-6-2-WeakHashMap特性"><a href="#2-6-2-WeakHashMap特性" class="headerlink" title="2.6.2 WeakHashMap特性"></a>2.6.2 WeakHashMap特性</h3><p>在WeakHashMap中，Key键是一个弱引用的键，如果Key键被回收，则在get该map中值后，会自动remove掉value<br>如果Key键始终被强引用，则是无法被回收的；<br>注意Value是被强引用的，所以不要让Value间接的引用了Key键，这将导致key始终被强引用<br>适合于受Key的生命周期控制的缓存</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.php.cn/java-article-368794.html">Java对象的强、软、弱和虚引用+ReferenceQueue-java教程-PHP中文网</a></p>
+</blockquote>
+<h3 id="2-6-3-使用实例"><a href="#2-6-3-使用实例" class="headerlink" title="2.6.3 使用实例"></a>2.6.3 使用实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException &#123;<br>    WeakHashMap&lt;Integer,Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">WeakHashMap</span>&lt;&gt;();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">1000</span>;i++)&#123;<br>        map.put(i,i);<br>    &#125;<br>    System.out.println(map.size());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-7-IdentityHashMap"><a href="#2-7-IdentityHashMap" class="headerlink" title="2.7 IdentityHashMap"></a>2.7 IdentityHashMap</h2><p>此Map实现“允许” 相同的Key存入， 原因是进行重复性检查用的是&#x3D;&#x3D; 而不是equals， 这就使得如果Key是复杂引用类型，那么会出现存储相同的键值对的情况。</p>
+<h3 id="2-7-1-存储原理"><a href="#2-7-1-存储原理" class="headerlink" title="2.7.1 存储原理"></a>2.7.1 存储原理</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">transient</span> Object[] table;<br></code></pre></td></tr></table></figure>
+
+<p>通过查阅源码，发现的存储结构也是数组。<br>不过它的数据结构不用Entry了哦，而是直接时Object了哦，这和其他的Map实现不同了。<br>所以就去看了put方法的实现，果然，看出了不一样的地方：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">tab[i] = k;<br>tab[i + <span class="hljs-number">1</span>] = value;<br></code></pre></td></tr></table></figure>
+
+<p>从这里可以看到，IdentityHashMap虽然用的数组存储，但是它的key和value是挨在一起存储的。<br><strong>具体的实现还需查阅源码。</strong></p>
+<h3 id="2-7-2-使用实例"><a href="#2-7-2-使用实例" class="headerlink" title="2.7.2 使用实例"></a>2.7.2 使用实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    IdentityHashMap&lt;Integer,Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">IdentityHashMap</span>&lt;&gt;();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;<br>        map.put(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Integer</span>(i),i);<br>    &#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;<br>        map.put(i,i);<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;map 大小： &quot;</span>+map.size());<br><br>    IdentityHashMap&lt;Integer,Integer&gt; map1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">IdentityHashMap</span>&lt;&gt;();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;<br>        map1.put(i,i);<br>    &#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;<br>        map1.put(i,i);<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;map1 大小：&quot;</span>+map1.size());<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">map 大小： 20<br>map1 大小：10<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+
+
+
+<p>代码地址：<br><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/Progress/exa27_4">Java基础学习&#x2F;src&#x2F;main&#x2F;java&#x2F;Progress&#x2F;exa27_4 · 严家豆&#x2F;Study - 码云 - 开源中国 (gitee.com)</a></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/9.4%20Java%E9%9B%86%E5%90%88%E4%B9%8BMap%E5%AD%A6%E4%B9%A0/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;9.4%20Java%E9%9B%86%E5%90%88%E4%B9%8BMap%E5%AD%A6%E4%B9%A0&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;9.4%20Java%E9%9B%86%E5%90%88%E4%B9%8BMap%E5%AD%A6%E4%B9%A0&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%BF%9B%E9%98%B6/" rel="tag">Java进阶</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/9.3%20Java%E9%9B%86%E5%90%88%E5%AD%A6%E4%B9%A0%E4%B9%8BList%EF%BC%88%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%8CAPI%EF%BC%8C%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86%EF%BC%89/"><i class="iconfont iconleft"></i>9.3 Java集合之List(基本概念,API,存储原理)</a>
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/9.5%20Java%E9%9B%86%E5%90%88%E4%B9%8BSet%E5%AD%A6%E4%B9%A0(%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86%EF%BC%8C%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95)/">9.5 Java集合之Set学习<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Map%E6%8E%A5%E5%8F%A3"><span class="toc-text">1.Map接口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Map%E6%8E%A5%E5%8F%A3%E5%AE%9A%E4%B9%89"><span class="toc-text">1.1 Map接口定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Entry%E6%8E%A5%E5%8F%A3"><span class="toc-text">1.2 Entry接口</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Map%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-text">2. Map具体实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-AbstractMap"><span class="toc-text">2.1 AbstractMap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-put%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="toc-text">2.1.1 put方法实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-get%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="toc-text">2.1.2 get方法实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-size-%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="toc-text">2.1.3 size()方法实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-4-isEmpty%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="toc-text">2.1.4 isEmpty方法实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-5-containsKey%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="toc-text">2.1.5 containsKey方法实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-6-containsValue%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="toc-text">2.1.6 containsValue方法实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-HashMap"><span class="toc-text">2.2 HashMap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6"><span class="toc-text">2.2.1 扩容机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86"><span class="toc-text">2.2.2 存储原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-3-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%AE%9E%E4%BE%8B"><span class="toc-text">2.2.3 性能测试实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-TreeMap"><span class="toc-text">2.3 TreeMap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86"><span class="toc-text">2.3.1 存储原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%AE%9E%E4%BE%8B"><span class="toc-text">2.3.2 性能测试实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-EnumMap"><span class="toc-text">2.4 EnumMap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-1-%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86"><span class="toc-text">2.4.1 存储原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-2-%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B"><span class="toc-text">2.4.2 使用实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-LinkedHashMap"><span class="toc-text">2.5 LinkedHashMap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-1-%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86"><span class="toc-text">2.5.1 存储原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-2-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%AE%9E%E4%BE%8B"><span class="toc-text">2.5.2 性能测试实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-WeakHashMap"><span class="toc-text">2.6 WeakHashMap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-1-%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86"><span class="toc-text">2.6.1 存储原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-2-WeakHashMap%E7%89%B9%E6%80%A7"><span class="toc-text">2.6.2 WeakHashMap特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-3-%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B"><span class="toc-text">2.6.3 使用实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-7-IdentityHashMap"><span class="toc-text">2.7 IdentityHashMap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-1-%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86"><span class="toc-text">2.7.1 存储原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-2-%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B"><span class="toc-text">2.7.2 使用实例</span></a></li></ol></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>6.序列化对象克隆以及文件锁 - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="1.序列化对象克隆我们也许学习过如何clone一个对象...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">6.序列化对象克隆以及文件锁</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">6.序列化对象克隆以及文件锁</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 20, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>6876</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="1-序列化对象克隆"><a href="#1-序列化对象克隆" class="headerlink" title="1.序列化对象克隆"></a>1.序列化对象克隆</h1><p>我们也许学习过如何clone一个对象，就是通过Object中的clone方法实现，<br>但是我们必须知道，Object中的clone方法实现的是浅clone。<br>如果我们想要clone一个完整的对象，我们需要学习如何去实现，<br><strong>序列化对象就是一种比较简单的完全clone方式。</strong></p>
+<h2 id="1-1-什么是序列化与对象克隆？"><a href="#1-1-什么是序列化与对象克隆？" class="headerlink" title="1.1 什么是序列化与对象克隆？"></a>1.1 什么是序列化与对象克隆？</h2><p>有时想得到对象的一个“复制品”，使得复制品的变化不会引起原对象实体变化，反之亦然。<br>我们称这样的复制品为原对象的一个克隆对象（简称克隆）。</p>
+<h2 id="1-2-如何实现？"><a href="#1-2-如何实现？" class="headerlink" title="1.2 如何实现？"></a>1.2 如何实现？</h2><p>使用对象流(例如ObjectOutputStream)很容易获取一个序列化对象的克隆，只需将该对象输出流指向目的地，然后将该目的地作为一个对象输入流的源，<br>那么该对象输入流从源中读回的对象一定是原对象的一个克隆。简言之： 就是对象输入流通过对象的序列化信息得到当前对象的一个克隆。</p>
+<p><strong>当程序想以较快的速度得到一个对象克隆时，可以用对象流将对象的序列化信息写入内存,然后从内存中读取对象</strong></p>
+<h2 id="1-3-实例展示"><a href="#1-3-实例展示" class="headerlink" title="1.3 实例展示"></a>1.3 实例展示</h2><p>下面是对象克隆的例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.io.*;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SerializableStudy</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">TV</span> <span class="hljs-variable">changhong</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TV</span>();<br>        changhong.setName(<span class="hljs-string">&quot;长虹电视&quot;</span>);<br>        changhong.setPrice(<span class="hljs-number">5678</span>);<br>        <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;television.txt&quot;</span>);<br><br>        <span class="hljs-keyword">try</span>&#123;<br>            <span class="hljs-comment">//定义文件字节输出流，源为television.txt</span><br>            <span class="hljs-type">FileOutputStream</span> <span class="hljs-variable">fileOut</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(file);<br>            <span class="hljs-comment">//定义对象字节输出流</span><br>            <span class="hljs-type">ObjectOutputStream</span> <span class="hljs-variable">objectOut</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectOutputStream</span>(fileOut);<br>            <span class="hljs-comment">//将对象序列化信息写入源中</span><br>            objectOut.writeObject(changhong);<br>            <span class="hljs-comment">//关闭对象输出流</span><br>            objectOut.close();<br>            <span class="hljs-comment">//定义文件输入流，源为television.txt</span><br>            <span class="hljs-type">FileInputStream</span> <span class="hljs-variable">fileIn</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(file);<br>            <span class="hljs-comment">//定义对象字节输入流</span><br>            <span class="hljs-type">ObjectInputStream</span> <span class="hljs-variable">objectIn</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectInputStream</span>(fileIn);<br>            <span class="hljs-comment">//将源中的对象读出得到changhong的克隆</span><br>            <span class="hljs-type">TV</span> <span class="hljs-variable">xinfei</span> <span class="hljs-operator">=</span> (TV)objectIn.readObject();<br>            objectIn.close();<span class="hljs-comment">//关闭对象输入流</span><br>            System.out.println(<span class="hljs-string">&quot;changhong的名字：&quot;</span>+changhong.getName());<br>            System.out.println(<span class="hljs-string">&quot;changhong的价格：&quot;</span>+changhong.getPrice());<br>            System.out.println(<span class="hljs-string">&quot;changhong clone 的名字：&quot;</span>+xinfei.getName());<br>            System.out.println(<span class="hljs-string">&quot;changhong clone 的价格&quot;</span>+xinfei.getPrice());<br>        &#125;<span class="hljs-keyword">catch</span>(ClassNotFoundException event)&#123;<br>            System.out.println(<span class="hljs-string">&quot;不能读出对象&quot;</span>);<br>        &#125;<span class="hljs-keyword">catch</span>(IOException event)&#123;<br>           event.printStackTrace();<br>        &#125;<br>    &#125;<br><br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 被克隆的对象必须实现标记接口Serializable</span><br><span class="hljs-comment"> * 否则进行序列化的时候（就是调用writeObject）会报错误：</span><br><span class="hljs-comment"> * java.io.NotSerializableException: Progress.exa24.TV</span><br><span class="hljs-comment"> at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1184)</span><br><span class="hljs-comment"> at java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:348)</span><br><span class="hljs-comment"> at Progress.exa24.SerializableStudy.main(SerializableStudy.java:19)</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TV</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123;<br><br>    String name;<br>    <span class="hljs-type">int</span> price;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setName</span><span class="hljs-params">(String s)</span>&#123;<br>        name =s;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setPrice</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span>&#123;<br>        price = n;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getName</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> name;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getPrice</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> price;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs text">changhong的名字：长虹电视<br>changhong的价格：5678<br>changhong clone 的名字：长虹电视<br>changhong clone 的价格5678<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="2-文件锁"><a href="#2-文件锁" class="headerlink" title="2.文件锁"></a>2.文件锁</h1><p>在实际的应用中，经常会出现几个程序处理同一个文件的情况发生，比如同时更新或读取文件。<br><strong>这种情况下，在多线程的情况中可能会造成冲突(出现数据不一致的情况)，Java提供了文件锁功能，可以帮助解决这样的问题。</strong></p>
+<h2 id="2-1-FileLock和FileChannel类"><a href="#2-1-FileLock和FileChannel类" class="headerlink" title="2.1.FileLock和FileChannel类"></a>2.1.FileLock和FileChannel类</h2><p>这两个类分别在java.nio和java.nio.channels包中。<br>输入，输出流读写文件时可以使用文件锁，以下结合RandomAccessFile类来说明文件锁的使用方法。</p>
+<p>RandomAccessFile创建的流在读写文件时可以使用文件锁。<br>只要不解除该锁，其他程序无法操作被锁定的文件。</p>
+<h2 id="2-2-使用文件锁的步骤"><a href="#2-2-使用文件锁的步骤" class="headerlink" title="2.2 使用文件锁的步骤"></a>2.2 使用文件锁的步骤</h2><p><strong>先使用RandomAccessFile流建立指向文件的流对象，该对象的读写属性必须是rw</strong>,<br>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">RandomAccessFile input=<span class="hljs-keyword">new</span> <span class="hljs-title class_">RandomAccessFile</span>(<span class="hljs-string">&quot;Example.java&quot;</span>,<span class="hljs-string">&quot;rw&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<p><strong>然后input流调用方法getChannel();获得一个连接到底层文件的FileChannel对象（信道）</strong>，例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">FileChannel</span> <span class="hljs-variable">channel</span> <span class="hljs-operator">=</span> input.getChannel();<br></code></pre></td></tr></table></figure>
+
+<p>信道调用tryLock();或lock();方法获得一个FileLock(文件锁）对象，这一过程称作对文件加锁。<br>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">FileLock</span> <span class="hljs-variable">lock</span> <span class="hljs-operator">=</span> channel.tryLock();<br></code></pre></td></tr></table></figure>
+
+<p>这一 过程有两个结果，要么成功，要么失败，如果失败了，我们需要进行重试获取锁，如果成功了，我们就可以对文件进行操作了。<br><strong>对文件加锁之后，如果想读，写文件必须让FileLock对象调用release();释放文件锁。</strong><br>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">lock.release();<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-3编程实例"><a href="#2-3编程实例" class="headerlink" title="2.3编程实例"></a>2.3编程实例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.io.File;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.RandomAccessFile;<br><span class="hljs-keyword">import</span> java.nio.channels.FileChannel;<br><span class="hljs-keyword">import</span> java.nio.channels.FileLock;<br><span class="hljs-keyword">import</span> java.nio.charset.StandardCharsets;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LockWriteFile</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Thread</span>&#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>        <span class="hljs-comment">//创建文件对象</span><br>        <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;test.txt&quot;</span>);<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">//如果文件不存在，创建之</span><br>            <span class="hljs-keyword">if</span>(!file.exists())&#123;<br>                <span class="hljs-keyword">if</span>(file.createNewFile())&#123;<br>                    System.out.println(<span class="hljs-string">&quot;创建成功！！&quot;</span>);<br>                &#125;<span class="hljs-keyword">else</span> &#123;<br>                    System.out.println(<span class="hljs-string">&quot;创建失败！！&quot;</span>);<br>                &#125;<br>            &#125;<br>            <span class="hljs-comment">//对该文件加锁</span><br>            <span class="hljs-type">RandomAccessFile</span> <span class="hljs-variable">randomAccessFile</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RandomAccessFile</span>(file, <span class="hljs-string">&quot;rw&quot;</span>);<br>            FileChannel fileChannel=randomAccessFile.getChannel();<br>            FileLock fileLock=<span class="hljs-literal">null</span>;<br><br>            <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)&#123;<br>                <span class="hljs-keyword">try</span> &#123;<br>                    <span class="hljs-comment">// 这一步就是尝试获取锁</span><br>                    fileLock = fileChannel.tryLock();<br>                    sleep(<span class="hljs-number">10000</span>);<br>                    <span class="hljs-keyword">break</span>;<br>                &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>                    System.out.println(<span class="hljs-string">&quot;有其他线程正在操作该文件，当前线程&quot;</span>+Thread.currentThread().getName()+<span class="hljs-string">&quot;休眠1000毫秒&quot;</span>);<br>                    sleep(<span class="hljs-number">1000</span>);<br>                &#125;<br>            &#125;<br><br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">1000</span>;i++)&#123;<br>                sleep(<span class="hljs-number">10</span>);<br>                StringBuffer sb=<span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuffer</span>();<br>                sb.append(<span class="hljs-string">&quot;这是第&quot;</span>+i+<span class="hljs-string">&quot;行对应的数据&quot;</span>);<br>                sb.append(<span class="hljs-string">&quot;\n&quot;</span>);<br>                randomAccessFile.write(sb.toString().getBytes(StandardCharsets.UTF_8));<br>            &#125;<br>            <span class="hljs-comment">//释放锁</span><br>            fileLock.release();<br>            <span class="hljs-comment">//关闭信道</span><br>            fileChannel.close();<br>            <span class="hljs-comment">//关闭流</span><br>            randomAccessFile.close();<br>        &#125; <span class="hljs-keyword">catch</span> (IOException | InterruptedException e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>        System.out.println(<span class="hljs-string">&quot;线程:&quot;</span>+Thread.currentThread().getName()+<span class="hljs-string">&quot;,写文件耗时： &quot;</span>+(System.currentTimeMillis()-start)+<span class="hljs-string">&quot;毫秒&quot;</span>);<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>测试程序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LockWriteTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">LockWriteFile</span> <span class="hljs-variable">writeFileThread</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LockWriteFile</span>();<br>        writeFileThread.setName(<span class="hljs-string">&quot;writeThread&quot;</span>);<br>        <span class="hljs-type">LockWriteFile</span> <span class="hljs-variable">writeFileThread2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LockWriteFile</span>();<br>        writeFileThread2.setName(<span class="hljs-string">&quot;writeThread2&quot;</span>);<br>        writeFileThread.start();<br>        writeFileThread2.start();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs text">有其他线程正在操作该文件，当前线程readFileThread休眠1000毫秒<br>有其他线程正在操作该文件，当前线程readFileThread休眠1000毫秒<br>有其他线程正在操作该文件，当前线程readFileThread休眠1000毫秒<br>有其他线程正在操作该文件，当前线程readFileThread休眠1000毫秒<br>有其他线程正在操作该文件，当前线程readFileThread休眠1000毫秒<br>有其他线程正在操作该文件，当前线程readFileThread休眠1000毫秒<br>有其他线程正在操作该文件，当前线程readFileThread休眠1000毫秒<br>有其他线程正在操作该文件，当前线程readFileThread休眠1000毫秒<br>有其他线程正在操作该文件，当前线程readFileThread休眠1000毫秒<br>有其他线程正在操作该文件，当前线程readFileThread休眠1000毫秒<br><br>当前线程:readFileThread2,读文件共花了15035毫秒<br><br>当前线程:readFileThread,读文件共花了25123毫秒<br><br>Process finished with exit code 0<br><br></code></pre></td></tr></table></figure>
+
+
+<p>代码地址：<br><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/Progress/exa24">Java基础学习&#x2F;src&#x2F;main&#x2F;java&#x2F;Progress&#x2F;exa24 · 严家豆&#x2F;Study - 码云 - 开源中国 (gitee.com)</a></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/6.%20%E5%BA%8F%E5%88%97%E5%8C%96%E5%AF%B9%E8%B1%A1%E5%85%8B%E9%9A%86%E5%8F%8A%E6%96%87%E4%BB%B6%E9%94%81%E5%AD%A6%E4%B9%A0/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;6.%20%E5%BA%8F%E5%88%97%E5%8C%96%E5%AF%B9%E8%B1%A1%E5%85%8B%E9%9A%86%E5%8F%8A%E6%96%87%E4%BB%B6%E9%94%81%E5%AD%A6%E4%B9%A0&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;6.%20%E5%BA%8F%E5%88%97%E5%8C%96%E5%AF%B9%E8%B1%A1%E5%85%8B%E9%9A%86%E5%8F%8A%E6%96%87%E4%BB%B6%E9%94%81%E5%AD%A6%E4%B9%A0&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%BF%9B%E9%98%B6/" rel="tag">Java进阶</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/5.%20%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%EF%BC%9A%E5%AD%97%E7%AC%A6%E6%B5%81/"><i class="iconfont iconleft"></i>5.文件读写-字符流</a>
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/7.%20Java%E6%93%8D%E4%BD%9Cmysql%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4%EF%BC%88JDBC%EF%BC%89/">7.Java操作MySQL的步骤(JDBC)<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%BA%8F%E5%88%97%E5%8C%96%E5%AF%B9%E8%B1%A1%E5%85%8B%E9%9A%86"><span class="toc-text">1.序列化对象克隆</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%85%8B%E9%9A%86%EF%BC%9F"><span class="toc-text">1.1 什么是序列化与对象克隆？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F"><span class="toc-text">1.2 如何实现？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E5%AE%9E%E4%BE%8B%E5%B1%95%E7%A4%BA"><span class="toc-text">1.3 实例展示</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E6%96%87%E4%BB%B6%E9%94%81"><span class="toc-text">2.文件锁</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-FileLock%E5%92%8CFileChannel%E7%B1%BB"><span class="toc-text">2.1.FileLock和FileChannel类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E4%BD%BF%E7%94%A8%E6%96%87%E4%BB%B6%E9%94%81%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-text">2.2 使用文件锁的步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3%E7%BC%96%E7%A8%8B%E5%AE%9E%E4%BE%8B"><span class="toc-text">2.3编程实例</span></a></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

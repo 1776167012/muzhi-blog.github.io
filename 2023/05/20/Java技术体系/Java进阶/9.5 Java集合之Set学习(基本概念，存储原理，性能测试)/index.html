@@ -1,0 +1,519 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>9.5 Java集合之Set学习 - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="1.Set接口graph LR
+
+Collection...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">9.5 Java集合之Set学习</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">9.5 Java集合之Set学习</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 20, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>6497</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="1-Set接口"><a href="#1-Set接口" class="headerlink" title="1.Set接口"></a>1.Set接口</h1><pre class="mermaid">graph LR
+
+Collection --extend--> Iterable
+
+List--extend--> Collection
+
+Set--extend--> Collection
+
+Queue--extend--> Collection
+
+SortedMap --extend--> Map
+
+SortedSet--extend-->Set
+Deque--extend-->Queue
+NavigableMap --extend--> SortedMap
+NavigbleSet --extend--> SortedSet
+ListIterator--extend-->Iterator
+RandomAccess</pre>
+
+<p>在正式学习Set接口之前，我们得先复习一下上面的图片。</p>
+<p>我们知道Set接口继承Collection接口，但是又有自己的特点，它存放一组相互不重复的元素集。<br>和Collection的定义相比,实际上并没有什么特殊的方法定义, 只是它的实现逻辑要进行特殊化.</p>
+<p>现在我们思考一下，为何没有呢？ 其实这个问题我们可以思考一下Collection中定义的方法是否能满足Set特性？</p>
+<h2 id="1-1-Set的特性是什么？"><a href="#1-1-Set的特性是什么？" class="headerlink" title="1.1 Set的特性是什么？"></a>1.1 Set的特性是什么？</h2><p>Set的最大的特性就是存储不重复的元素。<br>那么我们只需要保证使用Set的add()时具有排重逻辑。 其他的和Collection无异。</p>
+<p><strong>注意：我个人认为无序并不是Set的主要特性，无序是Hash存储的特性。</strong></p>
+<h1 id="2-具体实现"><a href="#2-具体实现" class="headerlink" title="2.具体实现"></a>2.具体实现</h1><p>老规矩，看图复习，然后根据具体的类进行学习。</p>
+<table>
+<thead>
+<tr>
+<th>集合类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ArrayList</td>
+<td>一种可以动态增长和缩减的索引序列</td>
+</tr>
+<tr>
+<td>LinkedList</td>
+<td>一种可以在任何位置进行高效地插入和删除操作的有序序列</td>
+</tr>
+<tr>
+<td>ArrayDeque</td>
+<td>一种用循环数组实现的双端队列</td>
+</tr>
+<tr>
+<td>HashSet</td>
+<td>一种没有重复元素的无序集合</td>
+</tr>
+<tr>
+<td>TreeSet</td>
+<td>一种没有重复元素的有序集合</td>
+</tr>
+<tr>
+<td>EnumSet</td>
+<td>一种包含枚举类型值的集</td>
+</tr>
+<tr>
+<td>LinkedHashSet</td>
+<td>一种可以记住元素插入次序的集</td>
+</tr>
+<tr>
+<td>PriorityQueue</td>
+<td>一种允许高效删除最小&#x2F;大元素的集合</td>
+</tr>
+<tr>
+<td>HashMap</td>
+<td>存储key-value结构的数据结构</td>
+</tr>
+<tr>
+<td>TreeMap</td>
+<td>存储key有序的key-value的数据结构</td>
+</tr>
+<tr>
+<td>EnumMap</td>
+<td>一种键值属于枚举类型的映射表</td>
+</tr>
+<tr>
+<td>LinkedHashMap</td>
+<td>一种可以记录键值插入顺序的结构</td>
+</tr>
+<tr>
+<td>WeakHashMap</td>
+<td>一种其值没用后可以被垃圾回收器回收的结构</td>
+</tr>
+<tr>
+<td>IdentityHashMap</td>
+<td>一种用&#x3D;&#x3D;而不是用equals比较键值的结构</td>
+</tr>
+</tbody></table>
+<p>上面的图片中我们可以看出，实现Set的实现可能有：</p>
+<p>HashSet, TreeSet, EnumSet, LinkedHashSet</p>
+<p>嗯？ 这不是和HashMap, TreeMap, EnumMap,LinkedHashMap有异曲同工之妙吗？</p>
+<p><strong>别着急，更神奇的还在后头！！</strong></p>
+<h1 id="2-1-HashSet"><a href="#2-1-HashSet" class="headerlink" title="2.1 HashSet"></a>2.1 HashSet</h1><p>通过查阅源码，我们发现了，<strong>HashSet中维护的存储结构是HashMap。</strong></p>
+<h3 id="2-1-1-存储原理"><a href="#2-1-1-存储原理" class="headerlink" title="2.1.1 存储原理"></a>2.1.1 存储原理</h3><p>当进行add(E e)的时候，就会向map中put(e,Object常量)，如果返回的是null,则表示添加成功，如果返回的不是null，则表示Map中已经存在键值对，添加失败。</p>
+<p>当进行contains(Object o)的时候，调用的也是Map的containsKey(Object o);</p>
+<p><strong>所以HashSet的存储原理就是利用HashMap的键不可重复的特性进行实现的。<br>由于HashSet借助了HashMap进行存储，所以对其进行存储时无法保证有序存储。</strong></p>
+<h3 id="2-1-2-性能测试"><a href="#2-1-2-性能测试" class="headerlink" title="2.1.2 性能测试"></a>2.1.2 性能测试</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//完整代码存放在git仓库中，地址在文章底部</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    Set&lt;Integer&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>    <span class="hljs-type">long</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10000000</span>;i++)&#123;<br>        set.add(i);<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;存储耗时： &quot;</span>+(System.currentTimeMillis()-start)+<span class="hljs-string">&quot; ms&quot;</span>);<br>    <span class="hljs-type">long</span> <span class="hljs-variable">start2</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10000000</span>;i++)&#123;<br>       <span class="hljs-type">boolean</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> set.contains(i);<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;查询耗时： &quot;</span>+(System.currentTimeMillis()-start2)+<span class="hljs-string">&quot; ms&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">存储耗时： 4380 ms<br>查询耗时： 214 ms<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-2-TreeSet"><a href="#2-2-TreeSet" class="headerlink" title="2.2 TreeSet"></a>2.2 TreeSet</h2><p>通过查阅源码，我们可以知道，TreeSet中维护的存储结构是NavigableMap接口，默认实现是TreeMap，<br>简单来说，TreeSet也是借助TreeMap来进行存储的，TreeMap是Map的有序实现，它会根据键的顺序将元素组织为一个搜索树。</p>
+<h3 id="2-2-1-存储原理"><a href="#2-2-1-存储原理" class="headerlink" title="2.2.1 存储原理"></a>2.2.1 存储原理</h3><p>当进行add(E e)的时候，就会向map中put(e,Object常量)，如果返回的是null,则表示添加成功，如果返回的不是null，则表示Map中已经存在键值对，添加失败。</p>
+<p>当进行contains(Object o)的时候，调用的也是Map的containsKey(Object o);</p>
+<p><strong>所以TreeSet的存储原理就是利用TreeMap的键不可重复的特性进行实现的。<br>由于TreeSet借助了TreeMap进行存储，所以对其进行存储可以保证存储的顺序。</strong></p>
+<h3 id="2-2-2-性能测试"><a href="#2-2-2-性能测试" class="headerlink" title="2.2.2 性能测试"></a>2.2.2 性能测试</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//完整代码存放在git仓库中，地址在文章底部</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    TreeSet&lt;Integer&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeSet</span>&lt;&gt;();<br>    <span class="hljs-type">long</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">100</span>;i&gt;<span class="hljs-number">0</span>;i--)&#123;<br>        set.add(i);<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;存储耗时： &quot;</span>+(System.currentTimeMillis()-start)+<span class="hljs-string">&quot; ms&quot;</span>);<br>    <span class="hljs-type">long</span> <span class="hljs-variable">start2</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">100</span>;i++)&#123;<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> set.contains(i);<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;查询耗时： &quot;</span>+(System.currentTimeMillis()-start2)+<span class="hljs-string">&quot; ms&quot;</span>);<br><br>    <span class="hljs-keyword">for</span>(Integer i:set)&#123;<br>        System.out.print(i+<span class="hljs-string">&quot; &quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">存储耗时： 2 ms<br>查询耗时： 1 ms<br>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 <br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<p>可以看到<strong>在TreeSet中，存储Integer是自然升序排序的。</strong></p>
+<h2 id="2-3-EnumSet（了解即可）"><a href="#2-3-EnumSet（了解即可）" class="headerlink" title="2.3 EnumSet（了解即可）"></a>2.3 EnumSet（了解即可）</h2><p>它是一个继承了AbstractSet的抽象类。<br>其中一个具体的实现是：RegularEnumSet  它是Set的常规实现, EnumSet的实现并不是一个公共的类，<strong>所以它不能作为公共API直接使用。</strong><br>它是用来存储枚举的Set集合。这个类好像只能存，不能取。</p>
+<h3 id="2-3-1-存储原理"><a href="#2-3-1-存储原理" class="headerlink" title="2.3.1 存储原理"></a>2.3.1 存储原理</h3><p>我们以RegularEnum为例子进行存储原理的学习。<br>通过阅读add源码， 我们发现其中关键在于使用了elements这个变量来记录传入的值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//add操作实际是用位运算，</span><br><span class="hljs-comment">//将这个long值对应你传入的枚举值的下标的那个bit位改成1，</span><br><span class="hljs-comment">//比如我传入的是IdentityEnu.DRIVER, 对应的ordinal是1，</span><br><span class="hljs-comment">//则是将elements的bit位中的第2位改成1，</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">add</span><span class="hljs-params">(E e)</span> &#123;<br>    typeCheck(e);<br>    <span class="hljs-type">long</span> <span class="hljs-variable">oldElements</span> <span class="hljs-operator">=</span> elements;<br>    elements |= (<span class="hljs-number">1L</span> &lt;&lt; ((Enum&lt;?&gt;)e).ordinal());<br>    <span class="hljs-keyword">return</span> elements != oldElements;<br>&#125;<br><span class="hljs-comment">//contains操作就是检查指定位的是否为0来判断</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">contains</span><span class="hljs-params">(Object e)</span> &#123;<br>    <span class="hljs-keyword">if</span> (e == <span class="hljs-literal">null</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    Class&lt;?&gt; eClass = e.getClass();<br>    <span class="hljs-keyword">if</span> (eClass != elementType &amp;&amp; eClass.getSuperclass() != elementType)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br><br>    <span class="hljs-keyword">return</span> (elements &amp; (<span class="hljs-number">1L</span> &lt;&lt; ((Enum&lt;?&gt;)e).ordinal())) != <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>比较特殊的一点是，elements用的是long,它只有64位，所以，它存储的枚举类的值不能超过64.</strong></p>
+<h2 id="2-4-LinkedHashSet"><a href="#2-4-LinkedHashSet" class="headerlink" title="2.4 LinkedHashSet"></a>2.4 LinkedHashSet</h2><p>这个类继承的HashSet，所以它的存储结构仍然是HashMap。</p>
+<p>查看LinkedHashSet的源码时，你也许会这么想，但是，真的是这样的吗？<br>但是我们需要实事求是，看下源码到底是怎么运行的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">HashSet(<span class="hljs-type">int</span> initialCapacity, <span class="hljs-type">float</span> loadFactor, <span class="hljs-type">boolean</span> dummy) &#123;<br>    map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedHashMap</span>&lt;&gt;(initialCapacity, loadFactor);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>看到这里，我们意识到猜错了，其实LinkedHashSet的存储结构是LinkedHashMap!!</strong></p>
+<p><strong>LinkedHashMap是对HashMap的一种增强：</strong><br>它会记住插入元素的顺序，这样在使用迭代器进行遍历的时候，遍历元素则是有序的。<br>LinkedHashMap通过重写newNode方法，让其在新创建Node的时候将其插入顺序通过双向链表结构记录下来。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">transient</span> LinkedHashMap.Entry&lt;K,V&gt; head;<br><span class="hljs-keyword">transient</span> LinkedHashMap.Entry&lt;K,V&gt; tail;<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-4-1-存储原理"><a href="#2-4-1-存储原理" class="headerlink" title="2.4.1 存储原理"></a>2.4.1 存储原理</h2><p>当进行add(E e)的时候，就会向map中put(e,Object常量)，如果返回的是null,则表示添加成功，如果返回的不是null，则表示Map中已经存在键值对，添加失败。</p>
+<p>当进行contains(Object o)的时候，调用的也是Map的containsKey(Object o);</p>
+<p><strong>所以LinkedHashSet的存储原理就是利用LinkedHashMap的键不可重复的特性进行实现的。<br>由于LinkedHashSet借助了LinkedHashMap进行存储，所以对其进行存储可以保证存储的顺序。</strong></p>
+<h2 id="2-4-2-性能测试"><a href="#2-4-2-性能测试" class="headerlink" title="2.4.2 性能测试"></a>2.4.2 性能测试</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br><br>    LinkedHashSet&lt;Integer&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedHashSet</span>&lt;&gt;();<br>    <span class="hljs-type">long</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">100</span>;i&gt;<span class="hljs-number">0</span>;i--)&#123;<br>        set.add(i);<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;存储耗时： &quot;</span>+(System.currentTimeMillis()-start)+<span class="hljs-string">&quot; ms&quot;</span>);<br>    <span class="hljs-type">long</span> <span class="hljs-variable">start2</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">100</span>;i++)&#123;<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> set.contains(i);<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;查询耗时： &quot;</span>+(System.currentTimeMillis()-start2)+<span class="hljs-string">&quot; ms&quot;</span>);<br><br>    <span class="hljs-keyword">for</span>(Integer i:set)&#123;<br>        System.out.print(i+<span class="hljs-string">&quot; &quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">存储耗时： 0 ms<br>查询耗时： 0 ms<br>100 99 98 97 96 95 94 93 92 91 90 89 88 87 86 85 84 83 82 81 80 79 78 77 76 75 74 73 72 71 70 69 68 67 66 65 64 63 62 61 60 59 58 57 56 55 54 53 52 51 50 49 48 47 46 45 44 43 42 41 40 39 38 37 36 35 34 33 32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 <br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-4-3-代码地址"><a href="#2-4-3-代码地址" class="headerlink" title="2.4.3 代码地址"></a>2.4.3 代码地址</h3><p><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/Progress/exa27_5">Java基础学习&#x2F;src&#x2F;main&#x2F;java&#x2F;Progress&#x2F;exa27_5 · 严家豆&#x2F;Study - 码云 - 开源中国 (gitee.com)</a></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/9.5%20Java%E9%9B%86%E5%90%88%E4%B9%8BSet%E5%AD%A6%E4%B9%A0(%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86%EF%BC%8C%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95)/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;9.5%20Java%E9%9B%86%E5%90%88%E4%B9%8BSet%E5%AD%A6%E4%B9%A0(%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86%EF%BC%8C%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95)&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;9.5%20Java%E9%9B%86%E5%90%88%E4%B9%8BSet%E5%AD%A6%E4%B9%A0(%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86%EF%BC%8C%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95)&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%BF%9B%E9%98%B6/" rel="tag">Java进阶</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/9.4%20Java%E9%9B%86%E5%90%88%E4%B9%8BMap%E5%AD%A6%E4%B9%A0/"><i class="iconfont iconleft"></i>9.4 Java集合之Map学习</a>
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/9.6%20%20Java%E9%9B%86%E5%90%88%E4%B9%8BQueue%E5%AD%A6%E4%B9%A0(Queue%E6%8E%A5%E5%8F%A3%EF%BC%8CPriorityQueue)/">9.6 Java集合之Queue学习<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Set%E6%8E%A5%E5%8F%A3"><span class="toc-text">1.Set接口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Set%E7%9A%84%E7%89%B9%E6%80%A7%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1.1 Set的特性是什么？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-text">2.具体实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-1-HashSet"><span class="toc-text">2.1 HashSet</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86"><span class="toc-text">2.1.1 存储原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">2.1.2 性能测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-TreeSet"><span class="toc-text">2.2 TreeSet</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86"><span class="toc-text">2.2.1 存储原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">2.2.2 性能测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-EnumSet%EF%BC%88%E4%BA%86%E8%A7%A3%E5%8D%B3%E5%8F%AF%EF%BC%89"><span class="toc-text">2.3 EnumSet（了解即可）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86"><span class="toc-text">2.3.1 存储原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-LinkedHashSet"><span class="toc-text">2.4 LinkedHashSet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-1-%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86"><span class="toc-text">2.4.1 存储原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-2-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">2.4.2 性能测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-3-%E4%BB%A3%E7%A0%81%E5%9C%B0%E5%9D%80"><span class="toc-text">2.4.3 代码地址</span></a></li></ol></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

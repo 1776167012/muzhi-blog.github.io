@@ -1,0 +1,544 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>9.2 Java集合基础学习(集合基本概念,基础接口) - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="学习总结自《java核心技术卷Ⅰ》
+1.Java集合框...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">9.2 Java集合基础学习(集合基本概念,基础接口)</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">9.2 Java集合基础学习(集合基本概念,基础接口)</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 20, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>5754</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <p>学习总结自《java核心技术卷Ⅰ》</p>
+<h1 id="1-Java集合框架"><a href="#1-Java集合框架" class="headerlink" title="1.Java集合框架"></a>1.Java集合框架</h1><p>Java最初的版本只为最常用的数据结构提供了一组类：Vector(链表),Stack(栈),Hashtable(哈希表)，<br>BitSet(位集合)和Enumeration（枚举）接口。 其中的Enumeration接口提供了一种用于访问任意容器中各个元素的抽象机制，<br>这句话的意思实际上说的就是我们可以实现这个接口来访问任意容器的元素：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Enumeration</span>&lt;E&gt; &#123;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">hasMoreElements</span><span class="hljs-params">()</span>;<br>    E <span class="hljs-title function_">nextElement</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>不过现在迭代器更为常用，现在Java中的集合框架经过发展已经支持很多数据结构了。</p>
+<h2 id="1-1-Java集合设计思想"><a href="#1-1-Java集合设计思想" class="headerlink" title="1.1.Java集合设计思想"></a>1.1.Java集合设计思想</h2><p>Java集合框架的一个中心思想是接口和实现分离。这种机制较好的保持了一些集合的特性,又给开发者提供了灵活的实现方式和增加一些特性。</p>
+<h3 id="1-1-1-自定义队列"><a href="#1-1-1-自定义队列" class="headerlink" title="1.1.1 自定义队列"></a>1.1.1 自定义队列</h3><p>下面我们通过自己构造队列的一种实现是如何被定义的来了解如何分离的</p>
+<ul>
+<li>首先我们要定义一个队列接口</li>
+</ul>
+<p>队列接口应指出可以在队列的尾部添加元素，在队列的头部删除元素，并且可以查询队列中元素的个数。<br>其最简单形式类似下面：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Queue</span>&lt;E&gt;&#123;<br> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(E element)</span>;<span class="hljs-comment">//尾部添加元素</span><br> E <span class="hljs-title function_">remove</span><span class="hljs-params">()</span>;<span class="hljs-comment">//头部删除元素</span><br> <span class="hljs-type">int</span> <span class="hljs-title function_">size</span><span class="hljs-params">()</span>;<span class="hljs-comment">//查询元素个数</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>然后我们要实现它:<br>上面的接口并没有说明队列是如何实现的，所以我们要实现它来实现队列，队列通常有两种实现方式：<strong>循环数组实现，链表实现</strong><br>下面分别大体实现下：</li>
+</ul>
+<p>i.循环数组实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CircularArrayQueue</span>&lt;E&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Queue</span>&lt;E&gt;<br>&#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> head;<span class="hljs-comment">//定义队列头元素</span><br>  <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> tail;<span class="hljs-comment">//队列尾元素</span><br>  CircularArrayQueue(<span class="hljs-type">int</span> capacity)&#123;......&#125;<span class="hljs-comment">//队列构造函数</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(E element)</span>&#123;......&#125;<span class="hljs-comment">//添加元素</span><br>  <span class="hljs-keyword">public</span> E <span class="hljs-title function_">remove</span><span class="hljs-params">()</span>&#123;......&#125;<span class="hljs-comment">//删除元素</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">size</span><span class="hljs-params">()</span>&#123;......&#125;<span class="hljs-comment">//返回队列大小</span><br>  <span class="hljs-keyword">private</span> E[] elements;<span class="hljs-comment">//存储元素的数组</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>ii.链表实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LinkedListQueue</span>&lt;E&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Queue</span>&lt;E&gt;<br>&#123;<br>  <span class="hljs-keyword">private</span> Link head;<br>  <span class="hljs-keyword">private</span> Link tail;<br>  LinkedListQueue()&#123;...&#125;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(E element)</span>&#123;...&#125;<br>  <span class="hljs-keyword">public</span> E <span class="hljs-title function_">remove</span><span class="hljs-params">()</span>&#123;...&#125;<br>  <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">size</span><span class="hljs-params">()</span>&#123;...&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>最后我们就可以在应用中用它了<br>上面是我们自己写的，其实Java库的开发者已经把上面的工作全做了，而且很系统的开发了很多数据结构供我们使用,<br>实际上我们只需要学习如何使用就可以了。</li>
+</ul>
+<h1 id="2-Java集合框架中有哪些接口？"><a href="#2-Java集合框架中有哪些接口？" class="headerlink" title="2.Java集合框架中有哪些接口？"></a>2.Java集合框架中有哪些接口？</h1><pre class="mermaid">graph LR
+
+Collection --extend--> Iterable
+
+List--extend--> Collection
+
+Set--extend--> Collection
+
+Queue--extend--> Collection
+
+SortedMap --extend--> Map
+
+SortedSet--extend-->Set
+Deque--extend-->Queue
+NavigableMap --extend--> SortedMap
+NavigbleSet --extend--> SortedSet
+ListIterator--extend-->Iterator
+RandomAccess</pre>
+
+<p><strong>这张图为我们比较完整的描述就Java中集合框架的基本接口。下面我们先了解一些比较重要的接口</strong></p>
+<h2 id="2-1-Iterable接口"><a href="#2-1-Iterable接口" class="headerlink" title="2.1.Iterable接口"></a>2.1.Iterable接口</h2><p>它是一个迭代器接口，实现它的类都是可被按顺序遍历的集合类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Iterable</span>&lt;T&gt; &#123;<br>    <br>    <span class="hljs-comment">//获取迭代器</span><br>    Iterator&lt;T&gt; <span class="hljs-title function_">iterator</span><span class="hljs-params">()</span>;<br>    <br>    <span class="hljs-comment">//default是在java8中引入的关键字，在接口内部包含了一些默认的方法实现，</span><br>    <span class="hljs-comment">//从而使得接口在进行扩展的时候，不会破坏与接口相关的实现类代码。</span><br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">    * 对Iterable的每个元素执行给定的操作，直到所有元素都被处理或动作引发异常</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-keyword">default</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">forEach</span><span class="hljs-params">(Consumer&lt;? <span class="hljs-built_in">super</span> T&gt; action)</span> &#123;<br>        Objects.requireNonNull(action);<br>        <span class="hljs-keyword">for</span> (T t : <span class="hljs-built_in">this</span>) &#123;<br>            action.accept(t);<br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">    *在Iterable描述的元素上创建一个Iterable</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-keyword">default</span> Spliterator&lt;T&gt; <span class="hljs-title function_">spliterator</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> Spliterators.spliteratorUnknownSize(iterator(), <span class="hljs-number">0</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-2-Collection接口"><a href="#2-2-Collection接口" class="headerlink" title="2.2 Collection接口"></a>2.2 Collection接口</h2><p>它继承了迭代器接口。它是集合接口，它里面定义了一些方法，这些方法都是操作集合的常用方法。<br>这个接口有两个基本方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Collection</span>&lt;E&gt;&#123;<br> <span class="hljs-type">boolean</span> <span class="hljs-title function_">add</span><span class="hljs-params">(E element)</span>;<span class="hljs-comment">//添加元素方法</span><br> Iterator&lt;E&gt; <span class="hljs-title function_">iterator</span><span class="hljs-params">()</span>;<span class="hljs-comment">//迭代器</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>[对于Collection的具体学习请看上一节](&#x2F;9.1 Java集合接口学习)。</strong></p>
+<h2 id="2-3-List-Set-Queue"><a href="#2-3-List-Set-Queue" class="headerlink" title="2.3 List,Set,Queue"></a>2.3 List,Set,Queue</h2><p>List，Set ，Queue接口则是继承Collection定义具体的数据结构的接口</p>
+<p>其中List定义了链表, 对应着链表数据结构, 线性顺序存储元素集</p>
+<p>Set定义了不重复集数据结构, 一般是非线性无序存储不重复的元素集</p>
+<p>Queue定义了队列数据结构, 其数据集遵守着先进先出的基本原则</p>
+<h2 id="2-4-Map接口"><a href="#2-4-Map接口" class="headerlink" title="2.4 Map接口"></a>2.4 Map接口</h2><p>它是一个独立的接口，它不继承Collection接口</p>
+<p>它用来定义键值对数据结构的接口, 一般用的是Hash映射(时间复杂度为1)</p>
+<p>它定义的接口常用方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//从该Map中删除所有的映射数据（可选操作）: 清空操作</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">clear</span><span class="hljs-params">()</span><br><br><span class="hljs-comment">//如果此Map包含指定key，则返回 true</span><br><span class="hljs-type">boolean</span> <span class="hljs-title function_">containsKey</span><span class="hljs-params">(Object key)</span><br><br><span class="hljs-comment">//如果此Map包含指定的value，则返回 true</span><br><span class="hljs-type">boolean</span> <span class="hljs-title function_">containsValue</span><span class="hljs-params">(Object value)</span><br><br><span class="hljs-comment">//返回此Map中包含的Entry的Set集合,可以用来遍历Map</span><br>Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()<br><br><span class="hljs-comment">//将指定的对象与此Map对象相比较获得相等性。</span><br><span class="hljs-type">boolean</span> <span class="hljs-title function_">equals</span><span class="hljs-params">(Object o)</span><br><br><span class="hljs-comment">//返回到指定键所对于的值，如果不包含指定的键，则返回null</span><br>V	<span class="hljs-title function_">get</span><span class="hljs-params">(Object key)</span><br><br><span class="hljs-comment">//返回到指定键所对于的值，如果不包含指定的键，则返回defaultValue</span><br><span class="hljs-keyword">default</span> V <span class="hljs-title function_">getOrDefault</span><span class="hljs-params">(Object key, V defaultValue)</span><br><br><span class="hljs-comment">//返回此对象的hashCode</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">hashCode</span><span class="hljs-params">()</span><br><br><span class="hljs-comment">//判断此Map是否为空</span><br><span class="hljs-type">boolean</span> <span class="hljs-title function_">isEmpty</span><span class="hljs-params">()</span><br><br><span class="hljs-comment">//返回此Map中包含的键的Set视图。</span><br>Set&lt;K&gt; <span class="hljs-title function_">keySet</span><span class="hljs-params">()</span><br><br><span class="hljs-comment">//向Map中添加键值对</span><br>V	<span class="hljs-title function_">put</span><span class="hljs-params">(K key, V value)</span><br><br><span class="hljs-comment">//将另一个Map的所有键值对添加到此Map中</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">putAll</span><span class="hljs-params">(Map&lt;? extends K,? extends V&gt; m)</span><br><br><span class="hljs-comment">//根据键从Map中删除一个键值对</span><br>V <span class="hljs-title function_">remove</span><span class="hljs-params">(Object key)</span><br><br><span class="hljs-comment">//只有给出的key,value和存储的对的上，才进行删除操作</span><br><span class="hljs-keyword">default</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">remove</span><span class="hljs-params">(Object key, Object value)</span><br><br><span class="hljs-comment">// /只有给出的key,value和存储的对的上，才进行替换操作</span><br><span class="hljs-keyword">default</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">replace</span><span class="hljs-params">(K key, V oldValue, V newValue)</span><br><br><span class="hljs-comment">//返回此Map中存储的键值对的数量</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">size</span><span class="hljs-params">()</span><br><br><span class="hljs-comment">//返回此Map中包含的值的Collection对象。</span><br>Collection&lt;V&gt; <span class="hljs-title function_">values</span><span class="hljs-params">()</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="2-5-Iterator接口"><a href="#2-5-Iterator接口" class="headerlink" title="2.5 Iterator接口"></a>2.5 Iterator接口</h2><p>迭代器接口，里面的方法用于遍历集合元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//对每个剩余元素执行给定的操作，直到所有元素都被处理或动作引发异常。</span><br><span class="hljs-keyword">default</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">forEachRemaining</span><span class="hljs-params">(Consumer&lt;? <span class="hljs-built_in">super</span> E&gt; action)</span><br><br><span class="hljs-comment">//如果迭代具有更多元素，则返回 true 。</span><br><span class="hljs-type">boolean</span> <span class="hljs-title function_">hasNext</span><span class="hljs-params">()</span><br><br><span class="hljs-comment">//返回迭代中的下一个元素。</span><br>E <span class="hljs-title function_">next</span><span class="hljs-params">()</span><br><br><span class="hljs-comment">//从底层集合中删除此迭代器返回的最后一个元素（可选操作）。</span><br><span class="hljs-keyword">default</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">remove</span><span class="hljs-params">()</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>每个支持迭代器的集合都应该给出自己的实现。</strong></p>
+<h2 id="2-6-RandomAccess接口"><a href="#2-6-RandomAccess接口" class="headerlink" title="2.6.RandomAccess接口"></a>2.6.RandomAccess接口</h2><p>此接口是一个标记接口，实现它的集合类具备支持随机访问的能力。<br>表明它们支持快速（通常为恒定时间）随机访问。</p>
+<h2 id="2-7-基础接口的具体实现"><a href="#2-7-基础接口的具体实现" class="headerlink" title="2.7 基础接口的具体实现"></a>2.7 基础接口的具体实现</h2><p>其他的所有接口或具体的实现类都是由Collection,Map,Iterator,Iterable衍生而来。<br>抽象类分别实现了对应的接口</p>
+<p>如下图：</p>
+<p>Collection衍生集合派系：</p>
+<pre class="mermaid">graph LR
+
+AbstractCollection--impl-->Collection
+AbstractList --extend-->AbstractCollection
+AbstractSet --extend-->AbstractCollection
+AbstractQueue--extend-->AbstractCollection
+ArrayQueue--extend-->AbstractCollection
+AbstractSequentialList--extend-->AbstractList
+ArrayList --extend--> AbstractList
+LinkedList--extend-->AbstractSequentialList
+HashSet--extend-->AbstractSet
+EnumSet--extend-->AbstractSet
+TreeSet--extend-->AbstractSet
+LinkedHashSet--extend-->HashSet
+PriorityQueue--extend-->AbstractQueue</pre>
+
+<p>Map衍生集合派系：</p>
+<pre class="mermaid">graph LR
+AbstractMap--impl-->Map
+HashMap--extend-->AbstractMap
+TreeMap--extend-->AbstractMap
+EnumMap--extend-->AbstractMap
+WeakHashMap--extend-->AbstractMap
+IdentityHashMap--extend-->AbstractMap
+LinkedHashMap--extend-->HashMap</pre>
+
+<h2 id="2-8-java类库中的具体集合有14个"><a href="#2-8-java类库中的具体集合有14个" class="headerlink" title="2.8 java类库中的具体集合有14个"></a>2.8 java类库中的具体集合有14个</h2><table>
+<thead>
+<tr>
+<th>集合类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ArrayList</td>
+<td>一种可以动态增长和缩减的索引序列</td>
+</tr>
+<tr>
+<td>LinkedList</td>
+<td>一种可以在任何位置进行高效地插入和删除操作的有序序列</td>
+</tr>
+<tr>
+<td>ArrayDeque</td>
+<td>一种用循环数组实现的双端队列</td>
+</tr>
+<tr>
+<td>HashSet</td>
+<td>一种没有重复元素的无序集合</td>
+</tr>
+<tr>
+<td>TreeSet</td>
+<td>一种没有重复元素的有序集合</td>
+</tr>
+<tr>
+<td>EnumSet</td>
+<td>一种包含枚举类型值的集</td>
+</tr>
+<tr>
+<td>LinkedHashSet</td>
+<td>一种可以记住元素插入次序的集</td>
+</tr>
+<tr>
+<td>PriorityQueue</td>
+<td>一种允许高效删除最小&#x2F;大元素的集合</td>
+</tr>
+<tr>
+<td>HashMap</td>
+<td>存储key-value结构的数据结构</td>
+</tr>
+<tr>
+<td>TreeMap</td>
+<td>存储key有序的key-value的数据结构</td>
+</tr>
+<tr>
+<td>EnumMap</td>
+<td>一种键值属于枚举类型的映射表</td>
+</tr>
+<tr>
+<td>LinkedHashMap</td>
+<td>一种可以记录键值插入顺序的结构</td>
+</tr>
+<tr>
+<td>WeakHashMap</td>
+<td>一种其值没用后可以被垃圾回收器回收的结构</td>
+</tr>
+<tr>
+<td>IdentityHashMap</td>
+<td>一种用&#x3D;&#x3D;而不是用equals比较键值的结构</td>
+</tr>
+</tbody></table>
+<p><strong>在接下来的博客中我会具体的分析每个集合的特性和学习如何使用它们。</strong></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/9.2%20java%E9%9B%86%E5%90%88%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E9%9B%86%E5%90%88%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E5%9F%BA%E7%A1%80%E6%8E%A5%E5%8F%A3%E5%AD%A6%E4%B9%A0%EF%BC%89/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;9.2%20java%E9%9B%86%E5%90%88%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E9%9B%86%E5%90%88%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E5%9F%BA%E7%A1%80%E6%8E%A5%E5%8F%A3%E5%AD%A6%E4%B9%A0%EF%BC%89&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;9.2%20java%E9%9B%86%E5%90%88%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E9%9B%86%E5%90%88%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E5%9F%BA%E7%A1%80%E6%8E%A5%E5%8F%A3%E5%AD%A6%E4%B9%A0%EF%BC%89&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%BF%9B%E9%98%B6/" rel="tag">Java进阶</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/9.1%20Java%E9%9B%86%E5%90%88%E6%8E%A5%E5%8F%A3%E5%AD%A6%E4%B9%A0/"><i class="iconfont iconleft"></i>9.1 Java集合接口学习</a>
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/9.3%20Java%E9%9B%86%E5%90%88%E5%AD%A6%E4%B9%A0%E4%B9%8BList%EF%BC%88%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%8CAPI%EF%BC%8C%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86%EF%BC%89/">9.3 Java集合之List(基本概念,API,存储原理)<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6"><span class="toc-text">1.Java集合框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Java%E9%9B%86%E5%90%88%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3"><span class="toc-text">1.1.Java集合设计思想</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%98%9F%E5%88%97"><span class="toc-text">1.1.1 自定义队列</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E6%8E%A5%E5%8F%A3%EF%BC%9F"><span class="toc-text">2.Java集合框架中有哪些接口？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Iterable%E6%8E%A5%E5%8F%A3"><span class="toc-text">2.1.Iterable接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Collection%E6%8E%A5%E5%8F%A3"><span class="toc-text">2.2 Collection接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-List-Set-Queue"><span class="toc-text">2.3 List,Set,Queue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-Map%E6%8E%A5%E5%8F%A3"><span class="toc-text">2.4 Map接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-Iterator%E6%8E%A5%E5%8F%A3"><span class="toc-text">2.5 Iterator接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-RandomAccess%E6%8E%A5%E5%8F%A3"><span class="toc-text">2.6.RandomAccess接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-7-%E5%9F%BA%E7%A1%80%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-text">2.7 基础接口的具体实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-8-java%E7%B1%BB%E5%BA%93%E4%B8%AD%E7%9A%84%E5%85%B7%E4%BD%93%E9%9B%86%E5%90%88%E6%9C%8914%E4%B8%AA"><span class="toc-text">2.8 java类库中的具体集合有14个</span></a></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

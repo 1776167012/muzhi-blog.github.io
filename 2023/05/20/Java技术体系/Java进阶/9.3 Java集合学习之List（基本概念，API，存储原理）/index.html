@@ -1,0 +1,513 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>9.3 Java集合之List(基本概念,API,存储原理) - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="1. List接口在学习List接口之前我们还是得复习...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">9.3 Java集合之List(基本概念,API,存储原理)</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">9.3 Java集合之List(基本概念,API,存储原理)</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 20, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>5442</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="1-List接口"><a href="#1-List接口" class="headerlink" title="1. List接口"></a>1. List接口</h1><p>在学习List接口之前我们还是得复习下这张图</p>
+<pre class="mermaid">graph LR
+
+Collection --extend--> Iterable
+
+List--extend--> Collection
+
+Set--extend--> Collection
+
+Queue--extend--> Collection
+
+SortedMap --extend--> Map
+
+SortedSet--extend-->Set
+Deque--extend-->Queue
+NavigableMap --extend--> SortedMap
+NavigbleSet --extend--> SortedSet
+ListIterator--extend-->Iterator
+RandomAccess</pre>
+
+<p>从图中我们知道了，<strong>List接口继承了Collection接口</strong>。</p>
+<p>也就是说List接口是在Collection接口的基础上衍生出来的具体的链表数据结构的接口，在Java集合中，链表数据结构类都必须要实现List接口。<br>通过查看List接口的定义并和Collection接口进行比较，可以找到，专属于List接口的方法有：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//指定开始位置将另一个集合的元素插入进List中</span><br><span class="hljs-type">boolean</span> <span class="hljs-title function_">addAll</span><span class="hljs-params">(<span class="hljs-type">int</span> index, Collection&lt;? extends E&gt; c)</span>;<br><br><span class="hljs-comment">//将List中的元素通过传入的Operator进行替换处理</span><br><span class="hljs-keyword">default</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">replaceAll</span><span class="hljs-params">(UnaryOperator&lt;E&gt; operator)</span> &#123;<br>    Objects.requireNonNull(operator);<br>    <span class="hljs-keyword">final</span> ListIterator&lt;E&gt; li = <span class="hljs-built_in">this</span>.listIterator();<br>    <span class="hljs-keyword">while</span> (li.hasNext()) &#123;<br>        li.set(operator.apply(li.next()));<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//将List中的元素通过传入的Comparator进行排序处理</span><br><span class="hljs-keyword">default</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sort</span><span class="hljs-params">(Comparator&lt;? <span class="hljs-built_in">super</span> E&gt; c)</span> &#123;<br>    Object[] a = <span class="hljs-built_in">this</span>.toArray();<br>    Arrays.sort(a, (Comparator) c);<br>    ListIterator&lt;E&gt; i = <span class="hljs-built_in">this</span>.listIterator();<br>    <span class="hljs-keyword">for</span> (Object e : a) &#123;<br>        i.next();<br>        i.set((E) e);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//根据索引位置得到指定位置的元素</span><br>E <span class="hljs-title function_">get</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span>;<br><br><span class="hljs-comment">//重置指定索引位置的元素</span><br>E <span class="hljs-title function_">set</span><span class="hljs-params">(<span class="hljs-type">int</span> index, E element)</span>;<br><br><span class="hljs-comment">//向指定位置插入新的元素</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> index, E element)</span>;<br><br><span class="hljs-comment">//删除指定位置的元素</span><br>E <span class="hljs-title function_">remove</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span>;<br><br><span class="hljs-comment">//得到第一个和对象o相等的对象的位置</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">indexOf</span><span class="hljs-params">(Object o)</span>;<br><br><span class="hljs-comment">//得到最后一个和对象o相等的对象的位置</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">lastIndexOf</span><span class="hljs-params">(Object o)</span>;<br><br><span class="hljs-comment">// 获得链表迭代器</span><br>ListIterator&lt;E&gt; <span class="hljs-title function_">listIterator</span><span class="hljs-params">()</span>;<br><br><span class="hljs-comment">//获得指定起始位置的链表迭代器</span><br>ListIterator&lt;E&gt; <span class="hljs-title function_">listIterator</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span>;<br><br><span class="hljs-comment">//获得指定位置范围的链表</span><br>List&lt;E&gt; <span class="hljs-title function_">subList</span><span class="hljs-params">(<span class="hljs-type">int</span> fromIndex, <span class="hljs-type">int</span> toIndex)</span>;<br></code></pre></td></tr></table></figure>
+
+<h1 id="2-List的具体实现"><a href="#2-List的具体实现" class="headerlink" title="2. List的具体实现"></a>2. List的具体实现</h1><table>
+<thead>
+<tr>
+<th>集合类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ArrayList</td>
+<td>一种可以动态增长和缩减的索引序列</td>
+</tr>
+<tr>
+<td>LinkedList</td>
+<td>一种可以在任何位置进行高效地插入和删除操作的有序序列</td>
+</tr>
+<tr>
+<td>ArrayDeque</td>
+<td>一种用循环数组实现的双端队列</td>
+</tr>
+<tr>
+<td>HashSet</td>
+<td>一种没有重复元素的无序集合</td>
+</tr>
+<tr>
+<td>TreeSet</td>
+<td>一种没有重复元素的有序集合</td>
+</tr>
+<tr>
+<td>EnumSet</td>
+<td>一种包含枚举类型值的集</td>
+</tr>
+<tr>
+<td>LinkedHashSet</td>
+<td>一种可以记住元素插入次序的集</td>
+</tr>
+<tr>
+<td>PriorityQueue</td>
+<td>一种允许高效删除最小&#x2F;大元素的集合</td>
+</tr>
+<tr>
+<td>HashMap</td>
+<td>存储key-value结构的数据结构</td>
+</tr>
+<tr>
+<td>TreeMap</td>
+<td>存储key有序的key-value的数据结构</td>
+</tr>
+<tr>
+<td>EnumMap</td>
+<td>一种键值属于枚举类型的映射表</td>
+</tr>
+<tr>
+<td>LinkedHashMap</td>
+<td>一种可以记录键值插入顺序的结构</td>
+</tr>
+<tr>
+<td>WeakHashMap</td>
+<td>一种其值没用后可以被垃圾回收器回收的结构</td>
+</tr>
+<tr>
+<td>IdentityHashMap</td>
+<td>一种用&#x3D;&#x3D;而不是用equals比较键值的结构</td>
+</tr>
+</tbody></table>
+<p>在具体的查看源码前，我们可以根据上面的表格先猜出那些具体的集合是通过实现List接口来定义的：<br>ArrayList,  LinkedList 这是两个比较明显的实现了。</p>
+<h2 id="2-1-ArrayList"><a href="#2-1-ArrayList" class="headerlink" title="2.1 ArrayList"></a>2.1 ArrayList</h2><p>简单介绍一下ArrayList的实现就是：</p>
+<p>ArrayList是基于动态数组实现的一个链表数据结构的一个<strong>线程不安全</strong>的类。</p>
+<p>它的使用特性是<strong>插入，删除慢。修改快，查询快，且支持随机查询（根据get(int index)能以常数时间获取元素）。</strong></p>
+<h3 id="2-1-1-存储原理"><a href="#2-1-1-存储原理" class="headerlink" title="2.1.1 存储原理"></a>2.1.1 存储原理</h3><ul>
+<li>开辟存储存储空间：<br>如果使用的是默认无参构造方法，size<em>1.5&lt;&#x3D;size+1，则为elementData开辟10个对象空间。<br>如果使用的是指定数量的构造方法，size</em>1.5&lt;&#x3D;size+1，则为elementData开辟size+1个对象空间。</li>
+<li>扩容机制：<br>每次添加前会对size+1进行检查<br>如果在原数组的基础上增加了一半后大于size+1且小于MAX_ARRAY_SIZE,则将数组扩容至150%大小。</li>
+</ul>
+<p><em><strong>具体的实现可以查阅Jdk源码来进行学习。</strong></em></p>
+<h3 id="2-1-2-性能测试实例"><a href="#2-1-2-性能测试实例" class="headerlink" title="2.1.2  性能测试实例"></a>2.1.2  性能测试实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//完整代码地址在文章最后</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    List&lt;Integer&gt; list = addTest(<span class="hljs-number">100000</span>);<br>    System.out.println(<span class="hljs-string">&quot;修改耗时：&quot;</span>+updateTest(list)+<span class="hljs-string">&quot;ms&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;查询耗时： &quot;</span>+queryTest(list)+<span class="hljs-string">&quot;ms&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;插入耗时： &quot;</span>+insertTest(list)+<span class="hljs-string">&quot;ms&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;删除耗时： &quot;</span>+deleteTest(list)+<span class="hljs-string">&quot;ms&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs text">添加耗时：5ms<br>修改耗时：5ms<br>查询耗时： 4ms<br>插入耗时： 2760ms<br>删除耗时： 2167ms<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<p>上面的测试结果实事求是的验证了ArrayList的 <strong>插入，删除慢。</strong></p>
+<h2 id="2-2-LinkedList"><a href="#2-2-LinkedList" class="headerlink" title="2.2 LinkedList"></a>2.2 LinkedList</h2><p>简单概述一下LinkedList的实现就是：LinkedList是基于双向链表实现的一个链表数据结构实现的一个<strong>线程不安全</strong>的类。</p>
+<h3 id="2-2-1-存储原理"><a href="#2-2-1-存储原理" class="headerlink" title="2.2.1 存储原理"></a>2.2.1 存储原理</h3><p>LinkedList 采用链表存储，如果是在头尾插入或者删除元素不受元素位置的影响（add(E e)、addFirst(E e) addLast(E e)、removeFirst()、 removeLast()），时间复杂度为 O(1)，效率非常好。<br>如果是要在指定位置 i 插入和删除元素的话（add(int index, E element)，remove(Object o)）， 时间复杂度为 O(n) ，因为需要先移动到指定位置再插入。<strong>但是不需要进行原有数据的整体移动处理。</strong></p>
+<p>需要注意的是： <strong>LinkedList不支持高效随机元素访问，ArrayList支持。 LinkedList则无需担心扩容问题，它的存储原理是需要的时候进行开辟空间，然后通过引用链接到一起，所以LinkedList的存储位置是碎片化，不连续的。</strong></p>
+<p>具体的实现请查阅源码。</p>
+<h3 id="2-2-2-性能测试实例"><a href="#2-2-2-性能测试实例" class="headerlink" title="2.2.2 性能测试实例"></a>2.2.2 性能测试实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//代码地址在文章最后</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    List&lt;Integer&gt; list = addTest(<span class="hljs-number">100000</span>);<br>    System.out.println(<span class="hljs-string">&quot;修改耗时：&quot;</span>+updateTest(list)+<span class="hljs-string">&quot;ms&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;查询耗时： &quot;</span>+queryTest(list)+<span class="hljs-string">&quot;ms&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;插入耗时： &quot;</span>+insertTest(list)+<span class="hljs-string">&quot;ms&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;删除耗时： &quot;</span>+deleteTest(list)+<span class="hljs-string">&quot;ms&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs text">添加耗时：6ms<br>修改耗时：5284ms<br>查询耗时： 4917ms<br>插入耗时： 8351ms<br>删除耗时： 7564ms<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<p>可以看到，相比而言，其总体性能和ArrayList相比差距还是较大的,所以在实际的使用过程中, ArrayList是首选。</p>
+<h2 id="2-3-Vector"><a href="#2-3-Vector" class="headerlink" title="2.3 Vector"></a>2.3 Vector</h2><p>其实除了ArrayList, LinkedList两种有名的实现之外，JDK最开始提供的List的实现版本是Vector但是它的性能和功能都逐渐被淘汰了。</p>
+<h3 id="2-3-1-存储原理"><a href="#2-3-1-存储原理" class="headerlink" title="2.3.1 存储原理"></a>2.3.1 存储原理</h3><p>Vector底层用的是数组实现。 它的关键操作方法都是同步的，这使得线程安全，但是性能不好。</p>
+<ul>
+<li>开辟内存空间<br>默认开辟10个内存空间</li>
+<li>扩容机制<br>既然是使用数组实现，那么它也一定会有相应的扩容机制，每次添加前会对elementCount+1进行检查，<br>如果它大于了数组长度，则进行扩容，采用的基本逻辑是如果指定了扩容大小capIncre，则扩为 oldCap+capIncre,否则进行<strong>两倍扩容</strong>。扩完后如果还是小于elementCount+1,则newCap &#x3D; elementCount+1<br>还进行了一些极限纠正。</li>
+</ul>
+<p>具体的实现请查阅源码。</p>
+<h3 id="2-3-2-性能测试实例"><a href="#2-3-2-性能测试实例" class="headerlink" title="2.3.2 性能测试实例"></a>2.3.2 性能测试实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//完整代码地址见下方链接</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    List&lt;Integer&gt; list = addTest(<span class="hljs-number">100000</span>);<br>    System.out.println(<span class="hljs-string">&quot;修改耗时：&quot;</span>+updateTest(list)+<span class="hljs-string">&quot;ms&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;查询耗时： &quot;</span>+queryTest(list)+<span class="hljs-string">&quot;ms&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;插入耗时： &quot;</span>+insertTest(list)+<span class="hljs-string">&quot;ms&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;删除耗时： &quot;</span>+deleteTest(list)+<span class="hljs-string">&quot;ms&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs text">添加耗时：15ms<br>修改耗时：12ms<br>查询耗时： 6ms<br>插入耗时： 3288ms<br>删除耗时： 2760ms<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<p>可以看到在这个测试实例下，Vector的性能和ArrayList相差不大。<br>但是，在多线程的情况下它的性能下降的还是很厉害的。</p>
+<p>完整代码地址：<br><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/Progress/exa27_3">https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/Progress/exa27_3</a></p>
+<blockquote>
+<p>LinkedList部分参考了文章： <a target="_blank" rel="noopener" href="https://javaguide.cn/java/collection/java-collection-questions-01.html#collection-%E5%AD%90%E6%8E%A5%E5%8F%A3%E4%B9%8B-list">https://javaguide.cn/java/collection/java-collection-questions-01.html#collection-%E5%AD%90%E6%8E%A5%E5%8F%A3%E4%B9%8B-list</a></p>
+</blockquote>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/9.3%20Java%E9%9B%86%E5%90%88%E5%AD%A6%E4%B9%A0%E4%B9%8BList%EF%BC%88%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%8CAPI%EF%BC%8C%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86%EF%BC%89/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;9.3%20Java%E9%9B%86%E5%90%88%E5%AD%A6%E4%B9%A0%E4%B9%8BList%EF%BC%88%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%8CAPI%EF%BC%8C%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86%EF%BC%89&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;9.3%20Java%E9%9B%86%E5%90%88%E5%AD%A6%E4%B9%A0%E4%B9%8BList%EF%BC%88%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%8CAPI%EF%BC%8C%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86%EF%BC%89&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%BF%9B%E9%98%B6/" rel="tag">Java进阶</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/9.2%20java%E9%9B%86%E5%90%88%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E9%9B%86%E5%90%88%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E5%9F%BA%E7%A1%80%E6%8E%A5%E5%8F%A3%E5%AD%A6%E4%B9%A0%EF%BC%89/"><i class="iconfont iconleft"></i>9.2 Java集合基础学习(集合基本概念,基础接口)</a>
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/9.4%20Java%E9%9B%86%E5%90%88%E4%B9%8BMap%E5%AD%A6%E4%B9%A0/">9.4 Java集合之Map学习<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-List%E6%8E%A5%E5%8F%A3"><span class="toc-text">1. List接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-List%E7%9A%84%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-text">2. List的具体实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-ArrayList"><span class="toc-text">2.1 ArrayList</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86"><span class="toc-text">2.1.1 存储原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%AE%9E%E4%BE%8B"><span class="toc-text">2.1.2  性能测试实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-LinkedList"><span class="toc-text">2.2 LinkedList</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86"><span class="toc-text">2.2.1 存储原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%AE%9E%E4%BE%8B"><span class="toc-text">2.2.2 性能测试实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-Vector"><span class="toc-text">2.3 Vector</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86"><span class="toc-text">2.3.1 存储原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%AE%9E%E4%BE%8B"><span class="toc-text">2.3.2 性能测试实例</span></a></li></ol></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

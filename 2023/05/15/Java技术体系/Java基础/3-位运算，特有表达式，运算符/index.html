@@ -1,0 +1,457 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>3.位运算符,特有表达式,运算符 - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="1.基础内容运算符与表达式和C的基本一样
+这里要补充的...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">3.位运算符,特有表达式,运算符</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">3.位运算符,特有表达式,运算符</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 15, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>4528</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="1-基础内容"><a href="#1-基础内容" class="headerlink" title="1.基础内容"></a>1.基础内容</h1><p>运算符与表达式和C的基本一样</p>
+<p>这里要补充的是以前没弄懂的</p>
+<h2 id="1-1-位运算符"><a href="#1-1-位运算符" class="headerlink" title="1.1 位运算符"></a>1.1 位运算符</h2><h3 id="1-1-1-按位-amp-运算（按位与运算）"><a href="#1-1-1-按位-amp-运算（按位与运算）" class="headerlink" title="1.1.1 按位&amp;运算（按位与运算）"></a>1.1.1 按位&amp;运算（按位与运算）</h3><p>按位与运算符&amp;是双目运算符，对两个整型数据进行二进制按位&amp;进行运算，运算的结果也是一个整型数据,<br>其运算法则是：<br><strong>如果两个数据对应位都是1，则结果的该位是1，否则是0</strong></p>
+<p>例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">m:   <span class="hljs-number">00000111</span><br>n:   <span class="hljs-number">10101011</span><br>n&amp;m: <span class="hljs-number">00000011</span> <br></code></pre></td></tr></table></figure>
+
+<p>编写程序验证：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BitAndStudy</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-comment">//这里使用的api可以将二进制转为10进制</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> Integer.parseInt(<span class="hljs-string">&quot;00000111&quot;</span>,<span class="hljs-number">2</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">num1</span> <span class="hljs-operator">=</span>Integer.parseInt(<span class="hljs-string">&quot;10101011&quot;</span>,<span class="hljs-number">2</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> num&amp;num1;<br>        System.out.println(Integer.toBinaryString(result));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">00000111&amp;10101011= 11<br></code></pre></td></tr></table></figure>
+
+<p><strong>它也可以做判断符来用，但与&amp;&amp;有差别：</strong></p>
+<ul>
+<li>&amp;　不管前面的条件是否正确，后面都执行</li>
+<li>&amp;&amp;　前面条件正确时，才执行后面，不正确时，就不执行，就效率而言，这个更好</li>
+</ul>
+<h3 id="1-2-按位-运算（按位或运算）"><a href="#1-2-按位-运算（按位或运算）" class="headerlink" title="1.2 按位|运算（按位或运算）"></a>1.2 按位|运算（按位或运算）</h3><p>按位或运算符|是二目运算符，运算法则和&amp;类似</p>
+<p><strong>只要两个数据对应位有一个是1，则结果的该位是1，否则是0</strong></p>
+<p>例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">orStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-comment">//这里使用的api可以将二进制转为10进制</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> Integer.parseInt(<span class="hljs-string">&quot;00000111&quot;</span>,<span class="hljs-number">2</span>);<br>    <span class="hljs-type">int</span> <span class="hljs-variable">num1</span> <span class="hljs-operator">=</span>Integer.parseInt(<span class="hljs-string">&quot;10101011&quot;</span>,<span class="hljs-number">2</span>);<br>    <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> num|num1;<br>    System.out.println(<span class="hljs-string">&quot;00000111 | 10101011= &quot;</span>+Integer.toBinaryString(result));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">00000111 | 10101011= 10101111<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-3-按位-运算（按位非运算）"><a href="#1-3-按位-运算（按位非运算）" class="headerlink" title="1.3  按位~运算（按位非运算）"></a>1.3  按位~运算（按位非运算）</h3><p>按位非运算符~是单目运算符，对一个整型数据a按位进行运算</p>
+<p>例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">nonStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-comment">//这里使用的api可以将二进制转为10进制</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> Integer.parseInt(<span class="hljs-string">&quot;00000111&quot;</span>,<span class="hljs-number">2</span>);<br>    <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> ~num;<br>    System.out.println(<span class="hljs-string">&quot;~00000111 = &quot;</span>+Integer.toBinaryString(result));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">~00000111 = 11111111111111111111111111111000<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="1-4-按位异或运算-（按位异或运算）"><a href="#1-4-按位异或运算-（按位异或运算）" class="headerlink" title="1.4 按位异或运算^（按位异或运算）"></a>1.4 按位异或运算^（按位异或运算）</h3><p>按位异或运算符^是二目运算符，运算法则：</p>
+<p><strong>如果两个数据对应位相同，则结果的该位是0，否则是1</strong></p>
+<p>例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 异或运算: 相同为0，不同为1</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">nonOrStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-comment">//这里使用的api可以将二进制转为10进制</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> Integer.parseInt(<span class="hljs-string">&quot;00000111&quot;</span>,<span class="hljs-number">2</span>);<br>    <span class="hljs-type">int</span> <span class="hljs-variable">num1</span> <span class="hljs-operator">=</span>Integer.parseInt(<span class="hljs-string">&quot;10101011&quot;</span>,<span class="hljs-number">2</span>);<br>    <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> num^num1;<br>    System.out.println(<span class="hljs-string">&quot;00000111 ^ 10101011= &quot;</span>+Integer.toBinaryString(result));<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">00000111 ^ 10101011= 10101100<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-5-按位右移-gt-gt-gt-gt-gt"><a href="#1-5-按位右移-gt-gt-gt-gt-gt" class="headerlink" title="1.5 按位右移&gt;&gt;,&gt;&gt;&gt;"></a>1.5 按位右移&gt;&gt;,&gt;&gt;&gt;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">&gt;&gt;按位右移（相当于将数右移） &gt;&gt;&gt;按位右移，但它会用<span class="hljs-number">0</span>填充高位（变小）<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 按位右移： 数会变小</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">rightMoveStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> Integer.parseInt(<span class="hljs-string">&quot;00000111&quot;</span>,<span class="hljs-number">2</span>);<br>    <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> num&gt;&gt;<span class="hljs-number">1</span>;<br>    System.out.println(<span class="hljs-string">&quot;00000111&gt;&gt;1 = &quot;</span>+Integer.toBinaryString(result));<br>    <span class="hljs-type">int</span> <span class="hljs-variable">result2</span> <span class="hljs-operator">=</span> num&gt;&gt;&gt;<span class="hljs-number">1</span>;<br>    System.out.println(<span class="hljs-string">&quot;00000111&gt;&gt;&gt;1 = &quot;</span>+Integer.toBinaryString(result2));<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">00000111&gt;</span><span class="language-bash">&gt;1 = 11</span><br><span class="hljs-meta prompt_">00000111&gt;</span><span class="language-bash">&gt;&gt;1 = 11</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="1-6-按位左移-lt-lt"><a href="#1-6-按位左移-lt-lt" class="headerlink" title="1.6  按位左移&lt;&lt;"></a>1.6  按位左移&lt;&lt;</h3><p>&lt;&lt;按位左移（相当于将数左移，变小）<strong>注意：不存在&lt;&lt;&lt;</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 按位左移： 数字变大</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">leftMoveStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> Integer.parseInt(<span class="hljs-string">&quot;00000111&quot;</span>,<span class="hljs-number">2</span>);<br>    <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> num&lt;&lt;<span class="hljs-number">1</span>;<br>    System.out.println(<span class="hljs-string">&quot;00000111&lt;&lt;1 = &quot;</span>+Integer.toBinaryString(result));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">00000111&lt;&lt;1 = 1110<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-新增运算符：instanceof-关键字-运算符"><a href="#2-新增运算符：instanceof-关键字-运算符" class="headerlink" title="2.新增运算符：instanceof(关键字) 运算符"></a>2.新增运算符：instanceof(关键字) 运算符</h2><p>该运算符是二目运算符，左面的操作元是一个对象，右面的是一个类。此运算符先做了解，<br>由于目前可能没有类的概念，所以说现在不太好理解。<br><strong>当左面的对象是右面的类或子类创建的对象时，该运算符的结果是ture，否则是false</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    ArrayList&lt;Integer&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>    System.out.println(list <span class="hljs-keyword">instanceof</span> List);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">true<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-for基本语句"><a href="#3-for基本语句" class="headerlink" title="3.for基本语句"></a>3.for基本语句</h2><p>这里和C完全相同。<br>不同的是Java提供了遍历数组循环语句：for（声明循环变量：数组的名字）{…}</p>
+<p>例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ForStudy</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">int</span>[] num = &#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>&#125;;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> n:num)&#123;<br>            System.out.println(n);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">1<br>2<br>3<br>4<br>5<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="2-实践经验积累"><a href="#2-实践经验积累" class="headerlink" title="2.实践经验积累"></a>2.实践经验积累</h1><p>本人认为本章的重点其实是为了给我们学习和设计算法打下一个基础，<br>我们要学会将学到的算法转移到这里来，或者利用java的特性设计出新的算法，<br>其实，程序设计，算法是最关键的地方，也是最难突破的地方。</p>
+<h2 id="2-1-例子：编写一个应用程序求100以内的全部素数"><a href="#2-1-例子：编写一个应用程序求100以内的全部素数" class="headerlink" title="2.1 例子：编写一个应用程序求100以内的全部素数"></a>2.1 例子：编写一个应用程序求100以内的全部素数</h2><p>要编写出这样一个程序，我们要知道什么是素数：</p>
+<p><strong>素数一般指质数，质数是指在大于1的自然数中，除了1和它本身以外不再有其他因数的自然数。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Scanner;<br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 计算1-n范围内的素数</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">QuestStudy</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String args[])</span> &#123;<br>        <span class="hljs-type">int</span> start , end ;<br>        <span class="hljs-type">Scanner</span> <span class="hljs-variable">reader</span>  <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>        System.out.println(<span class="hljs-string">&quot;请输入数字上限： &quot;</span>);<br>        end = reader.nextInt();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">//根据end计算1到end之间所有素数</span><br>        <span class="hljs-keyword">for</span> (start = <span class="hljs-number">1</span>; start &lt; end; start += <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>) Math.sqrt(start);<br>            <span class="hljs-keyword">for</span> (i = <span class="hljs-number">2</span>; i &lt;= k; i++) &#123;<br>                <span class="hljs-keyword">if</span> (start % i == <span class="hljs-number">0</span>)<br>                    <span class="hljs-keyword">break</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (i &gt;= k + <span class="hljs-number">1</span>) &#123;<br>                System.out.println(start);<br>                n++;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell">请输入数字上限： <br>10<br>1<br>3<br>5<br>7<br><br>Process finished with exit code 0<br><br></code></pre></td></tr></table></figure>
+
+
+<p>代码地址：<br><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/exa03">https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/exa03</a></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/15/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E5%9F%BA%E7%A1%80/3-%E4%BD%8D%E8%BF%90%E7%AE%97%EF%BC%8C%E7%89%B9%E6%9C%89%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%8C%E8%BF%90%E7%AE%97%E7%AC%A6/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;15&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;3-%E4%BD%8D%E8%BF%90%E7%AE%97%EF%BC%8C%E7%89%B9%E6%9C%89%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%8C%E8%BF%90%E7%AE%97%E7%AC%A6&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;15&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;3-%E4%BD%8D%E8%BF%90%E7%AE%97%EF%BC%8C%E7%89%B9%E6%9C%89%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%8C%E8%BF%90%E7%AE%97%E7%AC%A6&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80/" rel="tag">Java基础</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2023/05/15/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E5%9F%BA%E7%A1%80/2-Java%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8A%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"><i class="iconfont iconleft"></i>2.Java的基本数据类型的声明与使用</a>
+    <a href="/2023/05/15/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E5%9F%BA%E7%A1%80/4-%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89%EF%BC%8C%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B%EF%BC%8C%E6%96%B9%E6%B3%95%E7%B1%BB%E5%9E%8B/">4.类的定义,变量类型,方法类型<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E5%86%85%E5%AE%B9"><span class="toc-text">1.基础内容</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">1.1 位运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-%E6%8C%89%E4%BD%8D-amp-%E8%BF%90%E7%AE%97%EF%BC%88%E6%8C%89%E4%BD%8D%E4%B8%8E%E8%BF%90%E7%AE%97%EF%BC%89"><span class="toc-text">1.1.1 按位&amp;运算（按位与运算）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%8C%89%E4%BD%8D-%E8%BF%90%E7%AE%97%EF%BC%88%E6%8C%89%E4%BD%8D%E6%88%96%E8%BF%90%E7%AE%97%EF%BC%89"><span class="toc-text">1.2 按位|运算（按位或运算）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E6%8C%89%E4%BD%8D-%E8%BF%90%E7%AE%97%EF%BC%88%E6%8C%89%E4%BD%8D%E9%9D%9E%E8%BF%90%E7%AE%97%EF%BC%89"><span class="toc-text">1.3  按位~运算（按位非运算）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E6%8C%89%E4%BD%8D%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97-%EF%BC%88%E6%8C%89%E4%BD%8D%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97%EF%BC%89"><span class="toc-text">1.4 按位异或运算^（按位异或运算）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E6%8C%89%E4%BD%8D%E5%8F%B3%E7%A7%BB-gt-gt-gt-gt-gt"><span class="toc-text">1.5 按位右移&gt;&gt;,&gt;&gt;&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-%E6%8C%89%E4%BD%8D%E5%B7%A6%E7%A7%BB-lt-lt"><span class="toc-text">1.6  按位左移&lt;&lt;</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%96%B0%E5%A2%9E%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%9Ainstanceof-%E5%85%B3%E9%94%AE%E5%AD%97-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">2.新增运算符：instanceof(关键字) 运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-for%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5"><span class="toc-text">3.for基本语句</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%AE%9E%E8%B7%B5%E7%BB%8F%E9%AA%8C%E7%A7%AF%E7%B4%AF"><span class="toc-text">2.实践经验积累</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E4%BE%8B%E5%AD%90%EF%BC%9A%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%B1%82100%E4%BB%A5%E5%86%85%E7%9A%84%E5%85%A8%E9%83%A8%E7%B4%A0%E6%95%B0"><span class="toc-text">2.1 例子：编写一个应用程序求100以内的全部素数</span></a></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

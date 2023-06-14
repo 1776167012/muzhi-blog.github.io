@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="@[toc]
+1.Java如何通过网络发送和接受对象前...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title"></h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 27, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>6395</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <p>@[toc]</p>
+<h1 id="1-Java如何通过网络发送和接受对象"><a href="#1-Java如何通过网络发送和接受对象" class="headerlink" title="1.Java如何通过网络发送和接受对象"></a>1.Java如何通过网络发送和接受对象</h1><p>前面的网络学习的例子演示的只是基本数据类型的传输，但在实际的开发中，我们往往需要传输域对象（JavaBean）来进行通信。<br>我们可以回顾到在我们学习IO流的时候，有这样一句话：</p>
+<p>在JavaAPI中，我们可以从字节序列来源地读入一个字节序列的对象称为输入流。字节序列的来源地可以是文件，也可以是<strong>网络</strong>，还可以是内存块等等。</p>
+<p>所以，我们可以在套接字流上使用<strong>ObjectOutputStream</strong>和<strong>ObjectinputStream</strong>来发送和接受对象数据。</p>
+<p><strong>注意：传输的对象必须是可序列化的，也就是传输的对象的类定义中需要实现Serializable接口</strong></p>
+<h2 id="1-1-Demo展示"><a href="#1-1-Demo展示" class="headerlink" title="1.1 Demo展示"></a>1.1 Demo展示</h2><p><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/d5f73a2a61b24b0fb34952b0c46dfdbd.gif" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">在这里插入图片描述</span></p>
+<p>代码地址：<br><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/Progress/exa29_3">Java基础学习&#x2F;src&#x2F;main&#x2F;java&#x2F;Progress&#x2F;exa29_3 · 严家豆&#x2F;Study - 码云 - 开源中国 (gitee.com)</a></p>
+<h3 id="1-1-1-JavaBean定义"><a href="#1-1-1-JavaBean定义" class="headerlink" title="1.1.1 JavaBean定义"></a>1.1.1 JavaBean定义</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs csharp">import java.io.Serializable;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">StudentAddress</span> <span class="hljs-title">implements</span> <span class="hljs-title">Serializable</span> &#123;<br>    <span class="hljs-keyword">private</span> String name;<br>    <span class="hljs-keyword">private</span> String street;<br>    <span class="hljs-keyword">private</span> String city;<br>    <span class="hljs-keyword">private</span> String state;<br>    <span class="hljs-keyword">private</span> String zip;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">StudentAddress</span>(<span class="hljs-params">String name ,String street,String city,String state,String zip</span>)</span> &#123;<br>        <span class="hljs-keyword">this</span>.name=name;<br>        <span class="hljs-keyword">this</span>.street=street;<br>        <span class="hljs-keyword">this</span>.city=city;<br>        <span class="hljs-keyword">this</span>.state=state;<br>        <span class="hljs-keyword">this</span>.zip=zip;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span>()</span> &#123;<br>        <span class="hljs-keyword">return</span> name;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getStreet</span>()</span> &#123;<br>        <span class="hljs-keyword">return</span> street;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getCity</span>()</span> &#123;<br>        <span class="hljs-keyword">return</span> city;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getState</span>()</span> &#123;<br>        <span class="hljs-keyword">return</span> state;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getZip</span>()</span> &#123;<br>        <span class="hljs-keyword">return</span> zip;<br>    &#125;<br><br>    @Override<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span>()</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;StudentAddress&#123;&quot;</span> +<br>                <span class="hljs-string">&quot;name=&#x27;&quot;</span> + name + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>                <span class="hljs-string">&quot;, street=&#x27;&quot;</span> + street + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>                <span class="hljs-string">&quot;, city=&#x27;&quot;</span> + city + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>                <span class="hljs-string">&quot;, state=&#x27;&quot;</span> + state + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>                <span class="hljs-string">&quot;, zip=&#x27;&quot;</span> + zip + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>                <span class="hljs-string">&#x27;&#125;&#x27;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-1-2-服务器代码"><a href="#1-1-2-服务器代码" class="headerlink" title="1.1.2 服务器代码"></a>1.1.2 服务器代码</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs csharp">import java.io.FileOutputStream;<br>import java.io.IOException;<br>import java.io.ObjectInputStream;<br>import java.io.ObjectOutputStream;<br>import java.net.ServerSocket;<br>import java.net.Socket;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">StudentServer</span> &#123;<br>    <span class="hljs-keyword">private</span> ObjectOutputStream outputFile;<span class="hljs-comment">//声明输出流</span><br>    <span class="hljs-keyword">private</span> ObjectInputStream inputFromClient;<span class="hljs-comment">//声明输入流</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(<span class="hljs-params">String[] args</span>)</span> &#123;<br>        <span class="hljs-keyword">new</span> StudentServer();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">StudentServer</span>()</span>&#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            ServerSocket serverSocket = <span class="hljs-keyword">new</span> ServerSocket(<span class="hljs-number">8001</span>);<span class="hljs-comment">//设置服务器端口为8001</span><br>            System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;服务器已启动&quot;</span>);<br>            <span class="hljs-comment">//输出对象流到文件student.dat（在根目录）中</span><br>            outputFile = <span class="hljs-keyword">new</span> ObjectOutputStream(<span class="hljs-keyword">new</span> FileOutputStream(<span class="hljs-string">&quot;student.dat&quot;</span>,<span class="hljs-literal">true</span>));<br>            <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>) &#123;<br>                <span class="hljs-comment">//进入监听状态</span><br>                Socket socket=serverSocket.accept();<br>                <span class="hljs-comment">//实例化套接字对象输入流</span><br>                inputFromClient=<span class="hljs-keyword">new</span> ObjectInputStream(socket.getInputStream());<br>                <span class="hljs-comment">//定义object存放输入流对象信息</span><br>                Object <span class="hljs-built_in">object</span> = inputFromClient.readObject();<br>                <span class="hljs-comment">//将信息写入文件student.dat</span><br>                outputFile.writeObject(<span class="hljs-built_in">object</span>);<br>                System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;接收到一个Student数据: &quot;</span>+<span class="hljs-built_in">object</span>.toString());<br>            &#125;<br>        &#125;<span class="hljs-keyword">catch</span> (ClassNotFoundException ex)&#123;<br>            ex.printStackTrace();<br>        &#125;<span class="hljs-keyword">catch</span> (IOException ex) &#123;<br>            ex.printStackTrace();<br>        &#125; <span class="hljs-keyword">finally</span>&#123;<br>            <span class="hljs-keyword">try</span>&#123;<br>                inputFromClient.close();<br>                outputFile.close();<br>            &#125;<span class="hljs-keyword">catch</span>(Exception ex) &#123;<br>                ex.printStackTrace();<br>            &#125;<br>        &#125;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-1-3-客户端代码"><a href="#1-1-3-客户端代码" class="headerlink" title="1.1.3 客户端代码"></a>1.1.3 客户端代码</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs csharp">import Progress.exa29_3.StudentAddress;<br>import javafx.application.Application;<br>import javafx.<span class="hljs-keyword">event</span>.ActionEvent;<br>import javafx.<span class="hljs-keyword">event</span>.EventHandler;<br>import javafx.geometry.HPos;<br>import javafx.geometry.Pos;<br>import javafx.scene.Scene;<br>import javafx.scene.control.*;<br>import javafx.scene.layout.GridPane;<br>import javafx.scene.layout.HBox;<br>import javafx.stage.Stage;<br>import java.io.IOException;<br>import java.io.ObjectOutputStream;<br>import java.net.Socket;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">StudentClient</span> <span class="hljs-title">extends</span> <span class="hljs-title">Application</span> &#123;<br>    <span class="hljs-keyword">private</span> TextField tfName=<span class="hljs-keyword">new</span> TextField();<br>    <span class="hljs-keyword">private</span> TextField tfStreet=<span class="hljs-keyword">new</span> TextField();<br>    <span class="hljs-keyword">private</span> TextField  tfCity=<span class="hljs-keyword">new</span> TextField();<br>    <span class="hljs-keyword">private</span> TextField tfState=<span class="hljs-keyword">new</span> TextField();<br>    <span class="hljs-keyword">private</span> TextField tfZip=<span class="hljs-keyword">new</span> TextField();<br><br>    <span class="hljs-keyword">private</span> Button btRegister=<span class="hljs-keyword">new</span> Button(<span class="hljs-string">&quot;发送数据到服务器&quot;</span>);<br>    String host=<span class="hljs-string">&quot;localhost&quot;</span>;<span class="hljs-comment">//定义ip地址</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">start</span>(<span class="hljs-params">Stage primaryStage</span>)</span> &#123;<br>        GridPane pane=<span class="hljs-keyword">new</span> GridPane();<br>        pane.<span class="hljs-keyword">add</span>(<span class="hljs-keyword">new</span> Label(<span class="hljs-string">&quot;姓名&quot;</span>),<span class="hljs-number">0</span>,<span class="hljs-number">0</span>);<br>        pane.<span class="hljs-keyword">add</span>(tfName,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>);<br>        pane.<span class="hljs-keyword">add</span>(<span class="hljs-keyword">new</span> Label(<span class="hljs-string">&quot;街道&quot;</span>),<span class="hljs-number">0</span>,<span class="hljs-number">1</span>);<br>        pane.<span class="hljs-keyword">add</span>(tfStreet,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>);<br>        pane.<span class="hljs-keyword">add</span>(<span class="hljs-keyword">new</span> Label(<span class="hljs-string">&quot;城市&quot;</span>),<span class="hljs-number">0</span>,<span class="hljs-number">2</span>);<br>        HBox hBox=<span class="hljs-keyword">new</span> HBox(<span class="hljs-number">2</span>);<br>        pane.<span class="hljs-keyword">add</span>(hBox,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>);<br>        hBox.getChildren().addAll(tfCity,<span class="hljs-keyword">new</span> Label(<span class="hljs-string">&quot;州&quot;</span>),tfState,<span class="hljs-keyword">new</span> Label(<span class="hljs-string">&quot;编码&quot;</span>),tfZip);<br>        pane.<span class="hljs-keyword">add</span>(btRegister,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>);<br>        GridPane.setHalignment(btRegister, HPos.RIGHT);<br><br>        pane.setAlignment(Pos.CENTER);<br>        tfName.setPrefColumnCount(<span class="hljs-number">15</span>);<br>        tfStreet.setPrefColumnCount(<span class="hljs-number">15</span>);<br>        tfCity.setPrefColumnCount(<span class="hljs-number">10</span>);<br>        tfState.setPrefColumnCount(<span class="hljs-number">2</span>);<br>        tfZip.setPrefColumnCount(<span class="hljs-number">3</span>);<br>        btRegister.setOnAction(<span class="hljs-keyword">new</span> ButtonListerner());<br><br>        Scene scene=<span class="hljs-keyword">new</span> Scene(pane,<span class="hljs-number">450</span>,<span class="hljs-number">200</span>);<br>        primaryStage.setTitle(<span class="hljs-string">&quot;StudentClient&quot;</span>);<br>        primaryStage.setScene(scene);<br>        primaryStage.show();<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ButtonListerner</span> <span class="hljs-title">implements</span> <span class="hljs-title">EventHandler</span>&lt;<span class="hljs-title">ActionEvent</span>&gt; &#123;<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handle</span>(<span class="hljs-params">ActionEvent e</span>)</span><br>        &#123;<br>            <span class="hljs-keyword">try</span>&#123;<br>                Socket socket=<span class="hljs-keyword">new</span> Socket(host,<span class="hljs-number">8001</span>);<span class="hljs-comment">//定义套接字的ip和端口号</span><br><br>                <span class="hljs-comment">//定义套接字的对象输出流</span><br>                ObjectOutputStream toServer=<span class="hljs-keyword">new</span> ObjectOutputStream(socket.getOutputStream());<br><br>                String name=tfName.getText().trim();<br>                String street=tfStreet.getText().trim();<br>                String city=tfCity.getText().trim();<br>                String state=tfState.getText().trim();<br>                String zip=tfZip.getText().trim();<br><br>                StudentAddress s=<span class="hljs-keyword">new</span> StudentAddress(name,street,city,state,zip);<br>                <span class="hljs-comment">//向对象输出流写入对象</span><br>                toServer.writeObject(s);<br>            &#125;<span class="hljs-keyword">catch</span>(IOException ex) &#123;<br>                ex.printStackTrace();<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/27/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/11.3%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E9%80%9A%E8%BF%87%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E5%AF%B9%E8%B1%A1/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;27&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;11.3%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E9%80%9A%E8%BF%87%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E5%AF%B9%E8%B1%A1&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;27&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;11.3%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E9%80%9A%E8%BF%87%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E5%AF%B9%E8%B1%A1&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+        
+  <nav class="nav">
+    <a href="/2023/05/27/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/12.1%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E5%8F%8D%E5%B0%84%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%8F%8D%E5%B0%84%E4%BD%9C%E7%94%A8%EF%BC%8CClass%E7%B1%BB%EF%BC%8C%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90%E7%B1%BB%E7%9A%84%E8%83%BD%E5%8A%9B/"><i class="iconfont iconleft"></i></a>
+    <a href="/2023/05/27/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/12.2%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E5%8F%8D%E5%B0%84%E6%9F%A5%E7%9C%8B%E5%B1%9E%E6%80%A7%E7%9A%84%E5%80%BC%EF%BC%8C%E6%9F%A5%E7%9C%8B%E4%BB%BB%E6%84%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E9%83%A8%E4%BF%A1%E6%81%AF/"><i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Java%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E7%BD%91%E7%BB%9C%E5%8F%91%E9%80%81%E5%92%8C%E6%8E%A5%E5%8F%97%E5%AF%B9%E8%B1%A1"><span class="toc-text">1.Java如何通过网络发送和接受对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Demo%E5%B1%95%E7%A4%BA"><span class="toc-text">1.1 Demo展示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-JavaBean%E5%AE%9A%E4%B9%89"><span class="toc-text">1.1.1 JavaBean定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%A3%E7%A0%81"><span class="toc-text">1.1.2 服务器代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-3-%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BB%A3%E7%A0%81"><span class="toc-text">1.1.3 客户端代码</span></a></li></ol></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

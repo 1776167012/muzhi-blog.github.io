@@ -1,0 +1,381 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="@[TOC]总结自《Java核心技术卷Ⅰ》
+1.通过反...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title"></h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 27, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>4810</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <p>@[TOC]<br><strong>总结自《Java核心技术卷Ⅰ》</strong></p>
+<h1 id="1-通过反射机制查看对象属性的值"><a href="#1-通过反射机制查看对象属性的值" class="headerlink" title="1.通过反射机制查看对象属性的值"></a>1.通过反射机制查看对象属性的值</h1><p>利用反射机制可以查看在编译时还不清楚的对象域，就是具体运行时才能获取到的属性的值。<br>可以再程序运行时获取对象属性值，其中的关键是Field类中的get方法。</p>
+<p>如果field是一个Field类型的对象，obj是某个包含field的类的对象，则field.get(obj)将返回一个对象，其就是obj名为field.getName()的属性的当前值。<br>除此之外我们还可以调用field.set(obj,value)；将obj对象的名为field.getName()的属性设置成新值。</p>
+<h2 id="1-1-实例演示"><a href="#1-1-实例演示" class="headerlink" title="1.1 实例演示"></a>1.1 实例演示</h2><h3 id="1-1-1-Employee-java"><a href="#1-1-1-Employee-java" class="headerlink" title="1.1.1.Employee.java"></a>1.1.1.Employee.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Employee</span> &#123;<br>    <span class="hljs-keyword">private</span> String name;<br><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getName</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> name;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setName</span><span class="hljs-params">(String name)</span> &#123;<br>        <span class="hljs-built_in">this</span>.name = name;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Employee</span><span class="hljs-params">(String name)</span> &#123;<br>        <span class="hljs-built_in">this</span>.name=name;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-1-2-ReflectionTest-java"><a href="#1-1-2-ReflectionTest-java" class="headerlink" title="1.1.2 ReflectionTest.java"></a>1.1.2 ReflectionTest.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.lang.reflect.Field;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ReflectionTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> NoSuchFieldException, IllegalAccessException &#123;<br>        <span class="hljs-type">Employee</span> <span class="hljs-variable">harry</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Employee</span>(<span class="hljs-string">&quot;Harry Hacker&quot;</span>);<br>        Class cl=harry.getClass();<br>        <span class="hljs-type">Field</span> <span class="hljs-variable">f</span> <span class="hljs-operator">=</span> cl.getDeclaredField(<span class="hljs-string">&quot;name&quot;</span>);<br>        <span class="hljs-comment">//必须有，否则无法访问name的值会出错，作用是将所有域设置成可访问的</span><br>        f.setAccessible(<span class="hljs-literal">true</span>);<br>        <span class="hljs-type">Object</span> <span class="hljs-variable">v</span> <span class="hljs-operator">=</span> f.get(harry);<br>        <span class="hljs-comment">//输出的是Harry Hacker</span><br>        System.out.println(v);<br>        f.set(harry,<span class="hljs-string">&quot;牧之&quot;</span>);<br>        System.out.println(f.get(harry));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/80a8d9decb574ee4a2181b69c27e920d.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">在这里插入图片描述</span></p>
+<h1 id="2-编写toString方法来查看任意对象内部信息"><a href="#2-编写toString方法来查看任意对象内部信息" class="headerlink" title="2.编写toString方法来查看任意对象内部信息"></a>2.编写toString方法来查看任意对象内部信息</h1><p>通过上面的学习，我们可以使用反射机制来写出通用的toString程序来打印出任意对象的所有的属性值信息。<br>在学习例子之前我们应先了解相关方法：<br><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/a5c88fca0cba490aa985e774e382fbb6.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">在这里插入图片描述</span></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//此方法能获取当前类的父类的Class,可以用于访问定义在父类的属性</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">native</span> Class&lt;? <span class="hljs-built_in">super</span> T&gt; getSuperclass();<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="2-1-ObjectAnalyzer-java"><a href="#2-1-ObjectAnalyzer-java" class="headerlink" title="2.1 ObjectAnalyzer.java"></a>2.1 ObjectAnalyzer.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.lang.reflect.AccessibleObject;<br><span class="hljs-keyword">import</span> java.lang.reflect.Array;<br><span class="hljs-keyword">import</span> java.lang.reflect.Field;<br><span class="hljs-keyword">import</span> java.lang.reflect.Modifier;<br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ObjectAnalyzer</span>&#123;<br><br>    <span class="hljs-keyword">private</span> ArrayList&lt;Object&gt; visited = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 此方法利用放射将传入的对象toString化</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> obj</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> String</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">toString</span><span class="hljs-params">(Object obj)</span>&#123;<br>        <span class="hljs-comment">//首先判断传入的对象是否空对象，如果是直接返回null</span><br>        <span class="hljs-keyword">if</span> (obj == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;null&quot;</span>;<br>        <span class="hljs-comment">//然后判断是否已经传入过相同的对象进来，如果是，返回 ...</span><br>        <span class="hljs-keyword">if</span> (visited.contains(obj)) <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;...&quot;</span>;<br>        <span class="hljs-comment">//将obj对象加入全局变量visited中</span><br>        visited.add(obj);<br>        <span class="hljs-comment">//获得传入对象的class实例</span><br>        Class&lt;?&gt; cl = obj.getClass();<br>        <span class="hljs-comment">//判断传入的对象是否是字符串对象，如果是，强转后直接返回</span><br>        <span class="hljs-keyword">if</span> (cl == String.class)&#123;<br>            <span class="hljs-keyword">return</span> (String) obj;<br>        &#125;<br>        <span class="hljs-comment">//基本数据类型直接返回其对应的基本类型数值描述</span><br><span class="hljs-comment">//        if(cl==Integer.class||cl==Double.class||cl==Short.class||cl==Byte.class||cl==Float.class||cl==Long.class||cl==Boolean.class||cl==Character.class)&#123;</span><br><span class="hljs-comment">//            return obj.toString();</span><br><span class="hljs-comment">//        &#125;</span><br>        <span class="hljs-comment">//如果是数组类型，则</span><br>        <span class="hljs-keyword">if</span> (cl.isArray()) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> cl.getComponentType() + <span class="hljs-string">&quot;[]&#123;&quot;</span>;<br><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; Array.getLength(obj); i++) &#123;<br>                <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span>)&#123;<br>                    r += <span class="hljs-string">&quot;,&quot;</span>;<br>                &#125;<br>                <span class="hljs-comment">//获得数组指定位置的元素</span><br>                <span class="hljs-type">Object</span> <span class="hljs-variable">val</span> <span class="hljs-operator">=</span> Array.get(obj, i);<br>                <span class="hljs-comment">//判断元素是不是基本类型</span><br>                <span class="hljs-keyword">if</span> (cl.getComponentType().isPrimitive()) &#123;<br>                    r += val;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    r += toString(val);<br>                &#125;<br>            &#125;<br>            System.out.println(r);<br>            <span class="hljs-keyword">return</span> r + <span class="hljs-string">&quot;&#125;&quot;</span>;<br>        &#125;<br><br>        <span class="hljs-type">String</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> cl.getName();<br><br>        <span class="hljs-comment">//将传入对象String化</span><br>        <span class="hljs-keyword">do</span> &#123;<br>            r += <span class="hljs-string">&quot;[&quot;</span>;<br>            Field[] fields = cl.getDeclaredFields();<br>            <span class="hljs-comment">//这个操作可以让反射机制对私有属性也能进行操作</span><br>            AccessibleObject.setAccessible(fields, <span class="hljs-literal">true</span>);<br>            <span class="hljs-keyword">for</span> (Field f : fields) &#123;<br>                <span class="hljs-keyword">if</span> (!Modifier.isStatic(f.getModifiers())) &#123;<br>                    <span class="hljs-keyword">if</span> (!r.endsWith(<span class="hljs-string">&quot;[&quot;</span>)) r += <span class="hljs-string">&quot;,&quot;</span>;<br>                    r += f.getName() + <span class="hljs-string">&quot;=&quot;</span>;<br>                    <span class="hljs-keyword">try</span> &#123;<br>                        <span class="hljs-type">Class</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> f.getType();<br>                        <span class="hljs-type">Object</span> <span class="hljs-variable">val</span> <span class="hljs-operator">=</span> f.get(obj);<br>                        <span class="hljs-comment">//判断属性是不是基本类型</span><br>                        <span class="hljs-keyword">if</span> (t.isPrimitive()) &#123;<br>                            r += val;<br>                        &#125;<br>                        <span class="hljs-keyword">else</span> r += toString(val);<br>                    &#125;<br>                    <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>                        e.printStackTrace();<br>                    &#125;<br>                &#125;<br>            &#125;<br>            r += <span class="hljs-string">&quot;]&quot;</span>;<br>            <span class="hljs-comment">//获得此类的父类型Class</span><br>            cl = cl.getSuperclass();<br>        &#125; <span class="hljs-keyword">while</span> (cl != <span class="hljs-literal">null</span>);<br><br>        <span class="hljs-keyword">return</span> r;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-2-ToStringTest-java"><a href="#2-2-ToStringTest-java" class="headerlink" title="2.2 ToStringTest.java"></a>2.2 ToStringTest.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    Integer squares=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Integer</span>(<span class="hljs-number">20</span>);<br>    System.out.println( <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectAnalyzer</span>().toString(squares));<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/2ac412ab88884bceb13787cb26fe1482.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">在这里插入图片描述</span></p>
+<h1 id="3-代码仓库地址"><a href="#3-代码仓库地址" class="headerlink" title="3.代码仓库地址"></a>3.代码仓库地址</h1><p><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/Progress/exa30_2">Java基础学习&#x2F;src&#x2F;main&#x2F;java&#x2F;Progress&#x2F;exa30_2 · 严家豆&#x2F;Study - 码云 - 开源中国 (gitee.com)</a></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/27/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/12.2%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E5%8F%8D%E5%B0%84%E6%9F%A5%E7%9C%8B%E5%B1%9E%E6%80%A7%E7%9A%84%E5%80%BC%EF%BC%8C%E6%9F%A5%E7%9C%8B%E4%BB%BB%E6%84%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E9%83%A8%E4%BF%A1%E6%81%AF/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;27&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;12.2%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E5%8F%8D%E5%B0%84%E6%9F%A5%E7%9C%8B%E5%B1%9E%E6%80%A7%E7%9A%84%E5%80%BC%EF%BC%8C%E6%9F%A5%E7%9C%8B%E4%BB%BB%E6%84%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E9%83%A8%E4%BF%A1%E6%81%AF&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;27&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;12.2%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E5%8F%8D%E5%B0%84%E6%9F%A5%E7%9C%8B%E5%B1%9E%E6%80%A7%E7%9A%84%E5%80%BC%EF%BC%8C%E6%9F%A5%E7%9C%8B%E4%BB%BB%E6%84%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E9%83%A8%E4%BF%A1%E6%81%AF&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+        
+  <nav class="nav">
+    <a href="/2023/05/27/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/11.3%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E9%80%9A%E8%BF%87%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E5%AF%B9%E8%B1%A1/"><i class="iconfont iconleft"></i></a>
+    <a href="/2023/05/27/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/12.3%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E7%BC%96%E5%86%99%E6%95%B0%E7%BB%84CopyOf%E6%96%B9%E6%B3%95%EF%BC%8C%E8%B0%83%E7%94%A8%E4%BB%BB%E6%84%8F%E6%96%B9%E6%B3%95/"><i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E6%9F%A5%E7%9C%8B%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E7%9A%84%E5%80%BC"><span class="toc-text">1.通过反射机制查看对象属性的值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%AE%9E%E4%BE%8B%E6%BC%94%E7%A4%BA"><span class="toc-text">1.1 实例演示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-Employee-java"><span class="toc-text">1.1.1.Employee.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-ReflectionTest-java"><span class="toc-text">1.1.2 ReflectionTest.java</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E7%BC%96%E5%86%99toString%E6%96%B9%E6%B3%95%E6%9D%A5%E6%9F%A5%E7%9C%8B%E4%BB%BB%E6%84%8F%E5%AF%B9%E8%B1%A1%E5%86%85%E9%83%A8%E4%BF%A1%E6%81%AF"><span class="toc-text">2.编写toString方法来查看任意对象内部信息</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-ObjectAnalyzer-java"><span class="toc-text">2.1 ObjectAnalyzer.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-ToStringTest-java"><span class="toc-text">2.2 ToStringTest.java</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93%E5%9C%B0%E5%9D%80"><span class="toc-text">3.代码仓库地址</span></a></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

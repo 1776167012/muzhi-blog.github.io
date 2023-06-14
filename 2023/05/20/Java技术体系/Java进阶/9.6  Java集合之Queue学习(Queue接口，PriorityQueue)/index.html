@@ -1,0 +1,523 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>9.6 Java集合之Queue学习 - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="1. Queue接口graph LR
+
+Collect...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">9.6 Java集合之Queue学习</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">9.6 Java集合之Queue学习</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 20, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>7118</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="1-Queue接口"><a href="#1-Queue接口" class="headerlink" title="1. Queue接口"></a>1. Queue接口</h1><pre class="mermaid">graph LR
+
+Collection --extend--> Iterable
+
+List--extend--> Collection
+
+Set--extend--> Collection
+
+Queue--extend--> Collection
+
+SortedMap --extend--> Map
+
+SortedSet--extend-->Set
+Deque--extend-->Queue
+NavigableMap --extend--> SortedMap
+NavigbleSet --extend--> SortedSet
+ListIterator--extend-->Iterator
+RandomAccess</pre>
+
+<p>在正式学习Queue之前，我们得先复习一下上面的图片。</p>
+<p>Queue接口继承于Collection接口，但是它有具有自己的数据结构特点，Queue，队列，它的特性是<strong>先进先出</strong>。</p>
+<p>下面我们看一下Queue接口有没有不同于Collection的特殊的定义：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//向队列添加元素并返回true，如果队列没有剩余空间，抛出异常</span><br><span class="hljs-type">boolean</span> <span class="hljs-title function_">add</span><span class="hljs-params">(E e)</span>;<br><br><span class="hljs-comment">//在容量充足的情况下添加元素,添加成功返回true,失败返回false</span><br><span class="hljs-type">boolean</span> <span class="hljs-title function_">offer</span><span class="hljs-params">(E e)</span>;<br><br><span class="hljs-comment">//从队列中取出元素并删除，如果队列为空，则抛出异常</span><br>E <span class="hljs-title function_">remove</span><span class="hljs-params">()</span>;<br><br><span class="hljs-comment">//从队列中取出元素并删除，如果队列为空，则返回null</span><br>E <span class="hljs-title function_">poll</span><span class="hljs-params">()</span>;<br><br><span class="hljs-comment">//取出队列的第一个元素，但不删除，如果队列为空，则抛出异常</span><br>E <span class="hljs-title function_">element</span><span class="hljs-params">()</span>;<br><br><span class="hljs-comment">//取出队列的第一个元素，但不删除，如果队列为空，则返回null</span><br>E <span class="hljs-title function_">peek</span><span class="hljs-params">()</span>;<br></code></pre></td></tr></table></figure>
+
+<h2 id="1-1-Queue的特性"><a href="#1-1-Queue的特性" class="headerlink" title="1.1 Queue的特性"></a>1.1 Queue的特性</h2><p>Queue(队列)最大的特性就是，<strong>先进先出,按元素存入的顺序排队处理</strong>，对这个数据结构的所有操作应遵循这个原理。</p>
+<h1 id="2-具体实现"><a href="#2-具体实现" class="headerlink" title="2.具体实现"></a>2.具体实现</h1><table>
+<thead>
+<tr>
+<th>集合类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ArrayList</td>
+<td>一种可以动态增长和缩减的索引序列</td>
+</tr>
+<tr>
+<td>LinkedList</td>
+<td>一种可以在任何位置进行高效地插入和删除操作的有序序列</td>
+</tr>
+<tr>
+<td>ArrayDeque</td>
+<td>一种用循环数组实现的双端队列</td>
+</tr>
+<tr>
+<td>HashSet</td>
+<td>一种没有重复元素的无序集合</td>
+</tr>
+<tr>
+<td>TreeSet</td>
+<td>一种没有重复元素的有序集合</td>
+</tr>
+<tr>
+<td>EnumSet</td>
+<td>一种包含枚举类型值的集</td>
+</tr>
+<tr>
+<td>LinkedHashSet</td>
+<td>一种可以记住元素插入次序的集</td>
+</tr>
+<tr>
+<td>PriorityQueue</td>
+<td>一种允许高效删除最小&#x2F;大元素的集合</td>
+</tr>
+<tr>
+<td>HashMap</td>
+<td>存储key-value结构的数据结构</td>
+</tr>
+<tr>
+<td>TreeMap</td>
+<td>存储key有序的key-value的数据结构</td>
+</tr>
+<tr>
+<td>EnumMap</td>
+<td>一种键值属于枚举类型的映射表</td>
+</tr>
+<tr>
+<td>LinkedHashMap</td>
+<td>一种可以记录键值插入顺序的结构</td>
+</tr>
+<tr>
+<td>WeakHashMap</td>
+<td>一种其值没用后可以被垃圾回收器回收的结构</td>
+</tr>
+<tr>
+<td>IdentityHashMap</td>
+<td>一种用&#x3D;&#x3D;而不是用equals比较键值的结构</td>
+</tr>
+</tbody></table>
+<p>从图中，我们可以猜到实现Queue接口的具体类会有：PriorityQueue</p>
+<p>也可以猜出其也会有一个对应的AbstractQueue抽象类，提供了一些公用代码。</p>
+<p>下面进行源码阅读验证一下自己的猜想是否正确</p>
+<h1 id="2-1-AbstractQueue"><a href="#2-1-AbstractQueue" class="headerlink" title="2.1 AbstractQueue"></a>2.1 AbstractQueue</h1><p>果然，JDK对于Queue接口提供了一些基础实现，这个类的实现的方法不多。</p>
+<h3 id="2-1-1-add方法"><a href="#2-1-1-add方法" class="headerlink" title="2.1.1 add方法"></a>2.1.1 add方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//接口的定义是：向队列中添加元素，如果队列满了，则抛出异常。</span><br><span class="hljs-comment">//可以看到它的实现遵循了接口中对这个方法的定义</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">add</span><span class="hljs-params">(E e)</span> &#123;<br>    <span class="hljs-keyword">if</span> (offer(e))<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalStateException</span>(<span class="hljs-string">&quot;Queue full&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-1-2-remove方法"><a href="#2-1-2-remove方法" class="headerlink" title="2.1.2 remove方法"></a>2.1.2 remove方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//接口的定义是：取出一个元素并删除，如果队列为空，则抛出异常</span><br><span class="hljs-keyword">public</span> E <span class="hljs-title function_">remove</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-type">E</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> poll();<br>    <span class="hljs-keyword">if</span> (x != <span class="hljs-literal">null</span>)<br>        <span class="hljs-keyword">return</span> x;<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NoSuchElementException</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-1-3-element方法"><a href="#2-1-3-element方法" class="headerlink" title="2.1.3 element方法"></a>2.1.3 element方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//接口的定义是：取出一个元素但不删除，如果队列为空，则抛出异常</span><br><span class="hljs-keyword">public</span> E <span class="hljs-title function_">element</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-type">E</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> peek();<br>    <span class="hljs-keyword">if</span> (x != <span class="hljs-literal">null</span>)<br>        <span class="hljs-keyword">return</span> x;<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NoSuchElementException</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-1-4-clear方法"><a href="#2-1-4-clear方法" class="headerlink" title="2.1.4 clear方法"></a>2.1.4 clear方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//清空队列</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">clear</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-keyword">while</span> (poll() != <span class="hljs-literal">null</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-1-5-addAll方法"><a href="#2-1-5-addAll方法" class="headerlink" title="2.1.5 addAll方法"></a>2.1.5 addAll方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 将集合c中的元素都添加到队列中，如果c为空则抛出异常</span><br><span class="hljs-comment">// 如果c就是队列本身，也抛出异常</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">addAll</span><span class="hljs-params">(Collection&lt;? extends E&gt; c)</span> &#123;<br>    <span class="hljs-keyword">if</span> (c == <span class="hljs-literal">null</span>)<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NullPointerException</span>();<br>    <span class="hljs-keyword">if</span> (c == <span class="hljs-built_in">this</span>)<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>();<br>    <span class="hljs-type">boolean</span> <span class="hljs-variable">modified</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">for</span> (E e : c)<br>        <span class="hljs-keyword">if</span> (add(e))<br>            modified = <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">return</span> modified;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-2-PriorityQueue"><a href="#2-2-PriorityQueue" class="headerlink" title="2.2 PriorityQueue"></a>2.2 PriorityQueue</h2><p>这个类是Queue的一个具体实现，它实现的是名为<strong>优先队列</strong>的数据结构，它会根据优先级的设置来完进行进队，出队的操作。</p>
+<h3 id="2-2-1-存储原理"><a href="#2-2-1-存储原理" class="headerlink" title="2.2.1 存储原理"></a>2.2.1 存储原理</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">transient</span> Object[] queue; <span class="hljs-comment">// non-private to simplify nested class access</span><br></code></pre></td></tr></table></figure>
+
+<p>通过查阅源码我们可以得知，PriorityQueue使用的<strong>数组存储</strong>。<br>说到数组，我们就不得不说它的扩容机制了哈哈哈。</p>
+<h3 id="2-2-1-1-扩容机制"><a href="#2-2-1-1-扩容机制" class="headerlink" title="2.2.1.1 扩容机制"></a>2.2.1.1 扩容机制</h3><p>由于代码比较简单，我们就简单的浅读下它的扩容源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">grow</span><span class="hljs-params">(<span class="hljs-type">int</span> minCapacity)</span> &#123;<br>    <span class="hljs-comment">//获取queue原来的长度</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">oldCapacity</span> <span class="hljs-operator">=</span> queue.length;<br>    <span class="hljs-comment">// 如果oldCap小于64，则newCap = oldCap*2+2</span><br>    <span class="hljs-comment">// 如果oldCap&gt;=64, 则newCap = oldCap*1.5</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">newCapacity</span> <span class="hljs-operator">=</span> oldCapacity + ((oldCapacity &lt; <span class="hljs-number">64</span>) ?<br>                                     (oldCapacity + <span class="hljs-number">2</span>) :<br>                                     (oldCapacity &gt;&gt; <span class="hljs-number">1</span>));<br>    <span class="hljs-comment">// 超大容量检查处理</span><br>    <span class="hljs-keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="hljs-number">0</span>)<br>        newCapacity = hugeCapacity(minCapacity);<br>    queue = Arrays.copyOf(queue, newCapacity);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>关于PriorityQueue的扩容机制，总结起来就是：如果原始长度小于64，则扩1倍，否则扩0.5倍。</strong></p>
+<h3 id="2-2-2-优先级机制"><a href="#2-2-2-优先级机制" class="headerlink" title="2.2.2 优先级机制"></a>2.2.2 优先级机制</h3><p>上面介绍了它的存储原理，下面来介绍它的优先级机制。<br>通过阅读构造方法源码，我们可以发现，它提供了下面类型的构造方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//可以传入一个比较器，我们可以猜出这个比较器应该就是实现优先级机制的关键</span><br><span class="hljs-keyword">public</span> <span class="hljs-title function_">PriorityQueue</span><span class="hljs-params">(Comparator&lt;? <span class="hljs-built_in">super</span> E&gt; comparator)</span> &#123;<br>    <span class="hljs-built_in">this</span>(DEFAULT_INITIAL_CAPACITY, comparator);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>下面我们阅读一下它的offer方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">offer</span><span class="hljs-params">(E e)</span> &#123;<br>    <span class="hljs-keyword">if</span> (e == <span class="hljs-literal">null</span>)<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NullPointerException</span>();<br>    modCount++;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> size;<br>    <span class="hljs-keyword">if</span> (i &gt;= queue.length)<br>        grow(i + <span class="hljs-number">1</span>);<br>    size = i + <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span>)<br>        queue[<span class="hljs-number">0</span>] = e;<br>    <span class="hljs-keyword">else</span><br>        siftUp(i, e);<span class="hljs-comment">//关键点，这个方法有啥用？</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们会发现一个名为siftUp方法，当我们点进去的时候：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//会发现，这里用到比较器了，它的逻辑是：</span><br><span class="hljs-comment">// 如果传入比较器了，则用传入的比较器，否则就用元素自身默认的比较器</span><br><span class="hljs-comment">// 那么问题来了，如果传入的元素并没有实现Comparable接口呢？ </span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">siftUp</span><span class="hljs-params">(<span class="hljs-type">int</span> k, E x)</span> &#123;<br>    <span class="hljs-keyword">if</span> (comparator != <span class="hljs-literal">null</span>)<br>        siftUpUsingComparator(k, x);<br>    <span class="hljs-keyword">else</span><br>        siftUpComparable(k, x);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们进入siftUpComparable方法看看：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//它的逻辑是首先获取自己的比较器，然后进行优先位置调整</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">siftUpComparable</span><span class="hljs-params">(<span class="hljs-type">int</span> k, E x)</span> &#123;<br>    Comparable&lt;? <span class="hljs-built_in">super</span> E&gt; key = (Comparable&lt;? <span class="hljs-built_in">super</span> E&gt;) x;<br>    <span class="hljs-keyword">while</span> (k &gt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">parent</span> <span class="hljs-operator">=</span> (k - <span class="hljs-number">1</span>) &gt;&gt;&gt; <span class="hljs-number">1</span>;<br>        <span class="hljs-type">Object</span> <span class="hljs-variable">e</span> <span class="hljs-operator">=</span> queue[parent];<br>        <span class="hljs-keyword">if</span> (key.compareTo((E) e) &gt;= <span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">break</span>;<br>        queue[k] = e;<br>        k = parent;<br>    &#125;<br>    queue[k] = key;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>也就是说，每次进行元素入队的时候都要进行位置调整。</strong></p>
+<h3 id="2-3-2-使用案例"><a href="#2-3-2-使用案例" class="headerlink" title="2.3.2 使用案例"></a>2.3.2 使用案例</h3><p>PriorityQueue， 简单来说就是优先队列，下面我们陆续测试队列的功能和性能。<br>正常使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PriorityQueueStudy</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        Queue&lt;Integer&gt; queue = addTest();<br>        System.out.println(<span class="hljs-string">&quot;队列大小：&quot;</span>+queue.size());<br>        queue = pollTest(queue);<br>        System.out.println(<span class="hljs-string">&quot;取出元素后队列大小：&quot;</span>+queue.size());<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 添加元素进入队列</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Queue&lt;Integer&gt; <span class="hljs-title function_">addTest</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>        Queue&lt;Integer&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1000</span>;i&gt;<span class="hljs-number">0</span>;i--)&#123;<br>            <span class="hljs-type">boolean</span> <span class="hljs-variable">sus</span> <span class="hljs-operator">=</span> queue.offer(i);<br>            <span class="hljs-keyword">if</span>(sus) System.out.println(<span class="hljs-string">&quot;入队成功！&quot;</span>);<br>        &#125;<br>        System.out.println(<span class="hljs-string">&quot;添加耗时：&quot;</span>+ (System.currentTimeMillis()-start)+<span class="hljs-string">&quot;ms&quot;</span>);<br>        <span class="hljs-keyword">return</span> queue;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Queue&lt;Integer&gt; <span class="hljs-title function_">pollTest</span><span class="hljs-params">(Queue&lt;Integer&gt; queue)</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;取出10个元素&quot;</span>);<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;<br>            System.out.print(queue.poll());<br>        &#125;<br>        System.out.println();<br>        <span class="hljs-keyword">return</span> queue;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs text">......<br>入队成功！<br>入队成功！<br>入队成功！<br>入队成功！<br>入队成功！<br>添加耗时：18ms<br>队列大小：1000<br>取出10个元素<br>12345678910<br>取出元素后队列大小：990<br></code></pre></td></tr></table></figure>
+
+<p>可以看到，当元素是Integer类型的时候，优先队列会默认使用Integer的比较器进行优先级排序。</p>
+<p><strong>非正常使用</strong><br>下面我们试图向队列存入不实现Comparable接口的实例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Queue&lt;PriorityQueueStudy&gt; <span class="hljs-title function_">noCompareToTest</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">long</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>    Queue&lt;PriorityQueueStudy&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">10</span>;i&gt;<span class="hljs-number">0</span>;i--)&#123;<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">sus</span> <span class="hljs-operator">=</span> queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueueStudy</span>());<br>        <span class="hljs-keyword">if</span>(sus) System.out.println(<span class="hljs-string">&quot;入队成功！&quot;</span>);<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;添加耗时：&quot;</span>+ (System.currentTimeMillis()-start)+<span class="hljs-string">&quot;ms&quot;</span>);<br>    <span class="hljs-keyword">return</span> queue;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs text">Exception in thread &quot;main&quot; java.lang.ClassCastException: Progress.exa27_6.PriorityQueueStudy cannot be cast to java.lang.Comparable<br>	at java.util.PriorityQueue.siftUpComparable(PriorityQueue.java:652)<br>	at java.util.PriorityQueue.siftUp(PriorityQueue.java:647)<br>	at java.util.PriorityQueue.offer(PriorityQueue.java:344)<br>	at Progress.exa27_6.PriorityQueueStudy.noCompareToTest(PriorityQueueStudy.java:46)<br>	at Progress.exa27_6.PriorityQueueStudy.main(PriorityQueueStudy.java:15)<br></code></pre></td></tr></table></figure>
+
+<p>发现报错了，所以当我们使用优先队列的时候，这个点我们需要注意！！！</p>
+<h1 id="3-代码地址"><a href="#3-代码地址" class="headerlink" title="3.代码地址"></a>3.代码地址</h1><p><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/Progress/exa27_6">Java基础学习&#x2F;src&#x2F;main&#x2F;java&#x2F;Progress&#x2F;exa27_6 · 严家豆&#x2F;Study - 码云 - 开源中国 (gitee.com)</a></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/9.6%20%20Java%E9%9B%86%E5%90%88%E4%B9%8BQueue%E5%AD%A6%E4%B9%A0(Queue%E6%8E%A5%E5%8F%A3%EF%BC%8CPriorityQueue)/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;9.6%20%20Java%E9%9B%86%E5%90%88%E4%B9%8BQueue%E5%AD%A6%E4%B9%A0(Queue%E6%8E%A5%E5%8F%A3%EF%BC%8CPriorityQueue)&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;9.6%20%20Java%E9%9B%86%E5%90%88%E4%B9%8BQueue%E5%AD%A6%E4%B9%A0(Queue%E6%8E%A5%E5%8F%A3%EF%BC%8CPriorityQueue)&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%BF%9B%E9%98%B6/" rel="tag">Java进阶</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/9.5%20Java%E9%9B%86%E5%90%88%E4%B9%8BSet%E5%AD%A6%E4%B9%A0(%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86%EF%BC%8C%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95)/"><i class="iconfont iconleft"></i>9.5 Java集合之Set学习</a>
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/9.7%20%20Java%E9%9B%86%E5%90%88Deque%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97%EF%BC%89/">9.6 Java集合之Deque(双端队列)学习<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Queue%E6%8E%A5%E5%8F%A3"><span class="toc-text">1. Queue接口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Queue%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-text">1.1 Queue的特性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-text">2.具体实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-1-AbstractQueue"><span class="toc-text">2.1 AbstractQueue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-add%E6%96%B9%E6%B3%95"><span class="toc-text">2.1.1 add方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-remove%E6%96%B9%E6%B3%95"><span class="toc-text">2.1.2 remove方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-element%E6%96%B9%E6%B3%95"><span class="toc-text">2.1.3 element方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-4-clear%E6%96%B9%E6%B3%95"><span class="toc-text">2.1.4 clear方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-5-addAll%E6%96%B9%E6%B3%95"><span class="toc-text">2.1.5 addAll方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-PriorityQueue"><span class="toc-text">2.2 PriorityQueue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86"><span class="toc-text">2.2.1 存储原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-1-%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6"><span class="toc-text">2.2.1.1 扩容机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-%E4%BC%98%E5%85%88%E7%BA%A7%E6%9C%BA%E5%88%B6"><span class="toc-text">2.2.2 优先级机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B"><span class="toc-text">2.3.2 使用案例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E4%BB%A3%E7%A0%81%E5%9C%B0%E5%9D%80"><span class="toc-text">3.代码地址</span></a></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

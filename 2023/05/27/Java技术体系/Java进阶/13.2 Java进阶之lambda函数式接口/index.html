@@ -1,0 +1,449 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="@[toc]
+学习总结自《java核心技术卷一》
+1....">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title"></h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 27, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>8269</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <p>@[toc]</p>
+<p>学习总结自《java核心技术卷一》</p>
+<h1 id="1-函数式接口"><a href="#1-函数式接口" class="headerlink" title="1.函数式接口"></a>1.函数式接口</h1><p>我们前面已经说到，lambda表达式其实就是对接口方法的快速实现。<br>那是不是所有的接口方法都能让lambda表达式快速实现呢？ 答案是否定的，<strong>lambda表达式只能对特殊的接口方法进行快速实现，那就是函数式接口，lambda表达式能对函数式接口的方法进行快速实现。</strong></p>
+<h2 id="1-1-什么是函数式接口？"><a href="#1-1-什么是函数式接口？" class="headerlink" title="1.1 什么是函数式接口？"></a>1.1 什么是函数式接口？</h2><p>对于只有一个抽象方法的接口，需要这种接口的对象时，就可以提供一个lambda表达式替代对象，这样的接口我们称之为<strong>函数式接口（functional interface）</strong>。(有的接口可能重新声明Object类的方法，这些声明可能会让方法不再是抽象的，且在javaSE8中，接口可以声明非抽象方法)</p>
+<h2 id="1-2-如何用lambda表达式替代？"><a href="#1-2-如何用lambda表达式替代？" class="headerlink" title="1.2 如何用lambda表达式替代？"></a>1.2 如何用lambda表达式替代？</h2><p>我们以下面的例子来理解：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Arrays.sort(words,(first,second)-&gt;first.length()-second.length());<br></code></pre></td></tr></table></figure>
+
+<p>上面使用了Arrays.sort()方法，它的第二个参数需要一个Comparator的实例，而Comparator就是只有一个抽象方法的接口，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">int</span> <span class="hljs-title function_">compare</span><span class="hljs-params">(T o1, T o2)</span>;<br></code></pre></td></tr></table></figure>
+
+<p>所以我们可以用lambda表达式  <strong>(first,second)-&gt;first.length()-second.length()</strong> 替代它<br><strong>我们要记住：把lambda表达式看作是一个函数，而且lambda表达式可以传递到函数式接口中去</strong></p>
+<p>实际上，在Java中lambda表达式所能做的也只能是转换为函数式接口：<br>例如下面的函数式接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ActionListener</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">EventListener</span> &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Invoked when an action occurs.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">actionPerformed</span><span class="hljs-params">(ActionEvent e)</span>;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用它</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">Timer t= <span class="hljs-keyword">new</span> <span class="hljs-title class_">Timer</span>(<span class="hljs-number">1000</span>,(evnet)-&gt;<br>&#123;<br>  System.out.println(<span class="hljs-string">&quot;At the tone,the time is&quot;</span>+<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>());<br>  Toolkit.getDefaultToolkit().beep();<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<p>上面代码与使用实现了ActionListener接口的类相比，这个代码可读性要好很多。<br>演示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException &#123;<br>    <span class="hljs-type">Timer</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Timer</span>(<span class="hljs-number">1000</span>, event-&gt;&#123;<br>        System.out.println(<span class="hljs-string">&quot;At the tone,the time is&quot;</span>+<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>());<br>        Toolkit.getDefaultToolkit().beep();<br>    &#125;);<br>    t.start();<br>    JOptionPane.showMessageDialog(<span class="hljs-literal">null</span>,<span class="hljs-string">&quot;要退出吗?&quot;</span>);<br>    System.exit(<span class="hljs-number">0</span>);<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/e3d9572aa97a481d9c0e6c810dbf5f37.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">在这里插入图片描述</span></p>
+<h2 id="1-3-Java中常用函数式接口"><a href="#1-3-Java中常用函数式接口" class="headerlink" title="1.3 Java中常用函数式接口"></a>1.3 Java中常用函数式接口</h2><p><strong>Java API在java.util.function包中定义了很多非常通用的函数式接口。</strong><br><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/949a8b1e20d1495eb99f97b724486aec.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">在这里插入图片描述</span></p>
+<h2 id="1-3-1-Runnable接口"><a href="#1-3-1-Runnable接口" class="headerlink" title="1.3.1 Runnable接口"></a>1.3.1 Runnable接口</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@FunctionalInterface</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Runnable</span> &#123;<br>    <span class="hljs-comment">//抽象方法</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这个接口典型的应用场景就是多线程编程，它没有出参和入参，也没有泛型参数。<br>使用实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">runnableStudy</span><span class="hljs-params">(Runnable runnable)</span>&#123;<br>    runnable.run();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//测试</span><br>functionStudy.runnableStudy(()-&gt;&#123;<br>    System.out.println(<span class="hljs-string">&quot;使用Runnable的lambada表达式打印这句话的&quot;</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+<p><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/eb7b8fb0695e41c49f76647449e6d2f4.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">在这里插入图片描述</span></p>
+<h3 id="1-3-2-Supplier接口"><a href="#1-3-2-Supplier接口" class="headerlink" title="1.3.2 Supplier接口"></a>1.3.2 Supplier接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@FunctionalInterface</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Supplier</span>&lt;T&gt; &#123;<br>    T <span class="hljs-title function_">get</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以看到，这个接口没入参，定义了一个泛型出参，我们可以根据需求去使用它。<br>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">supplierStudy</span><span class="hljs-params">(Supplier&lt;String&gt; stringSupplier)</span>&#123;<br>    System.out.println(stringSupplier.get());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-3-3-Consumer接口"><a href="#1-3-3-Consumer接口" class="headerlink" title="1.3.3 Consumer接口"></a>1.3.3 Consumer接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@FunctionalInterface</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Consumer</span>&lt;T&gt; &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Performs this operation on the given argument.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> t the input argument</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">accept</span><span class="hljs-params">(T t)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这个接口提供了一个泛型入参，无出参的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">consumerStudy</span><span class="hljs-params">(String param,Consumer&lt;String&gt; stringConsumer)</span>&#123;<br>    stringConsumer.accept(param);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-3-4-BiConsumer接口"><a href="#1-3-4-BiConsumer接口" class="headerlink" title="1.3.4 BiConsumer接口"></a>1.3.4 BiConsumer接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@FunctionalInterface</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">BiConsumer</span>&lt;T, U&gt; &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Performs this operation on the given arguments.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> t the first input argument</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> u the second input argument</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">accept</span><span class="hljs-params">(T t, U u)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>此函数式接口提供了两个泛型入参，无出参。<br>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">biConsumerStudy</span><span class="hljs-params">(String u, String t, </span><br><span class="hljs-params">BiConsumer&lt;String,String&gt; biConsumer)</span>&#123;<br>    biConsumer.accept(u,t);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="1-3-5-Function接口"><a href="#1-3-5-Function接口" class="headerlink" title="1.3.5 Function接口"></a>1.3.5 Function接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@FunctionalInterface</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Function</span>&lt;T, R&gt; &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Applies this function to the given argument.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> t the function argument</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> the function result</span><br><span class="hljs-comment">     */</span><br>    R <span class="hljs-title function_">apply</span><span class="hljs-params">(T t)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">functionStudy</span><span class="hljs-params">(String t,Function&lt;String,String&gt; function)</span>&#123;<br>    System.out.println(function.apply(t));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-3-6-BiFunction接口"><a href="#1-3-6-BiFunction接口" class="headerlink" title="1.3.6 BiFunction接口"></a>1.3.6 BiFunction接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@FunctionalInterface</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">BiFunction</span>&lt;T, U, R&gt; &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Applies this function to the given arguments.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> t the first function argument</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> u the second function argument</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> the function result</span><br><span class="hljs-comment">     */</span><br>    R <span class="hljs-title function_">apply</span><span class="hljs-params">(T t, U u)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">biFunctionStudy</span><span class="hljs-params">(String t, String u, BiFunction&lt;String,String,String&gt; biFunction)</span>&#123;<br>    System.out.println(biFunction.apply(t,u));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-3-7-UnaryOperator接口"><a href="#1-3-7-UnaryOperator接口" class="headerlink" title="1.3.7 UnaryOperator接口"></a>1.3.7 UnaryOperator接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@FunctionalInterface</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">UnaryOperator</span>&lt;T&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Function</span>&lt;T, T&gt; &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Returns a unary operator that always returns its input argument.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> &lt;T&gt; the type of the input and output of the operator</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> a unary operator that always returns its input argument</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">static</span> &lt;T&gt; UnaryOperator&lt;T&gt; <span class="hljs-title function_">identity</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> t -&gt; t;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">unaryOperatorStudy</span><span class="hljs-params">(String s,UnaryOperator&lt;String&gt; unaryOperator)</span>&#123;<br>    System.out.println(unaryOperator.apply(s));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="1-3-8-BinaryOperator接口"><a href="#1-3-8-BinaryOperator接口" class="headerlink" title="1.3.8 BinaryOperator接口"></a>1.3.8 BinaryOperator接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@FunctionalInterface</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">BinaryOperator</span>&lt;T&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title class_">BiFunction</span>&lt;T,T,T&gt; &#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">binaryOperatorStudy</span><span class="hljs-params">(String s,String t,BinaryOperator&lt;String&gt; binaryOperator)</span>&#123;<br>    System.out.println(binaryOperator.apply(s,t));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-3-9-Predicate接口"><a href="#1-3-9-Predicate接口" class="headerlink" title="1.3.9 Predicate接口"></a>1.3.9 Predicate接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@FunctionalInterface</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Predicate</span>&lt;T&gt; &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Evaluates this predicate on the given argument.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> t the input argument</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-doctag">@code</span> true&#125; if the input argument matches the predicate,</span><br><span class="hljs-comment">     * otherwise &#123;<span class="hljs-doctag">@code</span> false&#125;</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">test</span><span class="hljs-params">(T t)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">predicateStudy</span><span class="hljs-params">(String s,Predicate&lt;String&gt; predicate)</span>&#123;<br>    <span class="hljs-keyword">if</span>(predicate.test(s))&#123;<br>        System.out.println(<span class="hljs-string">&quot;正确！！！！&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="1-3-10-BiPredicate接口"><a href="#1-3-10-BiPredicate接口" class="headerlink" title="1.3.10 BiPredicate接口"></a>1.3.10 BiPredicate接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@FunctionalInterface</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">BiPredicate</span>&lt;T, U&gt; &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Evaluates this predicate on the given arguments.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> t the first input argument</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> u the second input argument</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-doctag">@code</span> true&#125; if the input arguments match the predicate,</span><br><span class="hljs-comment">     * otherwise &#123;<span class="hljs-doctag">@code</span> false&#125;</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">test</span><span class="hljs-params">(T t, U u)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">biPredicateStudy</span><span class="hljs-params">(String t,String u,BiPredicate&lt;String,String&gt; biPredicate)</span>&#123;<br>    <span class="hljs-keyword">if</span>(biPredicate.test(t,u))&#123;<br>        System.out.println(<span class="hljs-string">&quot;正确！！&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-3-11-测试实例"><a href="#1-3-11-测试实例" class="headerlink" title="1.3.11 测试实例"></a>1.3.11 测试实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br><br>    <span class="hljs-type">FunctionStudy</span> <span class="hljs-variable">functionStudy</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FunctionStudy</span>();<br>    <span class="hljs-comment">//无入参,出参lambda表达式</span><br>    functionStudy.runnableStudy(()-&gt;&#123;<br>        System.out.println(<span class="hljs-string">&quot;使用Runnable的lambada表达式打印这句话的&quot;</span>);<br>    &#125;);<br>    <span class="hljs-comment">//无入参,有出参lambda表达式</span><br>    functionStudy.supplierStudy(()-&gt;&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;使用Supplier的lambada表达式打印这句话的&quot;</span>;<br>    &#125;);<br>    <span class="hljs-comment">//一个入参,无出参lambda表达式</span><br>    functionStudy.consumerStudy(<span class="hljs-string">&quot;consumerStudy&quot;</span>,(s)-&gt;&#123;<br>        <span class="hljs-keyword">if</span>(s.contains(<span class="hljs-string">&quot;consumer&quot;</span>))&#123;<br>            System.out.println(s);<br>        &#125;<br>    &#125;);<br>    <span class="hljs-comment">//两个入参,无出参lambda表达式</span><br>    functionStudy.biConsumerStudy(<span class="hljs-string">&quot;BiConsumerStudy&quot;</span>,<span class="hljs-string">&quot;two&quot;</span>,(s,t)-&gt;&#123;<br>        System.out.println(s+t);<br>    &#125;);<br>    <span class="hljs-comment">//一个入参,有出参lambda表达式</span><br>    functionStudy.functionStudy(<span class="hljs-string">&quot;functionStudy&quot;</span>,(s)-&gt;&#123;<br>        <span class="hljs-keyword">return</span> s+<span class="hljs-string">&quot;test&quot;</span>;<br>    &#125;);<br>    <span class="hljs-comment">//两个入参,一个出参lambda表达式</span><br>    functionStudy.biFunctionStudy(<span class="hljs-string">&quot;bi&quot;</span>,<span class="hljs-string">&quot;Function&quot;</span>,(s,u)-&gt;&#123;<br>        <span class="hljs-keyword">return</span> s+u;<br>    &#125;);<br>    <span class="hljs-comment">//一个入参，一个出参lambda表达式</span><br>    functionStudy.unaryOperatorStudy(<span class="hljs-string">&quot;s&quot;</span>,(s)-&gt;&#123;<br>        <span class="hljs-keyword">return</span> s;<br>    &#125;);<br>    <span class="hljs-comment">//两个入参，一个出参lambda表达式</span><br>    functionStudy.binaryOperatorStudy(<span class="hljs-string">&quot;binary&quot;</span>,<span class="hljs-string">&quot;Operation&quot;</span>,(s,v)-&gt;&#123;<br>        <span class="hljs-keyword">return</span> s+v;<br>    &#125;);<br>    <span class="hljs-comment">//一个入参，指定boolean类型出参lambda表达式</span><br>    functionStudy.predicateStudy(<span class="hljs-string">&quot;isGood&quot;</span>,(s)-&gt;&#123;<br>        <span class="hljs-keyword">return</span> s.contains(<span class="hljs-string">&quot;ood&quot;</span>);<br>    &#125;);<br>    <span class="hljs-comment">//两个入参，指定boolean类型出参lambda表达式</span><br>    functionStudy.biPredicateStudy(<span class="hljs-string">&quot;bi&quot;</span>,<span class="hljs-string">&quot;Predicate&quot;</span>,(t,u)-&gt;&#123;<br>        <span class="hljs-keyword">if</span>(t.equals(<span class="hljs-string">&quot;bi&quot;</span>)&amp;&amp;u.contains(<span class="hljs-string">&quot;cate&quot;</span>))&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<span class="hljs-keyword">else</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/ebd8a24260504818b9468aa7fc9e5d52.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">在这里插入图片描述</span></p>
+<h2 id="1-4-如何使用函数式接口"><a href="#1-4-如何使用函数式接口" class="headerlink" title="1.4 如何使用函数式接口"></a>1.4 如何使用函数式接口</h2><p>想要用lambda表达式做某些处理，还是要谨记表达式的用途，正确使用函数式接口，个人觉得Jdk中提供的一些函数式接口以及够用。<br>例如：java.util.function包中有一个接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Predicate</span>&lt;T&gt;&#123;<br> <span class="hljs-type">boolean</span> <span class="hljs-title function_">test</span><span class="hljs-params">(T t)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>ArrayList类有一个removeIf方法，它的参数就是一个Predicate。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">removeIf</span><span class="hljs-params">(Predicate&lt;? <span class="hljs-built_in">super</span> E&gt; filter)</span><br></code></pre></td></tr></table></figure>
+
+<p>这个接口专门用来传递lambda表达式。如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">list.removeIf(e-&gt;e==<span class="hljs-literal">null</span>);<br></code></pre></td></tr></table></figure>
+
+<p>上面的语句表示从一个数组列表删除所有的null值。</p>
+<h1 id="2-完整代码仓库地址"><a href="#2-完整代码仓库地址" class="headerlink" title="2 完整代码仓库地址"></a>2 完整代码仓库地址</h1><p><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/blob/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/Progress/exa31_2/FunctionStudy.java">Java基础学习&#x2F;src&#x2F;main&#x2F;java&#x2F;Progress&#x2F;exa31_2&#x2F;FunctionStudy.java · 严家豆&#x2F;Study - 码云 - 开源中国 (gitee.com)</a></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/27/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/13.2%20Java%E8%BF%9B%E9%98%B6%E4%B9%8Blambda%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;27&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;13.2%20Java%E8%BF%9B%E9%98%B6%E4%B9%8Blambda%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;27&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;13.2%20Java%E8%BF%9B%E9%98%B6%E4%B9%8Blambda%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+        
+  <nav class="nav">
+    <a href="/2023/05/27/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/13.1%20Java%E8%BF%9B%E9%98%B6%E4%B9%8Blambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%8C%E8%AF%AD%E6%B3%95/"><i class="iconfont iconleft"></i></a>
+    <a href="/2023/05/27/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/13.3%20Java%E8%BF%9B%E9%98%B6%E4%B9%8Blambda%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/"><i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3"><span class="toc-text">1.函数式接口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3%EF%BC%9F"><span class="toc-text">1.1 什么是函数式接口？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E5%A6%82%E4%BD%95%E7%94%A8lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%9B%BF%E4%BB%A3%EF%BC%9F"><span class="toc-text">1.2 如何用lambda表达式替代？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Java%E4%B8%AD%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3"><span class="toc-text">1.3 Java中常用函数式接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-1-Runnable%E6%8E%A5%E5%8F%A3"><span class="toc-text">1.3.1 Runnable接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-Supplier%E6%8E%A5%E5%8F%A3"><span class="toc-text">1.3.2 Supplier接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-3-Consumer%E6%8E%A5%E5%8F%A3"><span class="toc-text">1.3.3 Consumer接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-4-BiConsumer%E6%8E%A5%E5%8F%A3"><span class="toc-text">1.3.4 BiConsumer接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-5-Function%E6%8E%A5%E5%8F%A3"><span class="toc-text">1.3.5 Function接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-6-BiFunction%E6%8E%A5%E5%8F%A3"><span class="toc-text">1.3.6 BiFunction接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-7-UnaryOperator%E6%8E%A5%E5%8F%A3"><span class="toc-text">1.3.7 UnaryOperator接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-8-BinaryOperator%E6%8E%A5%E5%8F%A3"><span class="toc-text">1.3.8 BinaryOperator接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-9-Predicate%E6%8E%A5%E5%8F%A3"><span class="toc-text">1.3.9 Predicate接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-10-BiPredicate%E6%8E%A5%E5%8F%A3"><span class="toc-text">1.3.10 BiPredicate接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-11-%E6%B5%8B%E8%AF%95%E5%AE%9E%E4%BE%8B"><span class="toc-text">1.3.11 测试实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3"><span class="toc-text">1.4 如何使用函数式接口</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93%E5%9C%B0%E5%9D%80"><span class="toc-text">2 完整代码仓库地址</span></a></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,487 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>8.Java泛型,通配泛型,消除泛型和泛型的限制 - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="1.什么是泛型？在我看来，可以将泛型编程机制看作一个工...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">8.Java泛型,通配泛型,消除泛型和泛型的限制</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">8.Java泛型,通配泛型,消除泛型和泛型的限制</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 20, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>7728</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="1-什么是泛型？"><a href="#1-什么是泛型？" class="headerlink" title="1.什么是泛型？"></a>1.什么是泛型？</h1><p>在我看来，可以将泛型编程机制看作一个工具，通过这个工具我们可以在代码编译时检测出某些<strong>运行</strong>错误，<br>并写出更为通用（抽象）， 可复用的代码。<br>从JDK1.5开始，Java允许定义泛型类，泛型接口，泛型方法。这样我们就可以在Java中使用泛型机制写出更为通用的程序。</p>
+<h2 id="1-1-如何定义泛型类，接口，方法"><a href="#1-1-如何定义泛型类，接口，方法" class="headerlink" title="1.1. 如何定义泛型类，接口，方法"></a>1.1. 如何定义泛型类，接口，方法</h2><h3 id="1-1-1-泛型类"><a href="#1-1-1-泛型类" class="headerlink" title="1.1.1.泛型类"></a>1.1.1.泛型类</h3><p>泛型相当于一些类型数据的抽象，泛型程序设计意味着编写的泛型代码可以对多种不同类型的对象复用。<strong>（体现代码的复用原则）</strong></p>
+<p><strong>首先我们要注意泛型类型必须是引用类型（不能是int double …的基本类型)</strong></p>
+<h4 id="泛型类的示例"><a href="#泛型类的示例" class="headerlink" title="泛型类的示例"></a>泛型类的示例</h4><p>下面编写了一个泛型类, 意味着可以向这个类中存入任意类型的对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">GenericStack</span>&lt;E&gt; &#123;<br>    <span class="hljs-comment">//定义一个链表，链表中存储的元素设定为E</span><br>    <span class="hljs-keyword">private</span> ArrayList&lt;E&gt; list=<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getSize</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> list.size();<br>    &#125;<br><br>    <span class="hljs-comment">//泛型方法peek</span><br>    <span class="hljs-keyword">public</span> E <span class="hljs-title function_">peek</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> list.get(getSize()-<span class="hljs-number">1</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">push</span><span class="hljs-params">(E o)</span> &#123;<br>        list.add(o);<br>    &#125;<br><br>    <span class="hljs-comment">//泛型方法pop</span><br>    <span class="hljs-keyword">public</span> E <span class="hljs-title function_">pop</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">E</span> <span class="hljs-variable">o</span> <span class="hljs-operator">=</span> list.get(getSize()-<span class="hljs-number">1</span>);<br>        list.remove(getSize()-<span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> o;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isEmpty</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> list.isEmpty();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对于上面的类，我们就可以称之为泛型类了，因为它的定义使用了泛型机制。<br>在定义类的时候在类名后面添加 类似于 <E> 的代码：</E></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">GenericStack</span> &lt; E &gt;<br></code></pre></td></tr></table></figure>
+
+<p>时，我们就为这个类定义了泛型E,在类中，我们可以将E当作一个类进行使用，这个类是在使用GenericStack时定义的。</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    GenericStack&lt;String&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">GenericStack</span>&lt;&gt;();<br>    stack.push(<span class="hljs-string">&quot;number1&quot;</span>);<br>    stack.push(<span class="hljs-string">&quot;number2&quot;</span>);<br>    System.out.println(stack.pop());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">number2<br><br>Process finished with exit code 1<br></code></pre></td></tr></table></figure>
+
+<p>当我们尝试弹入非String的数据时，在编译期就会报错:  </p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">E:\Personal\MyRepository\study\Java基础学习\src\main\java\Progress\exa26\GenericClass.java:11:20<br>java: 不兼容的类型: int无法转换为java.lang.String<br></code></pre></td></tr></table></figure>
+
+<p><strong>如果没有使用泛型，在程序运行到这一段时才会报错。</strong></p>
+<p>比如我们把上面的泛型删掉用Object类型来编写一个相同作用的类，再看看：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">GenericStack1</span>&#123;<br>    <span class="hljs-comment">//定义一个链表，链表中存储的元素设定为E</span><br>    <span class="hljs-keyword">private</span> ArrayList list=<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>();<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getSize</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> list.size();<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">peek</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> list.get(getSize()-<span class="hljs-number">1</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">push</span><span class="hljs-params">(Object o)</span> &#123;<br>        list.add(o);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">pop</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">Object</span> <span class="hljs-variable">o</span> <span class="hljs-operator">=</span> list.get(getSize()-<span class="hljs-number">1</span>);<br>        list.remove(getSize()-<span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> o;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isEmpty</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> list.isEmpty();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>测试之：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    <span class="hljs-type">GenericStack1</span> <span class="hljs-variable">stack1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">GenericStack1</span>();<br>    stack1.push(<span class="hljs-number">11</span>);<br>    System.out.println((String)stack1.pop());<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>编译没有报错，下面运行的时候报错了：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">Exception in thread &quot;main&quot; java.lang.ClassCastException: java.lang.Integer cannot be cast to java.lang.String<br>	at Progress.exa26.GenericClass.main(GenericClass.java:15)<br><br>Process finished with exit code 1<br></code></pre></td></tr></table></figure>
+
+<p><strong>结论：使用泛型可以有效避免强转所造成的运行时错误(RuntimeException)。</strong></p>
+<h3 id="1-1-2-泛型接口"><a href="#1-1-2-泛型接口" class="headerlink" title="1.1.2 泛型接口"></a>1.1.2 泛型接口</h3><p>泛型接口的定义和泛型类一样，在合适的位置加上E即可。</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Maximum</span>&lt;T&gt; &#123;<br>    T <span class="hljs-title function_">getMax</span><span class="hljs-params">(T[] array)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>操作实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GenericInterface</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">MaximumImp</span> <span class="hljs-variable">maximumImp</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MaximumImp</span>();<br>        System.out.println(maximumImp.getMax(<span class="hljs-literal">null</span>));<br>    &#125;<br><br>&#125;<br><br> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Maximum</span>&lt;T&gt; &#123;<br>    T <span class="hljs-title function_">getMax</span><span class="hljs-params">(T[] array)</span>;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MaximumImp</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Maximum</span>&lt;String&gt;&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getMax</span><span class="hljs-params">(String[] array)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;null&quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">null<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="1-1-3-泛型方法"><a href="#1-1-3-泛型方法" class="headerlink" title="1.1.3 泛型方法"></a>1.1.3 泛型方法</h3><p>泛型方法除了在泛型类中定义，也可以在普通类中定义<br>例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ArrayAlg</span>&#123;<br><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; T <span class="hljs-title function_">getMiddle</span><span class="hljs-params">(T... a)</span>&#123;<br>    <span class="hljs-keyword">return</span> a[a.length/<span class="hljs-number">2</span>];<br>  &#125;<br>  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>注意：类型变量放在修饰符后，返回类型的前面。</strong></p>
+<p>当我们调用一个泛型方法时，我们可以把具体类型包围在尖括号中，放在方法名前面，例如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GenericMethod</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">middle</span> <span class="hljs-operator">=</span>GenericMethod.&lt;String&gt;getMiddle(<span class="hljs-string">&quot;join&quot;</span>,<span class="hljs-string">&quot;R&quot;</span>,<span class="hljs-string">&quot;fasd&quot;</span>);<br>        System.out.println(middle);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; T <span class="hljs-title function_">getMiddle</span><span class="hljs-params">(T... a)</span>&#123;<br>        <span class="hljs-keyword">return</span> a[a.length/<span class="hljs-number">2</span>];<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>其实在实际的编程中我们可以省略掉&lt; String &gt;而不对结果产生影响，原因是编译器会根据已有信息来对泛型类型进行推导，<br>这也是一种编程技巧。</p>
+<h1 id="2-使用泛型编程的好处"><a href="#2-使用泛型编程的好处" class="headerlink" title="2.使用泛型编程的好处"></a>2.使用泛型编程的好处</h1><p>前面学习了一些泛型的基础，我们知道了如何使用泛型机制进行编程，那么问题来了，泛型编程适合编写什么样的程序？<br><strong>泛型比较适合编写一些通用的程序出来，用来提高编程效率，简化编程工作。</strong><br>使代码具有更好的可读性和安全性，复用性，通用性，提高工作效率。</p>
+<h1 id="3-谁想成为合格的泛型程序员？"><a href="#3-谁想成为合格的泛型程序员？" class="headerlink" title="3.谁想成为合格的泛型程序员？"></a>3.谁想成为合格的泛型程序员？</h1><h2 id="3-1-作为一个泛型程序员，我们的任务就是要预计到我们的泛型类所有可能的用法。"><a href="#3-1-作为一个泛型程序员，我们的任务就是要预计到我们的泛型类所有可能的用法。" class="headerlink" title="3.1 作为一个泛型程序员，我们的任务就是要预计到我们的泛型类所有可能的用法。"></a>3.1 作为一个泛型程序员，我们的任务就是要预计到我们的泛型类所有可能的用法。</h2><p>这个任务会有多难呢？<br>我们可以看一个典型的问题：ArrayList类中有一个方法addAll用来添加另一个集合的全部元素。<br><strong>现在：Manager extends Emplyee</strong><br>一个程序员可能想要将一个ArrayList&lt; Manager &gt;中的所有元素添加到一个ArrayList&lt; Emplyee &gt;中去，这是可以的，但是反过来就不行了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">ArrayList&lt;Manager&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>();<br>ArrayList&lt;Emplyee&gt; list1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayLsit</span>();<br>list1.addAll(list);<span class="hljs-comment">//这个是可以的，因为Manager继承了Emplyee</span><br>list.add(list1);<span class="hljs-comment">//这个就不行了</span><br></code></pre></td></tr></table></figure>
+
+<p>但是目前我们所学的知识，泛型编程也无法避免这个问题：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GenericWildcard</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        ArrayList&lt;Manager&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>();<br>        list.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Manager</span>());<br>        ArrayList&lt;Emplyee&gt; list1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>();<br>        list1.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Emplyee</span>());<br>        <span class="hljs-comment">//list1.addAll(list);//这个是可以的，因为Manager继承了Emplyee</span><br>        list.addAll(list1);<span class="hljs-comment">//这个就不行了</span><br>        list.value[<span class="hljs-number">0</span>].sysoutI();<span class="hljs-comment">//这个就不行了</span><br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">ArrayList</span>&lt;E&gt;&#123;<br>    E[] value;<br>    <span class="hljs-type">int</span> size;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">ArrayList</span><span class="hljs-params">()</span>&#123;<br>        value = (E[]) <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[<span class="hljs-number">10</span>];<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(E e)</span>&#123;<br>        value[size++] = e;<br>    &#125;<br>    <span class="hljs-keyword">public</span> ArrayList&lt;E&gt; <span class="hljs-title function_">addAll</span><span class="hljs-params">(ArrayList&lt;?&gt; list)</span>&#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;size;i++)&#123;<br>            value[i] = (E)list.value[i];<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Emplyee</span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">100</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sysoutI</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(i);<br>    &#125;<br>&#125;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Manager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Emplyee</span>&#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">Exception in thread &quot;main&quot; java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to [LProgress.exa26.Manager;<br>	at Progress.exa26.GenericWildcard.main(GenericWildcard.java:11)<br><br>Process finished with exit code 1<br></code></pre></td></tr></table></figure>
+
+
+<p><strong>那么，如何在编译期间允许前一个调用，而不允许后一个调用方式呢？也就是如何让编译器在程序运行前发现这个错误？</strong><br>java语言的设计者发明了一个具有独创性的概念来解决这个问题： <strong>通配符类型（通配泛型）</strong><br><strong>通过通配泛型符，Java代码可以在编译期间发现本来可以避免的错误，并让程序员及时修复。<br>下面的4,5,6节将对这一机制进行详细学习。</strong></p>
+<h2 id="3-2-泛型程序设计的三个水平"><a href="#3-2-泛型程序设计的三个水平" class="headerlink" title="3.2 泛型程序设计的三个水平"></a>3.2 泛型程序设计的三个水平</h2><p>基本水平就是仅仅使用泛型类，而不考虑它们如何工作以及为什么这样做。<br>中等水平就是可以在混合使用不同的泛型类时能系统的解决各种问题，而不是胡乱猜测。<br>高等水平就是能自己设计出能够应用于多种场景的泛型类。</p>
+<p><strong>注意：Java库中使用变量E表示集合的元素类型，K和V表示键和值的类型。 T（必要时还可以用U,S）表示其他任意类型。</strong></p>
+<h1 id="4-原始类型和向后兼容"><a href="#4-原始类型和向后兼容" class="headerlink" title="4.原始类型和向后兼容"></a>4.原始类型和向后兼容</h1><h2 id="4-1-我们也可以使用泛型类而无需指定具体类型：（这时泛型默认为Object）"><a href="#4-1-我们也可以使用泛型类而无需指定具体类型：（这时泛型默认为Object）" class="headerlink" title="4.1.我们也可以使用泛型类而无需指定具体类型：（这时泛型默认为Object）"></a>4.1.我们也可以使用泛型类而无需指定具体类型：（这时泛型默认为Object）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">GenericStack</span> <span class="hljs-variable">stack</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">GenericStack</span>();<br></code></pre></td></tr></table></figure>
+
+<p>上面语句等价于：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">GenericStack&lt;Object&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">GenericStack</span>&lt;Object&gt;();<br></code></pre></td></tr></table></figure>
+
+<p>像这样的不带参数的泛型类称为原始类型，使用原始类型可以向后兼容Java的早期版本的代码。<br>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    <span class="hljs-type">List</span> <span class="hljs-variable">list</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>    list.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>());<br>    list.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Integer</span>(<span class="hljs-number">100</span>));<br>    System.out.println(list.get(<span class="hljs-number">0</span>));<br>    System.out.println(list.get(<span class="hljs-number">1</span>));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="4-2-类型擦除"><a href="#4-2-类型擦除" class="headerlink" title="4.2.类型擦除"></a>4.2.类型擦除</h2><p>在java虚拟机中，对于泛型程序其实会做一个类型消除的操作的，例如下面泛型接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Maximum</span>&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Comparable</span>&lt;T&gt;&gt; &#123;<br>    T <span class="hljs-title function_">getMax</span><span class="hljs-params">(T[] array)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在虚拟机中的class字节码为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Maximum</span>&#123;<br>    Comparable <span class="hljs-title function_">getMax</span><span class="hljs-params">(Comparable[] array)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>上面进行类型擦除的接口我们称之为这个泛型类的<strong>原始类型</strong>，这点很重要，因为我们获取的泛型类的Class对象其实就是原始类型的Class。<br>从这里我们大概可以知道泛型机制的实现原理，就是编译器通过解析泛型程序，根据泛型程序的定义将程序编译为具体类型的字节码JVM解释。</p>
+<h1 id="5-通配泛型"><a href="#5-通配泛型" class="headerlink" title="5.通配泛型"></a>5.通配泛型</h1><ul>
+<li><p>？称为非受限通配泛型，它和？extends Object是一样的。</p>
+</li>
+<li><p>？extends T称为受限通配泛型，表示T或T的一个子类型。</p>
+</li>
+<li><p>？super T称为下限通配泛型，它表示T或T的一个父类型。<br>通过通配泛型，我们便可以在编译期发现3.1节出现的错误。</p>
+<p>如下图所示：</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">wildcard</span><span class="hljs-params">()</span>&#123;<br>    List&lt;Emplyee&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>    List&lt;Manager&gt; list1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>    list1.addAll(list);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>   这个方法在编译期就会抛出异常.</p>
+<p>   <strong>通配泛型符可以让我们在定义泛型类时限制泛型的使用场景，将错误的场景排除在外，避免在运行时出现事故。</strong></p>
+<h1 id="6-消除泛型和对泛型的限制"><a href="#6-消除泛型和对泛型的限制" class="headerlink" title="6.消除泛型和对泛型的限制"></a>6.消除泛型和对泛型的限制</h1><p>泛型是使用<strong>类型消除机制</strong>的方法来实现的。<br><strong>编译器使用泛型类型信息来编译代码，但是随后会消除它。</strong><br>因此泛型信息在运行时是不可用的，<strong>这种方法可以使泛型代码向后兼容使用原始类型的遗留代码。</strong></p>
+<p>在这过程中 注意：</p>
+<ul>
+<li>如果一个泛型类型是受限的，那么编译器就用该受限类型替换它。</li>
+<li>不管实际的具体类型是什么，泛型类是被它的所有实例所共享的。</li>
+</ul>
+<p>由于泛型类型在运行时被消除，因此对如何使用泛型类型有如下限制：</p>
+<ul>
+<li>不能使用 new E()；不能使用泛型类型参数创建实例。</li>
+<li>不能使用new E[];不能使用泛型类型参数创建数组</li>
+<li>在静态上下文中不允许类的参数是泛型类型。</li>
+<li>异常类不能是泛型的。</li>
+</ul>
+<p>代码地址：<br><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/Progress/exa26">Java基础学习&#x2F;src&#x2F;main&#x2F;java&#x2F;Progress&#x2F;exa26 · 严家豆&#x2F;Study - 码云 - 开源中国 (gitee.com)</a></p>
+<p>如果通过上面的学习，你了解了如何使用泛型，不妨学习一下下面的泛型编程Demo专栏巩固一下：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/c1776167012/category_11511225.html?spm=1001.2014.3001.5482">Java动手做一做之泛型编程</a></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/8.Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E6%B3%9B%E5%9E%8B%EF%BC%8C%E9%80%9A%E9%85%8D%E6%B3%9B%E5%9E%8B%EF%BC%8C%E6%B6%88%E9%99%A4%E6%B3%9B%E5%9E%8B%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%9A%84%E9%99%90%E5%88%B6/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;8.Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E6%B3%9B%E5%9E%8B%EF%BC%8C%E9%80%9A%E9%85%8D%E6%B3%9B%E5%9E%8B%EF%BC%8C%E6%B6%88%E9%99%A4%E6%B3%9B%E5%9E%8B%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%9A%84%E9%99%90%E5%88%B6&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;8.Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E6%B3%9B%E5%9E%8B%EF%BC%8C%E9%80%9A%E9%85%8D%E6%B3%9B%E5%9E%8B%EF%BC%8C%E6%B6%88%E9%99%A4%E6%B3%9B%E5%9E%8B%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%9A%84%E9%99%90%E5%88%B6&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%BF%9B%E9%98%B6/" rel="tag">Java进阶</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/7.%20Java%E6%93%8D%E4%BD%9Cmysql%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4%EF%BC%88JDBC%EF%BC%89/"><i class="iconfont iconleft"></i>7.Java操作MySQL的步骤(JDBC)</a>
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/9.1%20Java%E9%9B%86%E5%90%88%E6%8E%A5%E5%8F%A3%E5%AD%A6%E4%B9%A0/">9.1 Java集合接口学习<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E6%B3%9B%E5%9E%8B%EF%BC%9F"><span class="toc-text">1.什么是泛型？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E6%B3%9B%E5%9E%8B%E7%B1%BB%EF%BC%8C%E6%8E%A5%E5%8F%A3%EF%BC%8C%E6%96%B9%E6%B3%95"><span class="toc-text">1.1. 如何定义泛型类，接口，方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-%E6%B3%9B%E5%9E%8B%E7%B1%BB"><span class="toc-text">1.1.1.泛型类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-%E6%B3%9B%E5%9E%8B%E6%8E%A5%E5%8F%A3"><span class="toc-text">1.1.2 泛型接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-3-%E6%B3%9B%E5%9E%8B%E6%96%B9%E6%B3%95"><span class="toc-text">1.1.3 泛型方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-text">2.使用泛型编程的好处</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E8%B0%81%E6%83%B3%E6%88%90%E4%B8%BA%E5%90%88%E6%A0%BC%E7%9A%84%E6%B3%9B%E5%9E%8B%E7%A8%8B%E5%BA%8F%E5%91%98%EF%BC%9F"><span class="toc-text">3.谁想成为合格的泛型程序员？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E4%BD%9C%E4%B8%BA%E4%B8%80%E4%B8%AA%E6%B3%9B%E5%9E%8B%E7%A8%8B%E5%BA%8F%E5%91%98%EF%BC%8C%E6%88%91%E4%BB%AC%E7%9A%84%E4%BB%BB%E5%8A%A1%E5%B0%B1%E6%98%AF%E8%A6%81%E9%A2%84%E8%AE%A1%E5%88%B0%E6%88%91%E4%BB%AC%E7%9A%84%E6%B3%9B%E5%9E%8B%E7%B1%BB%E6%89%80%E6%9C%89%E5%8F%AF%E8%83%BD%E7%9A%84%E7%94%A8%E6%B3%95%E3%80%82"><span class="toc-text">3.1 作为一个泛型程序员，我们的任务就是要预计到我们的泛型类所有可能的用法。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E6%B3%9B%E5%9E%8B%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%9A%84%E4%B8%89%E4%B8%AA%E6%B0%B4%E5%B9%B3"><span class="toc-text">3.2 泛型程序设计的三个水平</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%90%91%E5%90%8E%E5%85%BC%E5%AE%B9"><span class="toc-text">4.原始类型和向后兼容</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E6%88%91%E4%BB%AC%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E6%B3%9B%E5%9E%8B%E7%B1%BB%E8%80%8C%E6%97%A0%E9%9C%80%E6%8C%87%E5%AE%9A%E5%85%B7%E4%BD%93%E7%B1%BB%E5%9E%8B%EF%BC%9A%EF%BC%88%E8%BF%99%E6%97%B6%E6%B3%9B%E5%9E%8B%E9%BB%98%E8%AE%A4%E4%B8%BAObject%EF%BC%89"><span class="toc-text">4.1.我们也可以使用泛型类而无需指定具体类型：（这时泛型默认为Object）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4"><span class="toc-text">4.2.类型擦除</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E9%80%9A%E9%85%8D%E6%B3%9B%E5%9E%8B"><span class="toc-text">5.通配泛型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E6%B6%88%E9%99%A4%E6%B3%9B%E5%9E%8B%E5%92%8C%E5%AF%B9%E6%B3%9B%E5%9E%8B%E7%9A%84%E9%99%90%E5%88%B6"><span class="toc-text">6.消除泛型和对泛型的限制</span></a></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

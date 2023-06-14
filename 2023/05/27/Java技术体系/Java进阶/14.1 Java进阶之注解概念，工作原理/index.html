@@ -1,0 +1,451 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="@[toc]
+本篇文章学习总结自《Java核心技术卷二...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title"></h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 27, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>12895</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <p>@[toc]</p>
+<p><strong>本篇文章学习总结自《Java核心技术卷二》</strong></p>
+<h1 id="1-什么是注解？"><a href="#1-什么是注解？" class="headerlink" title="1.什么是注解？"></a>1.什么是注解？</h1><p>如果使用过Spring做开发，相信对注解并不陌生，相信大家都用过@Resource，@Autowired注解，通过将@Resource这个注解修饰一个类，Spring会自动这个类进行对象创建，通过@Autowired修饰一个变量，Spring会将这个变量赋值为相应的类的对象引用。<br><strong>这样我们就能将类的对象的管理交给Spring来进行管理，方便自己的开发工作。</strong></p>
+<p><strong>所以，我们可以把注解看作一种标记工具，通过这种工具，我们能开发出一些框架级别的东西来帮助我们提高编程效率。 我们可以拿它和泛型进行类比。</strong></p>
+<p>首先我们要知道和泛型一样，<strong>注解不会改变程序的编译方式</strong>，也就是Java编译器对于包含注解和不包含注解的代码会产生相同的虚拟机指令。但通过注解我们可以对一些开发进行简化。</p>
+<h2 id="1-1-如何才能使用注解？"><a href="#1-1-如何才能使用注解？" class="headerlink" title="1.1.如何才能使用注解？"></a>1.1.如何才能使用注解？</h2><p>为了我们能使用注解，我们需要选择一个处理工具，然后向我们的处理工具可以理解的代码中插入注解，之后运用该处理工具处理代码。例如Spring框架就是一个处理工具。<br><strong>所以，简单来说，注解就是那些插入到源代码中使用其他工具可以对其进行处理的标签。</strong><br>使用注解很简单，真正具有挑战性的是自己开发注解。</p>
+<h1 id="2-注解的基本概念"><a href="#2-注解的基本概念" class="headerlink" title="2.注解的基本概念"></a>2.注解的基本概念</h1><p>在Java中，注解是被当作一个修饰符来使用的，它被置于被注解项之前，中间没有分号，每一个注解的名称前面都加上了一个@符号，注解可以作为代码的一部分。 但是如果没有正确的工具去处理它，注解是不能生效的。</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span>&#123;<br> <span class="hljs-meta">@Test</span> <br> <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">checkRandomInsertions</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>上面代码中的 <strong>@Test</strong>自身不会做任何事，它需要工具的支持才会有用。（后面会讲到）</p>
+<h2 id="2-1-包含元素的注解"><a href="#2-1-包含元素的注解" class="headerlink" title="2.1 包含元素的注解"></a>2.1 包含元素的注解</h2><p>除了类似于@Test，有的注解中也允许包含参数，我们可以传入参数的值来控制注解的处理逻辑。<br>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test(timeout=&quot;10000&quot;)</span><br></code></pre></td></tr></table></figure>
+
+<p>包含的元素可以被读取这些注解的工具来处理，元素也允许有多种形式。</p>
+<h2 id="2-2-注解的作用范围"><a href="#2-2-注解的作用范围" class="headerlink" title="2.2 注解的作用范围"></a>2.2 注解的作用范围</h2><p>除方法外，我们还可以注解类，成员变量以及局部变量，我们还可以注解包，参数变量，类型参数以及类型用法，这些注解可以存在于任何可以放置像public ，static修饰符的地方。<br>我们可以把注解合理的理解为一个修饰符。</p>
+<h2 id="2-3-注解的定义"><a href="#2-3-注解的定义" class="headerlink" title="2.3 注解的定义"></a>2.3 注解的定义</h2><p>每个注解都必须通过一个注解接口进行定义，这些接口中的方法与注解中的元素相对应。<br>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Target(ElementType.METHOD)</span><br><span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> TestSelf&#123;<br> <span class="hljs-type">long</span> <span class="hljs-title function_">timeout</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-number">0L</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其中 @Target 和 @Retention 是元注解，它们注解了TestSelf注解。<strong>（@Target将TestSelf注解标识成一个只能运用到方法上的注解,@Retention将TestSelf标识为当类文件载入到虚拟机的时候，仍可以保留下来）</strong><br>@interface 声明创建一个Java注解接口，处理注解的工具将接受那些实现这个注解接口的对象，<strong>这类工具可以调用timeout方法来检索某个特定Test注解的timeout元素。</strong></p>
+<h2 id="2-4-元注解"><a href="#2-4-元注解" class="headerlink" title="2.4 元注解"></a>2.4 元注解</h2><p>元注解能让我们定义注解的作用范围，从上面我们可以知道的元注解有两个:@Target和@Retention</p>
+<h3 id="2-4-1-Target"><a href="#2-4-1-Target" class="headerlink" title="2.4.1 @Target"></a>2.4.1 @Target</h3><p>可以知道，它是定义注解的作用范围是方法级别，还是其他级别的，我们看一下ElementType类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> <span class="hljs-title class_">ElementType</span> &#123;<br>    TYPE, <span class="hljs-comment">//用于类、接口（包括注解类型）或 enum 声明 -ok</span><br>    <br>    FIELD, <span class="hljs-comment">//用于成员变量（包括枚举常量）-ok</span><br>    <br>    METHOD,  <span class="hljs-comment">//用于方法 -ok</span><br>    <br>    PARAMETER, <span class="hljs-comment">//用于参数 -ok</span><br>    <br>    CONSTRUCTOR, <span class="hljs-comment">// 用于构造方法 -ok</span><br>   <br>    LOCAL_VARIABLE,  <span class="hljs-comment">// 用于局部变量 -ok</span><br>   <br>    ANNOTATION_TYPE,  <span class="hljs-comment">// 用于注解类型 -ok</span><br>   <br>    PACKAGE,  <span class="hljs-comment">// 用于包,不常用</span><br>  <br>    TYPE_PARAMETER, <span class="hljs-comment">//用于类型参数   @since 1.8  -ok</span><br><br>    TYPE_USE <span class="hljs-comment">//使用一种类型 @since 1.8 -ok</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以为指定注解定义多个作用范围,例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Target(&#123;ElementType.METHOD&#125;)</span><br><span class="hljs-meta">@Target(&#123;ElementType.TYPE,ElementType.METHOD&#125;)</span><br></code></pre></td></tr></table></figure>
+
+<p>具体实例如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//考虑到代码篇幅较大，完整代码在文章底部链接中</span><br><span class="hljs-meta">@TypeTest</span><br><span class="hljs-meta">@TypeUseTest</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GoodTest</span>&lt;<span class="hljs-meta">@TypeParameterTest</span> V&gt; &#123;<br>    <span class="hljs-meta">@TypeUseTest</span><br>    <span class="hljs-meta">@FiledTest</span><br>    <span class="hljs-keyword">private</span> String field;<br><br>    <span class="hljs-meta">@MethodTest</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doSomething</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;哈哈哈&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doSomething1</span><span class="hljs-params">(<span class="hljs-meta">@TypeUseTest</span> <span class="hljs-meta">@ParameterTest</span> String param1)</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;呵呵呵&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@TypeUseTest</span><br>    <span class="hljs-meta">@ConstructorTest</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">GoodTest</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;这是构造方法&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doSomething3</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-meta">@TypeUseTest</span><br>        <span class="hljs-meta">@LocalVariableTest</span><br>        String local;<br>    &#125;<br><br>    <span class="hljs-meta">@TypeUseTest</span><br>    <span class="hljs-meta">@AnnotationTypeTest</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-meta">@interface</span> test&#123;<br><br>    &#125;<br><br>    <span class="hljs-meta">@TypeUseTest</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="2-4-2-Retention"><a href="#2-4-2-Retention" class="headerlink" title="2.4.2 @Retention"></a>2.4.2 @Retention</h3><p>它是用来定义注解信息的保留级别，用于描述注解的生命周期，也就是该注解被保留的时间长短。@Retention 注解中的成员变量（value）用来设置保留策略，value 是 java.lang.annotation.RetentionPolicy 枚举类型，RetentionPolicy 有 3 个枚举常量，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> <span class="hljs-title class_">RetentionPolicy</span> &#123;<br>    SOURCE, <span class="hljs-comment">//在源文件中有效（即源文件保留）</span><br>    CLASS, <span class="hljs-comment">//在 class 文件中有效（即 class 保留）</span><br>    RUNTIME <span class="hljs-comment">//在运行时有效（即运行时保留）</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>上面三者生命周期大小排序为 SOURCE &lt; CLASS &lt; RUNTIME。<br>这个需要注解根据我们自定义注解的性质去使用：<br><strong>如果需要在运行时去动态获取注解信息，那只能用 RUNTIME<br>如果只要在编译时进行一些预处理操作，比如生成一些辅助代码（比如一些脚本信息），就用 CLASS ；<br>如果只是做一些检查性的操作，比如 @Override 和 @SuppressWarnings，则可选用 SOURCE 。</strong></p>
+<p>例如下面定义了一个需要在程序运行时去获取注解信息的注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Target(ElementType.METHOD)</span><br><span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> TestSelf&#123;<br> <span class="hljs-type">long</span> <span class="hljs-title function_">timeout</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-number">0L</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="2-4-3-Documented"><a href="#2-4-3-Documented" class="headerlink" title="2.4.3 @Documented"></a>2.4.3 @Documented</h3><p>这个注解用来指定修饰的注解类会被javaDoc工具提取为文档。默认情况下javaDoc是不会将注解接口抽取为文档的。<br>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Documented</span><br><span class="hljs-meta">@Target(&#123;ElementType.TYPE,ElementType.METHOD&#125;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> MyDocumented &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">value</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-string">&quot;这是@Documented注解&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@MyDocumented</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DocumentedTest</span> &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 测试Documented注解知否生效</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@MyDocumented</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">test</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;测试&quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="2-4-4-Inherited"><a href="#2-4-4-Inherited" class="headerlink" title="2.4.4 @Inherited"></a>2.4.4 @Inherited</h3><p>@Inherited 是一个标记注解，用来指定该注解可以被继承。使用 @Inherited 注解的 Class 类，表示这个注解可以被用于该 Class 类的子类。就是说如果某个类使用了被 @Inherited 修饰的注解，则其子类将自动具有该注解。<br>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">InheritedTest</span> &#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 使用元注解Inherited</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Documented</span><br>    <span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span><br>    <span class="hljs-meta">@Target(ElementType.TYPE)</span><br>    <span class="hljs-meta">@Inherited</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-meta">@interface</span> WithInherited &#123;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 不使用元注解Inherited</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Documented</span><br>    <span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span><br>    <span class="hljs-meta">@Target(ElementType.TYPE)</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-meta">@interface</span> NoInherited &#123;<br>    &#125;<br><br>    <span class="hljs-meta">@WithInherited</span><br>    <span class="hljs-meta">@NoInherited</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SuperClass</span> &#123;<br><br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ChildClass</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">SuperClass</span> &#123;<br><br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">AnnotatedElement</span> <span class="hljs-variable">element</span> <span class="hljs-operator">=</span> SuperClass.class;<br>        System.out.println(<span class="hljs-string">&quot;SuperClass 是否被 @WithInherited 注解? &quot;</span> + element.isAnnotationPresent(WithInherited.class));<br>        System.out.println(<span class="hljs-string">&quot;SuperClass 是否被 @NoInherited 注解? &quot;</span> + element.isAnnotationPresent(NoInherited.class));<br>        <span class="hljs-type">AnnotatedElement</span> <span class="hljs-variable">childElement</span> <span class="hljs-operator">=</span> ChildClass.class;<br>        System.out.println(<span class="hljs-string">&quot;ChildClass 是否继承 SuperClass 中的 @WithInherited 注解? &quot;</span> + childElement.isAnnotationPresent(WithInherited.class));<br>        System.out.println(<span class="hljs-string">&quot;ChildClass 是否继承 SuperClass 中的 @NoInherited 注解? &quot;</span> + childElement.isAnnotationPresent(NoInherited.class));<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/de3aae29876449e0898a9ea0773f092a.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">在这里插入图片描述</span></p>
+<h3 id="2-4-5-Repeatable"><a href="#2-4-5-Repeatable" class="headerlink" title="2.4.5 @Repeatable"></a>2.4.5 @Repeatable</h3><p>@Repeatable 注解是 Java 8 新增加的，它允许在相同的程序元素中重复注解，在需要对同一种注解多次使用时，往往需要借助 @Repeatable 注解。Java 8 版本以前，同一个程序元素前最多只能有一个相同类型的注解，如果需要在同一个元素前使用多个相同类型的注解，则必须使用注解“容器”。</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 注解类型 Repeatable 用于指明它作为元注解所声明的注解类型是可重复的.</span><br><span class="hljs-comment"> * 也就是用 <span class="hljs-doctag">@Repeatable</span> 声明的注解 A, 可以作为容器注解, A 保证了被其注解的注解可以重复使用.</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RepeatableStudy</span> &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 定义容器注解</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Target(ElementType.TYPE)</span><br>    <span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-meta">@interface</span> Container &#123;<br>        <span class="hljs-comment">//这里存储注解Element的参数组</span><br>        Element[] value();<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 定义可复用注解并指向容器注解</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Repeatable(Container.class)</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-meta">@interface</span> Element &#123;<br>        String <span class="hljs-title function_">value</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-string">&quot;&quot;</span>;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 这里的可复用注解的注解信息会被注解Container接收</span><br><span class="hljs-comment">     * 我们可以通过得到Container信息来获取这里的注解信息</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Element(&quot;开始&quot;)</span><br>    <span class="hljs-meta">@Element(&quot;准备&quot;)</span><br>    <span class="hljs-meta">@Element(&quot;出发&quot;)</span><br>    <span class="hljs-meta">@Element(&quot;到达目的地&quot;)</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Running</span> &#123;<br><br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-comment">//判断Running是否存储了Container注解信息</span><br>        <span class="hljs-keyword">if</span>(Running.class.isAnnotationPresent(Container.class)) &#123;<br>            <span class="hljs-type">Container</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> Running.class.getAnnotation(Container.class);<br>            System.out.println(<span class="hljs-string">&quot;Running&#x27;s Element:&quot;</span>);<br>            <span class="hljs-comment">//遍历实际的Element注解中的信息</span><br>            <span class="hljs-keyword">for</span>(Element e: c.value())&#123;<br>                System.out.println(e.value());<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/17acf59f32254662b517566bde509d1e.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">在这里插入图片描述</span></p>
+<h3 id="2-4-6-Native"><a href="#2-4-6-Native" class="headerlink" title="2.4.6 @Native"></a>2.4.6 @Native</h3><p>使用 @Native 注解修饰成员变量，则表示这个变量可以被本地代码引用，常常被代码生成工具使用。对于 @Native 注解不常使用，了解即可。</p>
+<h1 id="3-了解注解基本工作原理"><a href="#3-了解注解基本工作原理" class="headerlink" title="3.了解注解基本工作原理"></a>3.了解注解基本工作原理</h1><h2 id="3-1-下面我们通过一个例子来学习注解的基本工作原理"><a href="#3-1-下面我们通过一个例子来学习注解的基本工作原理" class="headerlink" title="3.1  下面我们通过一个例子来学习注解的基本工作原理"></a>3.1  下面我们通过一个例子来学习注解的基本工作原理</h2><p>下面有一个程序：</p>
+<h3 id="3-1-1-首先定义注解ActionListernFor-java"><a href="#3-1-1-首先定义注解ActionListernFor-java" class="headerlink" title="3.1.1 首先定义注解ActionListernFor.java"></a>3.1.1 首先定义注解ActionListernFor.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 定义一个ActionListenerFor注解，用于监听方法的执行</span><br><span class="hljs-comment"> * 这个注解只能修饰方法且能在运行时获取其信息</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Target(ElementType.METHOD)</span><br><span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> ActionListenerFor &#123;<br>   String <span class="hljs-title function_">source</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-1-2-然后编写注解处理工具类（这是自定义注解的关键，没有它注解就是个摆设）"><a href="#3-1-2-然后编写注解处理工具类（这是自定义注解的关键，没有它注解就是个摆设）" class="headerlink" title="3.1.2 然后编写注解处理工具类（这是自定义注解的关键，没有它注解就是个摆设）"></a>3.1.2 然后编写注解处理工具类（这是自定义注解的关键，没有它注解就是个摆设）</h3><p>ActionListenerInstaller.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * ActionListener注解处理工具类</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ActionListenerInstaller</span> &#123;<br><br>   <span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 这个方法为注解生效做好了前提条件</span><br><span class="hljs-comment">    * 主要分为两步：1.扫描出注解修饰的方法 2.将指定方法和注解生效的对象进行绑定</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> obj 目标对象</span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">processAnnotations</span><span class="hljs-params">(Object obj)</span> &#123;<br>      <span class="hljs-keyword">try</span> &#123;<br>         Class&lt;?&gt; cl = obj.getClass();<span class="hljs-comment">//获取目标对象的Class对象</span><br><br>         <span class="hljs-comment">/*</span><br><span class="hljs-comment">           遍历其方法信息,处理那些被ActionListener修饰的方法</span><br><span class="hljs-comment">          */</span><br>         <span class="hljs-keyword">for</span> (Method m : cl.getDeclaredMethods()) &#123;<br>            <span class="hljs-comment">//检查使用ActionListenerFor注解的方法并将其加入监听列表中</span><br>            <span class="hljs-type">ActionListenerFor</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> m.getAnnotation(ActionListenerFor.class);<br>            <span class="hljs-keyword">if</span> (a != <span class="hljs-literal">null</span>) &#123;<br>               <span class="hljs-comment">//获取Class中名为source注解值的Field对象</span><br>               <span class="hljs-type">Field</span> <span class="hljs-variable">f</span> <span class="hljs-operator">=</span> cl.getDeclaredField(a.source());<br>               f.setAccessible(<span class="hljs-literal">true</span>);<br>               <span class="hljs-comment">//将方法加入监听中</span><br>               addListener(f.get(obj), obj, m);<br>            &#125;<br>         &#125;<br>      &#125; <span class="hljs-keyword">catch</span>(ReflectiveOperationException e)&#123;<br>         e.printStackTrace();<br>      &#125;<br>   &#125;<br><br>   <span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 此方法将指定的方法和指定的组件进行绑定，已达到监听的效果</span><br><span class="hljs-comment">    * 注意：此方法的实现用到了jdk的动态代理机制，看不懂的同学可以学习下动态代理原理</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> source 属性对象</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> param 目标对象</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> m 方法对象</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@throws</span> ReflectiveOperationException</span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addListener</span><span class="hljs-params">(Object source, <span class="hljs-keyword">final</span> Object param, <span class="hljs-keyword">final</span> Method m)</span> <span class="hljs-keyword">throws</span> ReflectiveOperationException &#123;<br><br>      <span class="hljs-comment">//定义一个前置处理器,让按钮在执行完点击事件后执行指定的方法</span><br>      <span class="hljs-type">InvocationHandler</span> <span class="hljs-variable">handler</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">InvocationHandler</span>() &#123;<br><br>         <span class="hljs-keyword">final</span> <span class="hljs-type">Method</span> <span class="hljs-variable">realM</span> <span class="hljs-operator">=</span> m;<br>         <span class="hljs-keyword">final</span> <span class="hljs-type">Object</span> <span class="hljs-variable">realProxy</span> <span class="hljs-operator">=</span> param;<br><br>            <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">invoke</span><span class="hljs-params">(Object proxy, Method m1, Object[] args)</span> <span class="hljs-keyword">throws</span> Throwable &#123;<br>               System.out.println(m1.getName());<br>               <span class="hljs-keyword">if</span>(m1.getName().equals(<span class="hljs-string">&quot;actionPerformed&quot;</span>))&#123;<br>                  System.out.println(<span class="hljs-string">&quot;执行actionPerformed!!&quot;</span>);<br>               &#125;<br>               <span class="hljs-comment">//这个操作就是将param参数传入并执行m方法</span><br>               <span class="hljs-keyword">return</span> realM.invoke(realProxy);<br>            &#125;<br>         &#125;;<br><br>      <span class="hljs-comment">// 获取监听器代理对象</span><br>      <span class="hljs-type">Object</span> <span class="hljs-variable">listenerProxy</span> <span class="hljs-operator">=</span> Proxy.newProxyInstance(<span class="hljs-literal">null</span>,<span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[] &#123; ActionListener.class &#125;, handler);<br><br>      <span class="hljs-comment">// 获取指定组件的指定方法对象</span><br>      <span class="hljs-type">Method</span> <span class="hljs-variable">adder</span> <span class="hljs-operator">=</span> source.getClass().getMethod(<span class="hljs-string">&quot;addActionListener&quot;</span>, ActionListener.class);<br><br>      <span class="hljs-comment">//给指定按钮组件加入监听器</span><br>      adder.invoke(source, listenerProxy);<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-1-3-应用代码"><a href="#3-1-3-应用代码" class="headerlink" title="3.1.3 应用代码"></a>3.1.3 应用代码</h3><p><strong>ButtonFrame.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 一个验证ActionListenerFor注解的UI面板</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ButtonFrame</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">JFrame</span> &#123;<br><br>   <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">DEFAULT_WIDTH</span> <span class="hljs-operator">=</span> <span class="hljs-number">300</span>;<br>   <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">DEFAULT_HEIGHT</span> <span class="hljs-operator">=</span> <span class="hljs-number">200</span>;<br><br>   <span class="hljs-keyword">private</span> JPanel panel;<br>   <span class="hljs-keyword">private</span> JButton yellowButton;<br>   <span class="hljs-keyword">private</span> JButton blueButton;<br>   <span class="hljs-keyword">private</span> JButton redButton;<br><br>   <span class="hljs-keyword">public</span> <span class="hljs-title function_">ButtonFrame</span><span class="hljs-params">()</span> &#123;<br>      setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);<br>      panel = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JPanel</span>();<br>      add(panel);<br>      yellowButton = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JButton</span>(<span class="hljs-string">&quot;Yellow&quot;</span>);<br>      blueButton = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JButton</span>(<span class="hljs-string">&quot;Blue&quot;</span>);<br>      redButton = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JButton</span>(<span class="hljs-string">&quot;Red&quot;</span>);<br>      panel.add(yellowButton);<br>      panel.add(blueButton);<br>      panel.add(redButton);<br><br>      <span class="hljs-comment">//在这里使用注解处理器让被ActionListenerFor修饰的方法生效</span><br>      ActionListenerInstaller.processAnnotations(<span class="hljs-built_in">this</span>);<br>   &#125;<br><br>   <span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 这里使用注解方法的方式为名为yellowButton的按钮添加监听器</span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-meta">@ActionListenerFor(source = &quot;yellowButton&quot;)</span><br>   <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">yellowBackground</span><span class="hljs-params">()</span> &#123;<br>      panel.setBackground(Color.YELLOW);<br>   &#125;<br><br>   <span class="hljs-meta">@ActionListenerFor(source = &quot;blueButton&quot;)</span><br>   <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">blueBackground</span><span class="hljs-params">()</span> &#123;<br>      panel.setBackground(Color.BLUE);<br>   &#125;<br><br>   <span class="hljs-meta">@ActionListenerFor(source = &quot;redButton&quot;)</span><br>   <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">redBackground</span><span class="hljs-params">()</span> &#123;<br>      panel.setBackground(Color.RED);<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="3-1-4-测试代码"><a href="#3-1-4-测试代码" class="headerlink" title="3.1.4 测试代码"></a>3.1.4 测试代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 自定义注解效果测试</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ButtonTest</span> &#123;<br>   <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>      EventQueue.invokeLater(() -&gt; &#123;<br>            <span class="hljs-type">ButtonFrame</span> <span class="hljs-variable">frame</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ButtonFrame</span>();<br>            frame.setTitle(<span class="hljs-string">&quot;ButtonTest&quot;</span>);<br>            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);<br>            frame.setVisible(<span class="hljs-literal">true</span>);<br>         &#125;);<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们首先来运行一下上面程序可以看到下面结果：<br><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/e0cdd3841190494da4cdb947c5a4d3b7.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">在这里插入图片描述</span></p>
+<p><strong>我们可以很清楚的知道上面的程序中主要有一个图形化的界面和三个按钮，我们每点击一个按钮界面的背景颜色会发生相应的改变。</strong></p>
+<p>我们普通的做法是给每个按钮都注册一个事件监听器，但上面却不是，它是利用注解来完成事件响应的。</p>
+<h2 id="3-2-代码解析"><a href="#3-2-代码解析" class="headerlink" title="3.2 代码解析"></a>3.2 代码解析</h2><p>下面我们分析下它是如何完成的</p>
+<h3 id="3-2-1-首先我们要定义一个注解"><a href="#3-2-1-首先我们要定义一个注解" class="headerlink" title="3.2.1 首先我们要定义一个注解"></a>3.2.1 首先我们要定义一个注解</h3><p>在上面程序中定义了一个名为ActionListenerFor的注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> annotations;<br><span class="hljs-keyword">import</span> java.lang.annotation.*;<br><span class="hljs-meta">@Target(ElementType.METHOD)</span><br><span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> ActionListenerFor&#123;<br>   String <span class="hljs-title function_">source</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>处理注解的工具可以调用source()方法来检索注解中的source元素值做处理。</p>
+<h3 id="3-2-2-定义处理注解工具"><a href="#3-2-2-定义处理注解工具" class="headerlink" title="3.2.2 定义处理注解工具"></a>3.2.2 定义处理注解工具</h3><p>当我们定义好一个注解后，它本身是没任何功能的，它就是一个可以标注的注解。 <strong>但是如果我们编写了针对这个注解的处理工具，我们就可以让使用工具让这个注解发挥出它的作用。</strong><br>在上面的例子中ActionListenerInstaller.java 就是针对ActionListenerFor注解的一种处理工具。</p>
+<p>它的主要作用就是让注解发挥作用，它的真正的功能其实就是让注解了的方法和按钮事件相对应，从而使我们点击按钮会有效果。</p>
+<p>下面我们结合上面的使用注解的地方逐步分析：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">  <span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 这里使用注解方法的方式为名为yellowButton的按钮添加监听器</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@ActionListenerFor(source = &quot;yellowButton&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">yellowBackground</span><span class="hljs-params">()</span> &#123;<br>   panel.setBackground(Color.YELLOW);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们可以看到，上面的例子中，我们使用了ActionListenerFor修饰了方法yellowBacgroud,在这里我们只是标注了这个方法，那么如何让注解生效呢？</p>
+<p>通过分析代码我们可以知道，真正让注解生效的是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">ActionListenerInstaller.processAnnotations(<span class="hljs-built_in">this</span>);<br></code></pre></td></tr></table></figure>
+
+<p><strong>processAnnotations()方法的主要作用就是获取上面的三个注解了的方法，并且将这几个方法自动的注册到监听器中，从而实现了三个按钮的监听。</strong>具体细节大家可以仔细看一下代码。</p>
+<p>下图展示了上面例子中注解是如何被处理的：<br><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/298579e577d1405caa058ecea4fa75a3.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">在这里插入图片描述</span></p>
+<p>可能大家不容易get到上面图的重点，下面是我针对上面图中程序运用API,反射机制处理注解的详细流程解释：<br><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/286f0a2991894f45910518f0025d5f1e.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">在这里插入图片描述</span></p>
+<h1 id="4-完整代码地址"><a href="#4-完整代码地址" class="headerlink" title="4 完整代码地址"></a>4 完整代码地址</h1><p><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/Progress/exa32_1">Java基础学习&#x2F;src&#x2F;main&#x2F;java&#x2F;Progress&#x2F;exa32_1 · 严家豆&#x2F;Study - 码云 - 开源中国 (gitee.com)</a></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/27/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/14.1%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E6%B3%A8%E8%A7%A3%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;27&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;14.1%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E6%B3%A8%E8%A7%A3%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;27&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;14.1%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E6%B3%A8%E8%A7%A3%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+        
+  <nav class="nav">
+    <a href="/2023/05/27/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/15%20Java%E8%BF%9B%E9%98%B6%E4%B9%8BScanner%E7%B1%BB%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95%EF%BC%89/"><i class="iconfont iconleft"></i></a>
+    <a href="/2023/05/27/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/12.1%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E5%8F%8D%E5%B0%84%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%8F%8D%E5%B0%84%E4%BD%9C%E7%94%A8%EF%BC%8CClass%E7%B1%BB%EF%BC%8C%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90%E7%B1%BB%E7%9A%84%E8%83%BD%E5%8A%9B/"><i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E6%B3%A8%E8%A7%A3%EF%BC%9F"><span class="toc-text">1.什么是注解？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%EF%BC%9F"><span class="toc-text">1.1.如何才能使用注解？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E6%B3%A8%E8%A7%A3%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">2.注解的基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%8C%85%E5%90%AB%E5%85%83%E7%B4%A0%E7%9A%84%E6%B3%A8%E8%A7%A3"><span class="toc-text">2.1 包含元素的注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%9C%E7%94%A8%E8%8C%83%E5%9B%B4"><span class="toc-text">2.2 注解的作用范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E6%B3%A8%E8%A7%A3%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">2.3 注解的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E5%85%83%E6%B3%A8%E8%A7%A3"><span class="toc-text">2.4 元注解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-1-Target"><span class="toc-text">2.4.1 @Target</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-2-Retention"><span class="toc-text">2.4.2 @Retention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-3-Documented"><span class="toc-text">2.4.3 @Documented</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-4-Inherited"><span class="toc-text">2.4.4 @Inherited</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-5-Repeatable"><span class="toc-text">2.4.5 @Repeatable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-6-Native"><span class="toc-text">2.4.6 @Native</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E4%BA%86%E8%A7%A3%E6%B3%A8%E8%A7%A3%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">3.了解注解基本工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E4%B8%8B%E9%9D%A2%E6%88%91%E4%BB%AC%E9%80%9A%E8%BF%87%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E6%9D%A5%E5%AD%A6%E4%B9%A0%E6%B3%A8%E8%A7%A3%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">3.1  下面我们通过一个例子来学习注解的基本工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-%E9%A6%96%E5%85%88%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3ActionListernFor-java"><span class="toc-text">3.1.1 首先定义注解ActionListernFor.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-%E7%84%B6%E5%90%8E%E7%BC%96%E5%86%99%E6%B3%A8%E8%A7%A3%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E7%B1%BB%EF%BC%88%E8%BF%99%E6%98%AF%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3%E7%9A%84%E5%85%B3%E9%94%AE%EF%BC%8C%E6%B2%A1%E6%9C%89%E5%AE%83%E6%B3%A8%E8%A7%A3%E5%B0%B1%E6%98%AF%E4%B8%AA%E6%91%86%E8%AE%BE%EF%BC%89"><span class="toc-text">3.1.2 然后编写注解处理工具类（这是自定义注解的关键，没有它注解就是个摆设）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-3-%E5%BA%94%E7%94%A8%E4%BB%A3%E7%A0%81"><span class="toc-text">3.1.3 应用代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-4-%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81"><span class="toc-text">3.1.4 测试代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90"><span class="toc-text">3.2 代码解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-1-%E9%A6%96%E5%85%88%E6%88%91%E4%BB%AC%E8%A6%81%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E6%B3%A8%E8%A7%A3"><span class="toc-text">3.2.1 首先我们要定义一个注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-2-%E5%AE%9A%E4%B9%89%E5%A4%84%E7%90%86%E6%B3%A8%E8%A7%A3%E5%B7%A5%E5%85%B7"><span class="toc-text">3.2.2 定义处理注解工具</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E5%9C%B0%E5%9D%80"><span class="toc-text">4 完整代码地址</span></a></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

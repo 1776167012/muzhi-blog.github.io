@@ -1,0 +1,466 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>19 Java进阶之动态编译 - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="1. 作为程序员的最高追求   当我们习惯了编写重复的...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">19 Java进阶之动态编译</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">19 Java进阶之动态编译</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 20, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>10639</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="1-作为程序员的最高追求"><a href="#1-作为程序员的最高追求" class="headerlink" title="1. 作为程序员的最高追求"></a>1. 作为程序员的最高追求</h1><p>   当我们习惯了编写重复的业务代码，是否有时候会感觉到无聊至极！！<br><br>   有时候，作为程序员，是否脑子中会不时的闪现出一个想法，如果我能写一个程序让系统能自动的写代码，<br><br>   然后再自动的装载到系统中实时编译运行就好了。</p>
+<p>实际上，这并不是不能实现，在JDK8中提供了编译相关的API供我们使用，<br>通过JDK8,我们可以实现程序自动生成源代码 ，然后自动进行编译加载，在不停掉系统的前提下新增类并使用它！！<br>这就是动态编译。</p>
+<h1 id="2-如何实现动态编译"><a href="#2-如何实现动态编译" class="headerlink" title="2.如何实现动态编译"></a>2.如何实现动态编译</h1><p>简单来说分为四步：<br><br><strong>生成源码–&gt;编译源码生成字节码文件–&gt;加载字节码得到Class对象–&gt;使用Class对象创建对象并使用</strong></p>
+<h2 id="2-1-生成源码"><a href="#2-1-生成源码" class="headerlink" title="2.1 生成源码"></a>2.1 生成源码</h2><p>这一步就是根据业务的不同，我们可以灵活处理，是我们自由发挥的关键。<br><br>我们先写一个例子，加入我们打算在系统编译这个源文件并加载它，我们应该怎么做？</p>
+<p>Test.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> Progress.exa37.complier;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;这是要用Java编译器Api进行编译的java源文件&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">printInfo</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;成功加载并生成对象,执行printInfo完成&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="2-2-调用编译器API对Test源码文件进行编译生成字节码"><a href="#2-2-调用编译器API对Test源码文件进行编译生成字节码" class="headerlink" title="2.2 调用编译器API对Test源码文件进行编译生成字节码"></a>2.2 调用编译器API对Test源码文件进行编译生成字节码</h2><p>这一步我们需要详细学习，这是实现源码到字节码的关键，我们先按简单的来，怎么简单怎么来，<br>我们可以用JavaCompiler这个类对指定源文件进行编译：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> FileNotFoundException &#123;<br>        <span class="hljs-type">JavaCompiler</span> <span class="hljs-variable">compiler</span> <span class="hljs-operator">=</span> ToolProvider.getSystemJavaCompiler();<br>        <span class="hljs-type">OutputStream</span> <span class="hljs-variable">outputStream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(<span class="hljs-string">&quot;output.txt&quot;</span>);<br>        <span class="hljs-type">OutputStream</span> <span class="hljs-variable">errStream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(<span class="hljs-string">&quot;error.txt&quot;</span>);<br>        <span class="hljs-comment">//注意这里的路径就是源文件的路径</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> compiler.run(<span class="hljs-literal">null</span>,outputStream,errStream,<br>                <span class="hljs-string">&quot;../study/Java基础学习/src/main/java/Progress/exa38/complier/Test.java&quot;</span>);<br>        <span class="hljs-keyword">if</span>(result==<span class="hljs-number">0</span>)&#123;<br>            System.out.println(<span class="hljs-string">&quot;编译成功！！！&quot;</span>);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>当运行完成后，会打印出下面的内容，并在程序同级目录下生成一个class文件：<br>Test.class</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//</span><br><span class="hljs-comment">// Source code recreated from a .class file by IntelliJ IDEA</span><br><span class="hljs-comment">// (powered by FernFlower decompiler)</span><br><span class="hljs-comment">//</span><br><br><span class="hljs-keyword">package</span> Progress.exa37.complier;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Test</span><span class="hljs-params">()</span> &#123;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] var0)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;这是要用Java编译器Api进行编译的java源文件&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">printInfo</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;成功加载并生成对象,执行printInfo完成&quot;</span>);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>到这里，我们已经完成了源码的编译。</p>
+<h2 id="2-3-调用类加载器对字节码进行加载得到Class对象"><a href="#2-3-调用类加载器对字节码进行加载得到Class对象" class="headerlink" title="2.3 调用类加载器对字节码进行加载得到Class对象"></a>2.3 调用类加载器对字节码进行加载得到Class对象</h2><p>这一步非常关键，这一步的成功与否标志着我们能否顺利的创建对象。<br>一般用类加载器对字节码进行加载，<br>我们一般都选择自己写一个自定义加载器, 实现findClass方法用来得到此类的Class对象.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> Progress.exa37.loader;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.net.URI;<br><span class="hljs-keyword">import</span> java.net.URISyntaxException;<br><span class="hljs-keyword">import</span> java.nio.file.Files;<br><span class="hljs-keyword">import</span> java.nio.file.Path;<br><span class="hljs-keyword">import</span> java.nio.file.Paths;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClassLoader</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ClassLoader</span>&#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 根据路径和类全名对字节码文件进行读取并加载</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> pathName 字节码文件路径</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> className 类包名</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 返回这个类的Class对象</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">protected</span> Class&lt;?&gt; findClass(String pathName,String className) &#123;<br>        <span class="hljs-comment">// 声明字节码数组</span><br>        <span class="hljs-type">byte</span>[] cLassBytes = <span class="hljs-literal">null</span>;<br>        <span class="hljs-type">Path</span> <span class="hljs-variable">path</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            path = Paths.get(<span class="hljs-keyword">new</span> <span class="hljs-title class_">URI</span>(pathName));<br>            <span class="hljs-comment">// 读取字节码文件的字节码</span><br>            cLassBytes = Files.readAllBytes(path);<br>        &#125; <span class="hljs-keyword">catch</span> (IOException | URISyntaxException e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>        <span class="hljs-comment">// 根据类的包名，字节码数组构建class对象</span><br>        Class&lt;?&gt; clazz = defineClass(className, cLassBytes, <span class="hljs-number">0</span>, cLassBytes.length);<br>        <span class="hljs-keyword">return</span> clazz;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>通过上面的方法我们可以获取到Class对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> Progress.exa37.loader;<br><span class="hljs-keyword">import</span> java.lang.reflect.Method;<br><span class="hljs-keyword">import</span> java.net.MalformedURLException;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 使用自定义的类加载器对class文件加载并创建实例使用之</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LoaderStudy</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> ClassNotFoundException, InstantiationException, IllegalAccessException, MalformedURLException &#123;<br>        <span class="hljs-type">MyClassLoader</span> <span class="hljs-variable">loader</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MyClassLoader</span>();<br>        Class&lt;?&gt; aClass = loader.findClass(<span class="hljs-string">&quot;file:///E:/Personal/MyRepository/study/Java基础学习/src/main/java/Progress/exa37/complier/Test.class&quot;</span>,<span class="hljs-string">&quot;Progress.exa37.complier.Test&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="2-4-使用Class对象创建对象进行使用"><a href="#2-4-使用Class对象创建对象进行使用" class="headerlink" title="2.4 使用Class对象创建对象进行使用"></a>2.4 使用Class对象创建对象进行使用</h2><p>通过上面的一步，我们获取到Test.class字节码对应的Class对象后，我们就可以使用Class来创建实例对象了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> Progress.exa37.loader;<br><span class="hljs-keyword">import</span> java.lang.reflect.Method;<br><span class="hljs-keyword">import</span> java.net.MalformedURLException;<br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 使用自定义的类加载器对class文件加载并创建实例使用之</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LoaderStudy</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> ClassNotFoundException, InstantiationException, IllegalAccessException, MalformedURLException &#123;<br>        <span class="hljs-type">MyClassLoader</span> <span class="hljs-variable">loader</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MyClassLoader</span>();<br>        Class&lt;?&gt; aClass = loader.findClass(<span class="hljs-string">&quot;file:///E:/Personal/MyRepository/study/Java基础学习/src/main/java/Progress/exa37/complier/Test.class&quot;</span>,<span class="hljs-string">&quot;Progress.exa37.complier.Test&quot;</span>);<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-type">Object</span> <span class="hljs-variable">obj</span> <span class="hljs-operator">=</span> aClass.newInstance();<br>            <span class="hljs-type">Method</span> <span class="hljs-variable">method</span> <span class="hljs-operator">=</span> aClass.getMethod(<span class="hljs-string">&quot;printInfo&quot;</span>);<br>            method.invoke(obj);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>执行结果：<br>控制台打印： 成功加载并生成对象,执行printInfo完成</p>
+<p>到这里，我们应该大概明白如何利用java编译器api和类加载器实现动态编译了。<br>那么对于类加载器，我们为何要去自定义一个呢？ 难道不能使用Jdk原有的api去实现相应的功能吗？<br>要理解这一点，我们就得学习一些Java中的类加载机制。</p>
+<h1 id="3-Java编译API学习"><a href="#3-Java编译API学习" class="headerlink" title="3. Java编译API学习"></a>3. Java编译API学习</h1><p>   通过上面的动手，我们可以发现在Java程序中对某个源文件进行编译可以这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">JavaCompiler</span> <span class="hljs-variable">compiler</span> <span class="hljs-operator">=</span> ToolProvider.getSystemJavaCompiler();<br><span class="hljs-comment">//注意这里的路径就是源文件的路径</span><br><span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> compiler.run(<span class="hljs-literal">null</span>,outputStream,errStream,<br>    <span class="hljs-string">&quot;../study/Java基础学习/src/main/java/Progress/exa38/complier/Test.java&quot;</span>);<br><span class="hljs-keyword">if</span>(result==<span class="hljs-number">0</span>)&#123;<br>    System.out.println(<span class="hljs-string">&quot;编译成功！！！&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>通过JavaCompiler对象的run方法可以对指定路径的源文件进行编译为字节码文件。</p>
+<h1 id="4-类加载机制"><a href="#4-类加载机制" class="headerlink" title="4. 类加载机制"></a>4. 类加载机制</h1><p>   下面了解Java的类加载机制。<br><br>   我们知道Java程序的执行流程是先将Java源文件编译成字节码文件(存储虚拟机代码)，<br>   然后由虚拟机去加载这些字节码文件将其转换为对应平台的机器码进行执行。<br><br>   而这个虚拟机加载字节码文件的过程，我们有必要进行了解</p>
+<h2 id="2-1-类加载过程"><a href="#2-1-类加载过程" class="headerlink" title="2.1 类加载过程"></a>2.1 类加载过程</h2><p><strong>虚拟机只加载程序执行时所需要的类文件。</strong></p>
+<p>我们假设程序从MyProgram.class开始运行，那么虚拟机的执行步骤如下：</p>
+<ul>
+<li><p>虚拟机有一个用于加载类文件的机制，例如从磁盘中读取文件或者请求Web上的文件，虚拟机会使用该机制来加载MyProgram类文件中的内容。<br>一个类的加载流程如下：<br></p>
+<ol>
+<li>如果MyProgram类拥有类型为另一个类的域，或者超类，那么这些类文件也会被加载，这一过程被称为类的解析(加载某个类所依赖的所有类的过程被称为类的解析)</li>
+<li>接着，虚拟机执行MyProgram中的静态的main方法</li>
+<li>如果main方法或者main方法调用的方法要用到更多的类，那么接下来就会加载这些类.</li>
+</ol>
+</li>
+<li><p>然而，类加载机制并非只使用单个的类加载器，每个Java程序至少拥有三个类加载器：</p>
+<ol>
+<li><p>**系统类加载器(BootStrap)**：<br><br>系统类加载器负责加载系统类(对rt.jar中的类进行加载，为java程序运行时必须的类)。系统类时虚拟机不可分隔的一部分，通常是一些有C语言是实现的底层类。系统类加载器没有对应的ClassLoader对象，它是虚拟机的一部分。</p>
+</li>
+<li><p>**扩展类加载器(ExtClassLoader)**： <br><br>扩展类加载器用于从jre&#x2F;lib&#x2F;ext目录加载 ”标准的扩展“。 我们可以将Jar文件放到该目录下，这样即使没有任何类路径，扩展类加载器也能找到其中的各个类。</p>
+</li>
+<li><p>**应用类加载器(AppClassLoader)**：<br><br>应用类加载器用于加载应用类。 它由CLASSPATH环境变量或者-classpath命令行选项设置的类路径中的目录里或者jar&#x2F;zip文件里找到这些类。</p>
+</li>
+</ol>
+</li>
+</ul>
+<p><strong>注意：在Java中，扩展类加载器和系统类加载器都是用Java实现的，他们都是URLClassLoader类的实例。</strong></p>
+<h2 id="2-2-类加载器的层次结构"><a href="#2-2-类加载器的层次结构" class="headerlink" title="2.2 类加载器的层次结构"></a>2.2 类加载器的层次结构</h2><p>类加载器有一种父&#x2F;子关系。除了系统类加载器外，其他的每个类加载器都有一个父类加载器。<br><br>根据虚拟机规定，类加载器会为它的父类加载器提供一个机会，以便加载任何给定的类，并且只有在其父类<br>加载器加载失败时，它才会加载给定的类。</p>
+<p>例如：当要求应用类加载器加载一个类(例如java.util.ArrayList)时，应用类加载器会先去请求扩展类加载器<br>对ArrayList进行加载，然后扩展类会再去请求系统类加载器进行加载，系统类加载器会对其进行加载，如果加载<br>失败，则扩展类加载器会对其进行加载，如果扩展类加载器加载失败，则应用类加载器会对其进行加载并返回。<br>(有点类似责任链模式)</p>
+<h3 id="2-2-1-使用URLClassLoader加载jar包中的类"><a href="#2-2-1-使用URLClassLoader加载jar包中的类" class="headerlink" title="2.2.1 使用URLClassLoader加载jar包中的类"></a>2.2.1 使用URLClassLoader加载jar包中的类</h3><p>某些程序具有插件架构，其中代码的某些部分是作为可选的插件打包的。<br>如果插件被打包为JAR文件，那就可以直接用URLClassLoader类的实例去加载这些类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">URL</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">URL</span>(<span class="hljs-string">&quot;file:///path/to/plugin.jar&quot;</span>);<br><span class="hljs-type">URLClassLoader</span> <span class="hljs-variable">loader</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">URLClassLoader</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">URL</span>[]&#123;url&#125;);<br>Class&lt;?&gt; cl = loader.loadClass(<span class="hljs-string">&quot;mypackage.myClass&quot;</span>);<br><span class="hljs-type">Object</span> <span class="hljs-variable">obj</span> <span class="hljs-operator">=</span> cl.newInstance();<br></code></pre></td></tr></table></figure>
+<p>由于在URLClassLoader构造器中没有指定父类加载器，所以loader的父类加载器就是应用类加载器。<br><strong>在Java中，所有的类加载器都应该继承ClassLoader抽象类。</strong></p>
+<p>大多数的时候，我们不需要去干预类加载的层次结构，通常，类是由于其他的类需要它而被加载的，这个过程对我们是透明的。</p>
+<h3 id="2-2-2-干涉类加载过程"><a href="#2-2-2-干涉类加载过程" class="headerlink" title="2.2.2 干涉类加载过程"></a>2.2.2 干涉类加载过程</h3><p>偶尔，有时需要干涉指定类的加载过程。<br><br>思考下面例子：<br><br>应用的代码包含一个help方法，它需要调用Class.forName(classNameString), 而这个方法是从一个插件类中被调用的，<br>更巧的是，classNameString指定的正是一个包含在这个插件的Jar包的类。<br></p>
+<p>插件的作者很合理的期望这个类应该被加载，但是，help方法是由应用类加载器加载的，而classNameString对于应用类<br>加载器是不可视的，这个类无法被正常的加载！！<br></p>
+<p>要解决这个问题，help方法在调用Class.forName(classNameString)之前需要用恰当的类加载器先将这个类加载。<br></p>
+<p>解决方案：<br><br>每个线程都有一个类加载器的引用，这个引用被称之为上下文类加载器。<br><br>主线程的上下文类加载器是应用类加载器。 当新线程创建时，它的上下文类加载器会被设置为创建该线程的上下文类加载器。<br>因此，如果不做额外的操作，那么所有的线程就都会将自己的上下文类加载器设置为应用类加载器！！<br><br><br>所以我们可以这样做：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Thread</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> Thread.currentTherad();<br>t.setContextClassLoader(selfloader);<br></code></pre></td></tr></table></figure>
+<p>然后help这个方法就能用自定义的类加载器进行类加载了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Thread</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> Thread.currentThread();<br><span class="hljs-type">ClassLoader</span> <span class="hljs-variable">loader</span> <span class="hljs-operator">=</span> t.getContextClassLoader();<br><span class="hljs-type">Class</span> <span class="hljs-variable">cl</span> <span class="hljs-operator">=</span> loader.loadClass(className);<br></code></pre></td></tr></table></figure>
+
+<p>那么问题来了，我们该如何去编写自定义的类加载器呢？<br></p>
+<h3 id="2-2-3-自定义类加载器"><a href="#2-2-3-自定义类加载器" class="headerlink" title="2.2.3 自定义类加载器"></a>2.2.3 自定义类加载器</h3><p>我们可以编写自己的用于特殊目的的类加载器，这使得我们可以在向虚拟机传递字节码之前执行定制的检查。<br><br>例如我们可以编写一个类加载器，它可以拒绝加载没有标记为 piadfor的类。<br></p>
+<p>如果要编写自己的类加载器，只需要继承ClassLoader类，然后覆盖这个类的findClass方法:<br><br>ClassLoader的loadClass方法用于将类的加载操作委托给其父类加载器进行，<br>只有当该类尚未加载并且父类加载器也无法加载该类时，才调用findClass方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="hljs-type">boolean</span> resolve)<br>    <span class="hljs-keyword">throws</span> ClassNotFoundException<br>&#123;<br>    <span class="hljs-keyword">synchronized</span> (getClassLoadingLock(name)) &#123;<br>        <span class="hljs-comment">// First, check if the class has already been loaded</span><br>        Class&lt;?&gt; c = findLoadedClass(name);<br>        <span class="hljs-keyword">if</span> (c == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-type">long</span> <span class="hljs-variable">t0</span> <span class="hljs-operator">=</span> System.nanoTime();<br>            <span class="hljs-keyword">try</span> &#123;<br>                <span class="hljs-comment">//如果类加载器存在父类，先让父类加载</span><br>                <span class="hljs-keyword">if</span> (parent != <span class="hljs-literal">null</span>) &#123;<br>                    c = parent.loadClass(name, <span class="hljs-literal">false</span>);<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-comment">// 如果所有的父类都加载失败，调用rt加载器加载</span><br>                    c = findBootstrapClassOrNull(name);<br>                &#125;<br>            &#125; <span class="hljs-keyword">catch</span> (ClassNotFoundException e) &#123;<br>                <span class="hljs-comment">// ClassNotFoundException thrown if class not found</span><br>                <span class="hljs-comment">// from the non-null parent class loader</span><br>            &#125;<br>            <span class="hljs-comment">// 如果父类加载器和rt加载器都加载失败，则直接调用自己的类加载器加载</span><br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-literal">null</span>) &#123;<br>                <span class="hljs-comment">// If still not found, then invoke findClass in order</span><br>                <span class="hljs-comment">// to find the class.</span><br>                <span class="hljs-type">long</span> <span class="hljs-variable">t1</span> <span class="hljs-operator">=</span> System.nanoTime();<br>                <span class="hljs-comment">// 这里是最后的防线</span><br>                c = findClass(name);<br><br>                <span class="hljs-comment">// this is the defining class loader; record the stats</span><br>                sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);<br>                sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);<br>                sun.misc.PerfCounter.getFindClasses().increment();<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (resolve) &#123;<br>            resolveClass(c);<br>        &#125;<br>        <span class="hljs-keyword">return</span> c;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>findClass方法的实现前提是：</p>
+<ul>
+<li><p>为来自本地文件系统或者其他源的类加载其字节码</p>
+</li>
+<li><p>调用ClassLoader的defineClass方法向虚拟机提供字节码</p>
+<p>这样我们就能使用自定义加载器顺利加载自定义类，<br></p>
+</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClassLoader</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ClassLoader</span> &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 根据路径和类全名对字节码文件进行读取并加载</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> pathName 字节码文件路径 file:///E:/Personal/MyRepository/study/Java基础学习/src/main/java/Progress/exa37/complier/Test.class</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 返回这个类的Class对象</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">protected</span> Class&lt;?&gt; findClass(String pathName)  <span class="hljs-keyword">throws</span> ClassFormatError &#123;<br>        <span class="hljs-comment">// 声明字节码数组</span><br>        <span class="hljs-type">byte</span>[] cLassBytes = <span class="hljs-literal">null</span>;<br>        <span class="hljs-type">Path</span> <span class="hljs-variable">path</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            path = Paths.get(<span class="hljs-keyword">new</span> <span class="hljs-title class_">URI</span>(pathName));<br>            <span class="hljs-comment">// 读取字节码文件的字节码</span><br>            cLassBytes = Files.readAllBytes(path);<br>        &#125; <span class="hljs-keyword">catch</span> (IOException | URISyntaxException e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">className</span> <span class="hljs-operator">=</span> pathName.substring(pathName.indexOf(<span class="hljs-string">&quot;java&quot;</span>)+<span class="hljs-number">5</span>,pathName.indexOf(<span class="hljs-string">&quot;.class&quot;</span>)).replace(<span class="hljs-string">&quot;/&quot;</span>,<span class="hljs-string">&quot;.&quot;</span>);<br>        <span class="hljs-comment">// 根据类的包名，字节码数组构建class对象</span><br>        Class&lt;?&gt; clazz = defineClass(className, cLassBytes, <span class="hljs-number">0</span>, cLassBytes.length);<br>        <span class="hljs-keyword">return</span> clazz;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/19%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E5%8A%A8%E6%80%81%E7%BC%96%E8%AF%91/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;19%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E5%8A%A8%E6%80%81%E7%BC%96%E8%AF%91&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;19%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E5%8A%A8%E6%80%81%E7%BC%96%E8%AF%91&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%BF%9B%E9%98%B6/" rel="tag">Java进阶</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/10.3%20%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E7%BA%BF%E7%A8%8B%E4%BF%A1%E5%8F%B7%E9%87%8F%EF%BC%8C%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81/"><i class="iconfont iconleft"></i>10.3 Java进阶之线程信号量</a>
+    <a href="/2023/05/15/resource/">resource<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E4%BD%9C%E4%B8%BA%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%9C%80%E9%AB%98%E8%BF%BD%E6%B1%82"><span class="toc-text">1. 作为程序员的最高追求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E7%BC%96%E8%AF%91"><span class="toc-text">2.如何实现动态编译</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E7%94%9F%E6%88%90%E6%BA%90%E7%A0%81"><span class="toc-text">2.1 生成源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E8%B0%83%E7%94%A8%E7%BC%96%E8%AF%91%E5%99%A8API%E5%AF%B9Test%E6%BA%90%E7%A0%81%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E7%BC%96%E8%AF%91%E7%94%9F%E6%88%90%E5%AD%97%E8%8A%82%E7%A0%81"><span class="toc-text">2.2 调用编译器API对Test源码文件进行编译生成字节码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E8%B0%83%E7%94%A8%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%AF%B9%E5%AD%97%E8%8A%82%E7%A0%81%E8%BF%9B%E8%A1%8C%E5%8A%A0%E8%BD%BD%E5%BE%97%E5%88%B0Class%E5%AF%B9%E8%B1%A1"><span class="toc-text">2.3 调用类加载器对字节码进行加载得到Class对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E4%BD%BF%E7%94%A8Class%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E8%BF%9B%E8%A1%8C%E4%BD%BF%E7%94%A8"><span class="toc-text">2.4 使用Class对象创建对象进行使用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Java%E7%BC%96%E8%AF%91API%E5%AD%A6%E4%B9%A0"><span class="toc-text">3. Java编译API学习</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6"><span class="toc-text">4. 类加载机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="toc-text">2.1 类加载过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%9A%84%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="toc-text">2.2 类加载器的层次结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-%E4%BD%BF%E7%94%A8URLClassLoader%E5%8A%A0%E8%BD%BDjar%E5%8C%85%E4%B8%AD%E7%9A%84%E7%B1%BB"><span class="toc-text">2.2.1 使用URLClassLoader加载jar包中的类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-%E5%B9%B2%E6%B6%89%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="toc-text">2.2.2 干涉类加载过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-3-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="toc-text">2.2.3 自定义类加载器</span></a></li></ol></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

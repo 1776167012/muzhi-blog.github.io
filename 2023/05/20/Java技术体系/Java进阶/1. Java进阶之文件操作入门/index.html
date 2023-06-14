@@ -1,0 +1,494 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>1.Java进阶之文件操作入门 - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="1.我们为何要操作文件？首先,我们思考一个问题，在没学...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">1.Java进阶之文件操作入门</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">1.Java进阶之文件操作入门</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 20, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>9679</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="1-我们为何要操作文件？"><a href="#1-我们为何要操作文件？" class="headerlink" title="1.我们为何要操作文件？"></a>1.我们为何要操作文件？</h1><p>首先,我们思考一个问题，在没学习JDBC之前，我们怎么将程序产生的数据持久化(存储)到硬盘&#x2F;磁盘中呢？<br>并且我们如何去读取硬盘中的文件呢？<br>答案就是Java的文件操作机制和输入输出流机制，Java提供了丰富的API让我们能对文件进行操作，其中最基础的类就是File类。</p>
+<h1 id="2-File类能干啥？"><a href="#2-File类能干啥？" class="headerlink" title="2.File类能干啥？"></a>2.File类能干啥？</h1><p>File类主要用来获取文件本身的一些信息，例如文件所在的目录、文件的大小(也可称为长度)或文件读写权限等，<br><strong>但不涉及对文件的读写操作，但是对文件读写操作是基于文件的。</strong></p>
+<p>用户界面和操作系统使用依赖于系统的路径名 字符串命名文件和目录，<strong>这个类提供了一个抽象的，<br>独立于系统的层次化路径名的视图。</strong></p>
+<h1 id="3-File类中的方法"><a href="#3-File类中的方法" class="headerlink" title="3.File类中的方法"></a>3.File类中的方法</h1><h2 id="3-1构造方法"><a href="#3-1构造方法" class="headerlink" title="3.1构造方法"></a>3.1构造方法</h2><h3 id="File-String-filename"><a href="#File-String-filename" class="headerlink" title="File(String filename);"></a>File(String filename);</h3><p>根据文件名构造File对象,其中，filename是文件名字，<br>使用File(String filename)创建文件时，该文件被认为与当前应用程序在同一目录中。</p>
+<h3 id="File-String-directoryPath-String-filename"><a href="#File-String-directoryPath-String-filename" class="headerlink" title="File(String directoryPath,String filename);"></a>File(String directoryPath,String filename);</h3><p>根据路径名称和文件名构造File对象，其中，filename是文件名字，directoryPath是文件的路径</p>
+<h3 id="File-File-dir-String-filename"><a href="#File-File-dir-String-filename" class="headerlink" title="File(File dir,String filename);"></a>File(File dir,String filename);</h3><p>dir为一个目录File对象，filename是文件名</p>
+<p>当我们顺利获取一个File对象时，我们可以调用其中的方法获取文件的相关信息。</p>
+<p>用法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">fileStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span>  <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;麻子.txt&quot;</span>);<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;E:/Personal/MyRepository/study&quot;</span>,<span class="hljs-string">&quot;麻子.txt&quot;</span>);<br>    <span class="hljs-type">File</span> <span class="hljs-variable">dir</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;E:/Personal/MyRepository/study&quot;</span>);<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(dir,<span class="hljs-string">&quot;麻子.txt&quot;</span>);<br>    <span class="hljs-comment">//获取文件的绝对路径</span><br>    System.out.println(file.getAbsolutePath());<br>    System.out.println(file1.getAbsolutePath());<br>    System.out.println(dir.getAbsolutePath());<br>    System.out.println(file2.getAbsolutePath());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">file 文件路径：E:\Personal\MyRepository\study\麻子.txt<br>file1 文件路径： E:\Personal\MyRepository\study\麻子.txt<br>dir 文件路径： E:\Personal\MyRepository\study<br>file2 文件路径： E:\Personal\MyRepository\study\麻子.txt<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-2-其他方法"><a href="#3-2-其他方法" class="headerlink" title="3.2 其他方法"></a>3.2 其他方法</h2><h3 id="public-boolean-exists"><a href="#public-boolean-exists" class="headerlink" title="public boolean exists();"></a>public boolean exists();</h3><p>判断文件是否存在,存在返回true, 不存在返回false</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">existsStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;麻子.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;麻子.txt 文件是否存在： &quot;</span>+file.exists());<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;四郎.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;四郎.txt 是否存在： &quot;</span>+file1.exists());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">麻子.txt 文件是否存在： true<br>四郎.txt 是否存在： false<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="public-String-getName"><a href="#public-String-getName" class="headerlink" title="public String getName();"></a>public String getName();</h3><p>获取文件的名称.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">getNameStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;麻子.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;麻子.txt文件名称： &quot;</span>+file.getName());<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;四郎.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;四郎.txt 文件名称： &quot;</span>+file1.getName());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="public-boolean-canRead"><a href="#public-boolean-canRead" class="headerlink" title="public boolean canRead();"></a>public boolean canRead();</h3><p>判断文件是否可读,可读返回true,不可读返回false</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">canReadStudy</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;麻子.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;麻子.txt文件是否可读： &quot;</span>+file.canRead());<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;四郎.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;四郎.txt是否可读： &quot;</span>+file1.canRead());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="public-boolean-canWrite"><a href="#public-boolean-canWrite" class="headerlink" title="public boolean canWrite();"></a>public boolean canWrite();</h3><p>判断文件是否可被写入,可写入返回true,不可写入返回false</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">canWriteStudy</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;麻子.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;麻子.txt是否可写： &quot;</span>+file.canWrite());<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;四郎.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;四郎.txt是否可写： &quot;</span>+file1.canWrite());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="public-long-length"><a href="#public-long-length" class="headerlink" title="public long length();"></a>public long length();</h3><p>获取文件长度（大小）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">lengthStudy</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;麻子.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;麻子.txt文件大小： &quot;</span>+file.length());<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;四郎.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;四郎.txt文件大小： &quot;</span>+file1.length());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="public-String-getAbsolutePath"><a href="#public-String-getAbsolutePath" class="headerlink" title="public String getAbsolutePath();"></a>public String getAbsolutePath();</h3><p>获取文件的绝对路径。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">absolutePathStudy</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;麻子.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;麻子.txt 文件绝对路径： &quot;</span>+file.getAbsolutePath());<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;四郎.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;四郎.txt 文件绝对路径： &quot;</span>+file1.getAbsolutePath());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="public-String-getParent"><a href="#public-String-getParent" class="headerlink" title="public String getParent();"></a>public String getParent();</h3><p>获取文件的父目录字符串描述。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">parentStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;麻子.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;麻子.txt 文件父目录： &quot;</span>+file.getParent());<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;四郎.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;四郎.txt 文件父目录： &quot;</span>+file1.getParent());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="public-boolean-isFile"><a href="#public-boolean-isFile" class="headerlink" title="public boolean isFile();"></a>public boolean isFile();</h3><p>判断文件是否是一个普通文件而非目录。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">isFileStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;麻子.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;麻子.txt 是否是文件： &quot;</span>+file.isFile());<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;四郎.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;四郎.txt 是否是文件： &quot;</span>+file1.isFile());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="public-boolean-isDirectory"><a href="#public-boolean-isDirectory" class="headerlink" title="public boolean isDirectory();"></a>public boolean isDirectory();</h3><p>判断文件是否是一个目录。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">isDirectory</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;麻子.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;麻子.txt是否是目录: &quot;</span>+file.isDirectory());<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;四郎.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;四郎.txt是否是目录： &quot;</span>+file1.isDirectory());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="public-boolean-isHidden"><a href="#public-boolean-isHidden" class="headerlink" title="public boolean isHidden();"></a>public boolean isHidden();</h3><p>判断文件是否是隐藏文件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">isHidden</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;麻子.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;麻子.txt是否是隐藏文件： &quot;</span>+file.isHidden());<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;四郎.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;四郎.txt 是否是隐藏文件： &quot;</span>+file1.isHidden());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="public-long-lastModified"><a href="#public-long-lastModified" class="headerlink" title="public long lastModified();"></a>public long lastModified();</h3><p>获取文件最后修改的时间戳。(时间是从1970年午夜至文件最后修改时刻的毫秒数）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">lastModifiedStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;麻子.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;麻子.txt最后修改时间： &quot;</span>+file.lastModified());<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;四郎.txt&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;四郎.txt 件最后修改时间： &quot;</span>+file1.lastModified());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">麻子.txt最后修改时间： 1667878191306<br>四郎.txt 件最后修改时间： 0<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="public-boolean-mkdir"><a href="#public-boolean-mkdir" class="headerlink" title="public boolean mkdir();"></a>public boolean mkdir();</h3><p>File对象可以调用此方法创建一个目录，创建成功返回true。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">mkdirStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;FileStudy&quot;</span>);<br>    <span class="hljs-keyword">if</span>(!file1.exists())&#123;<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">sus</span> <span class="hljs-operator">=</span> file1.mkdir();<br>        <span class="hljs-keyword">if</span>(sus)&#123;<br>            System.out.println(<span class="hljs-string">&quot;FileStudy 目录创建成功&quot;</span>);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="public-String-list"><a href="#public-String-list" class="headerlink" title="public String[] list();"></a>public String[] list();</h3><p>如果File对象是一个目录，那么此对象可以调用该方法以字符串的形式返回目录下的文件和子目录描述。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">listStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;Java基础学习&quot;</span>);<br>    String[] dir = file.list();<br>    <span class="hljs-keyword">assert</span> dir != <span class="hljs-literal">null</span>;<br>    <span class="hljs-keyword">for</span>(String d:dir)&#123;<br>        System.out.println(<span class="hljs-string">&quot;Java基础学习子目录： &quot;</span>+d);<br>    &#125;<br><br>    String[] dir1 = file.list(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FilenameFilter</span>() &#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">accept</span><span class="hljs-params">(File dir, String name)</span> &#123;<br>            <span class="hljs-keyword">if</span>(name.contains(<span class="hljs-string">&quot;tar&quot;</span>))<br>               <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>    &#125;);<br><br>    <span class="hljs-keyword">assert</span> dir1 != <span class="hljs-literal">null</span>;<br>    <span class="hljs-keyword">for</span>(String d2:dir1)&#123;<br>        System.out.println(<span class="hljs-string">&quot;Java基础学习子目录中名称包含 tar 的目录：&quot;</span>+d2);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">Java基础学习子目录： Java基础学习.iml<br>Java基础学习子目录： pom.xml<br>Java基础学习子目录： resource<br>Java基础学习子目录： src<br>Java基础学习子目录： target<br>Java基础学习子目录中名称包含 tar 的目录：target<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="public-File-listFiles"><a href="#public-File-listFiles" class="headerlink" title="public File[] listFiles();"></a>public File[] listFiles();</h3><p>如果File对象关联的文件是一个目录，那么此对象可以调用该方法以File对象的形式返回目录下的文件和子目录。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">listFilesStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;Java基础学习&quot;</span>);<br>    File[] files = file.listFiles();<br>    <span class="hljs-keyword">assert</span> files != <span class="hljs-literal">null</span>;<br>    <span class="hljs-keyword">for</span>(File file1:files)&#123;<br>        System.out.println(<span class="hljs-string">&quot;Java基础学习子目录： &quot;</span>+file1.getName());<br>    &#125;<br>    File[] dir1 = file.listFiles(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FilenameFilter</span>() &#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">accept</span><span class="hljs-params">(File dir, String name)</span> &#123;<br>            <span class="hljs-keyword">if</span>(name.contains(<span class="hljs-string">&quot;tar&quot;</span>))<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>    &#125;);<br>    <span class="hljs-keyword">assert</span> dir1 != <span class="hljs-literal">null</span>;<br>    <span class="hljs-keyword">for</span>(File d2:dir1)&#123;<br>        System.out.println(<span class="hljs-string">&quot;Java基础学习子目录中名称包含 tar 的目录：&quot;</span>+d2.getName());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">Java基础学习子目录： Java基础学习.iml<br>Java基础学习子目录： pom.xml<br>Java基础学习子目录： resource<br>Java基础学习子目录： src<br>Java基础学习子目录： target<br>Java基础学习子目录中名称包含 tar 的目录：target<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="public-String-list-FilenameFilter-obj"><a href="#public-String-list-FilenameFilter-obj" class="headerlink" title="public String[] list(FilenameFilter obj);"></a>public String[] list(FilenameFilter obj);</h3><p>该方法用字符串的形式返回目录下的指定类型的所有文件。</p>
+<p>参数FilenameFilter是一个接口，该接口有一个方法：<br>public boolean accept(File dir,String name);<br>当这个方法返回true时，list方法就将name文件存放到返回的数组中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">listStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;Java基础学习&quot;</span>);<br>    String[] dir = file.list();<br>    <span class="hljs-keyword">assert</span> dir != <span class="hljs-literal">null</span>;<br>    <span class="hljs-keyword">for</span>(String d:dir)&#123;<br>        System.out.println(<span class="hljs-string">&quot;Java基础学习子目录： &quot;</span>+d);<br>    &#125;<br><br>    String[] dir1 = file.list(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FilenameFilter</span>() &#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">accept</span><span class="hljs-params">(File dir, String name)</span> &#123;<br>            <span class="hljs-keyword">if</span>(name.contains(<span class="hljs-string">&quot;tar&quot;</span>))<br>               <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>    &#125;);<br><br>    <span class="hljs-keyword">assert</span> dir1 != <span class="hljs-literal">null</span>;<br>    <span class="hljs-keyword">for</span>(String d2:dir1)&#123;<br>        System.out.println(<span class="hljs-string">&quot;Java基础学习子目录中名称包含 tar 的目录：&quot;</span>+d2);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="public-File-listFiles-FilenameFilter-obj"><a href="#public-File-listFiles-FilenameFilter-obj" class="headerlink" title="public File[] listFiles(FilenameFilter obj);"></a>public File[] listFiles(FilenameFilter obj);</h3><p>此方法用File对象返回目录下指定类型的所有文件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">listFilesStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;Java基础学习&quot;</span>);<br>    File[] files = file.listFiles();<br>    <span class="hljs-keyword">assert</span> files != <span class="hljs-literal">null</span>;<br>    <span class="hljs-keyword">for</span>(File file1:files)&#123;<br>        System.out.println(<span class="hljs-string">&quot;Java基础学习子目录： &quot;</span>+file1.getName());<br>    &#125;<br>    File[] dir1 = file.listFiles(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FilenameFilter</span>() &#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">accept</span><span class="hljs-params">(File dir, String name)</span> &#123;<br>            <span class="hljs-keyword">if</span>(name.contains(<span class="hljs-string">&quot;tar&quot;</span>))<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>    &#125;);<br>    <span class="hljs-keyword">assert</span> dir1 != <span class="hljs-literal">null</span>;<br>    <span class="hljs-keyword">for</span>(File d2:dir1)&#123;<br>        System.out.println(<span class="hljs-string">&quot;Java基础学习子目录中名称包含 tar 的目录：&quot;</span>+d2.getName());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="public-boolean-createNewFile"><a href="#public-boolean-createNewFile" class="headerlink" title="public boolean createNewFile();"></a>public boolean createNewFile();</h3><p>此方法可以创建一个文件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">createNewFileStudy</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;四郎.txt&quot;</span>);<br>    <span class="hljs-keyword">if</span>(!file.exists())&#123;<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">sus</span> <span class="hljs-operator">=</span> file.createNewFile();<br>        <span class="hljs-keyword">if</span>(sus) System.out.println(<span class="hljs-string">&quot;四郎.txt 文件创建完成！！&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="public-boolean-detele"><a href="#public-boolean-detele" class="headerlink" title="public boolean detele();"></a>public boolean detele();</h3><p>此方法为删除一个文件的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">deleteStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;四郎.txt&quot;</span>);<br>    <span class="hljs-type">boolean</span> <span class="hljs-variable">sus</span> <span class="hljs-operator">=</span> file.delete();<br>    <span class="hljs-keyword">if</span>(sus) System.out.println(<span class="hljs-string">&quot;四郎.txt 文件删除完成！！&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/Progress/exa01">Java基础学习&#x2F;src&#x2F;main&#x2F;java&#x2F;Progress&#x2F;exa01 · 严家豆&#x2F;Study - 码云 - 开源中国 (gitee.com)</a></p>
+<p>如果想动手做点东西，可以参考Java动手做一做之文件编程专栏：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/c1776167012/category_10987539.html">Java动手做一做之文件编程</a></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/1.%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%85%A5%E9%97%A8/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;1.%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%85%A5%E9%97%A8&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;1.%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%85%A5%E9%97%A8&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%BF%9B%E9%98%B6/" rel="tag">Java进阶</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2023/05/27/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/11.2%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E7%BD%91%E7%BB%9CInetAddress%E7%B1%BB%EF%BC%8C%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"><i class="iconfont iconleft"></i></a>
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/2.1%20Java%E8%AF%BB%E6%96%87%E4%BB%B6%E4%B9%8BInputStream%E5%AD%A6%E4%B9%A0/">2.1 Java读文件之InputStream学习<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%88%91%E4%BB%AC%E4%B8%BA%E4%BD%95%E8%A6%81%E6%93%8D%E4%BD%9C%E6%96%87%E4%BB%B6%EF%BC%9F"><span class="toc-text">1.我们为何要操作文件？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-File%E7%B1%BB%E8%83%BD%E5%B9%B2%E5%95%A5%EF%BC%9F"><span class="toc-text">2.File类能干啥？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-File%E7%B1%BB%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">3.File类中的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="toc-text">3.1构造方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#File-String-filename"><span class="toc-text">File(String filename);</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#File-String-directoryPath-String-filename"><span class="toc-text">File(String directoryPath,String filename);</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#File-File-dir-String-filename"><span class="toc-text">File(File dir,String filename);</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95"><span class="toc-text">3.2 其他方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#public-boolean-exists"><span class="toc-text">public boolean exists();</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-String-getName"><span class="toc-text">public String getName();</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-boolean-canRead"><span class="toc-text">public boolean canRead();</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-boolean-canWrite"><span class="toc-text">public boolean canWrite();</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-long-length"><span class="toc-text">public long length();</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-String-getAbsolutePath"><span class="toc-text">public String getAbsolutePath();</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-String-getParent"><span class="toc-text">public String getParent();</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-boolean-isFile"><span class="toc-text">public boolean isFile();</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-boolean-isDirectory"><span class="toc-text">public boolean isDirectory();</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-boolean-isHidden"><span class="toc-text">public boolean isHidden();</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-long-lastModified"><span class="toc-text">public long lastModified();</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-boolean-mkdir"><span class="toc-text">public boolean mkdir();</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-String-list"><span class="toc-text">public String[] list();</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-File-listFiles"><span class="toc-text">public File[] listFiles();</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-String-list-FilenameFilter-obj"><span class="toc-text">public String[] list(FilenameFilter obj);</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-File-listFiles-FilenameFilter-obj"><span class="toc-text">public File[] listFiles(FilenameFilter obj);</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-boolean-createNewFile"><span class="toc-text">public boolean createNewFile();</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-boolean-detele"><span class="toc-text">public boolean detele();</span></a></li></ol></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

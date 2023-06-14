@@ -1,0 +1,441 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>15.内部类,匿名类 - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="1.什么是内部类？1.1 内部类的定义《JAVA pr...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">15.内部类,匿名类</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">15.内部类,匿名类</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 15, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>4914</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="1-什么是内部类？"><a href="#1-什么是内部类？" class="headerlink" title="1.什么是内部类？"></a>1.什么是内部类？</h1><h2 id="1-1-内部类的定义"><a href="#1-1-内部类的定义" class="headerlink" title="1.1 内部类的定义"></a>1.1 内部类的定义</h2><p>《JAVA programming》里这样定义的：<br>内部类（又叫嵌入类），是一种在其他类的内部定义的类。<br>如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ShowInnerClass</span> &#123;<br>    <br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> data;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">methodOne</span><span class="hljs-params">()</span>&#123;<br>        <br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * InnerClass是ShowInnerClass的内部类</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">InnerClass</span>&#123;<br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">method</span><span class="hljs-params">()</span>&#123;<br>            data++;<br>            methodOne();<br>        &#125;<br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>InnerClass类在ShowInnerClass类的内部定义，所以InnerClass是ShowInnerClass的内部类。</p>
+<h2 id="1-2-内部类的特性"><a href="#1-2-内部类的特性" class="headerlink" title="1.2 内部类的特性"></a>1.2 内部类的特性</h2><p>内部类作为定义在类中的类，有着其一定的特殊性。</p>
+<p>内部类有下列特性：</p>
+<h3 id="1-2-1-内部类有外部变量的直接访问权"><a href="#1-2-1-内部类有外部变量的直接访问权" class="headerlink" title="1.2.1 内部类有外部变量的直接访问权"></a>1.2.1 内部类有外部变量的直接访问权</h3><p>内部类可以引用包含它的外部类中的数据和方法，所以不必把外部类的引用传递给内部类的构造方法，<br>基于这个原因，内部类可以使程序简单明了。</p>
+<p>如下面所示，内部类InnerClass可以直接访问外部类的私有变量和方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ShowInnerClass</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> data;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> num;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">methodOne</span><span class="hljs-params">()</span>&#123;<br>    &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * InnerClass是ShowInnerClass的内部类</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">InnerClass</span>&#123;<br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">method</span><span class="hljs-params">()</span>&#123;<br>            data++;<br>            methodOne();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-2-2-内部类的编译文件"><a href="#1-2-2-内部类的编译文件" class="headerlink" title="1.2.2 内部类的编译文件"></a>1.2.2 内部类的编译文件</h3><p>内部类只是用来支撑外部类的工作。编译后，他的名称形如“外部类名称$内部类名称.class”。<br>例如，showInnerClass中内部类InnerClass,被编译为showInnerClass$$InnerClass.class。</p>
+<p><img   class="lazyload" data-original="/2023/05/15/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E5%9F%BA%E7%A1%80/15-%E5%86%85%E9%83%A8%E7%B1%BB,%E5%8C%BF%E5%90%8D%E7%B1%BB/15-%E5%86%85%E9%83%A8%E7%B1%BB,%E5%8C%BF%E5%90%8D%E7%B1%BB1.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">内部类编译后</span></p>
+<h3 id="1-2-3-内部类的成员"><a href="#1-2-3-内部类的成员" class="headerlink" title="1.2.3 内部类的成员"></a>1.2.3 内部类的成员</h3><p>内部类可以声明为public,protected,private，其意义与用在类的其他成员上相同。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ShowInnerClass</span> &#123;<br>    <span class="hljs-keyword">public</span> ShowInnerClass.InnerClass InnerClass;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> data;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> num;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">methodOne</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;Hello world&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">ShowInnerClass</span><span class="hljs-params">()</span>&#123;<br>        InnerClass = <span class="hljs-keyword">new</span> <span class="hljs-title class_">InnerClass</span>();<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * InnerClass是ShowInnerClass的内部类</span><br><span class="hljs-comment">     */</span><br>     <span class="hljs-keyword">class</span> <span class="hljs-title class_">InnerClass</span>&#123;<br>         <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> num2;<br>         <span class="hljs-keyword">protected</span> <span class="hljs-type">int</span> age;<br>         <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">method</span><span class="hljs-params">()</span>&#123;<br>            data++;<br>            methodOne();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-2-4-静态内部类"><a href="#1-2-4-静态内部类" class="headerlink" title="1.2.4 静态内部类"></a>1.2.4 静态内部类</h3><p>内部类可以声明为static的，可以使用外部类的类名来访问静态的内部类，<br>但静态的内部类不能访问外部类的非静态成员。</p>
+<p>如果内部类是静态的，使用下列语法可以直接创建它的对象:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">外部类.内部类 内部类对象名 = <span class="hljs-keyword">new</span> 外部类.内部类();<br></code></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StaticInnerClass</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> data;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">methodOne</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;hello world! &quot;</span>);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * InnerClass是ShowInnerClass的内部类</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">InnerClass</span>&#123;<br>        <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> num2;<br>        <span class="hljs-keyword">protected</span> <span class="hljs-type">int</span> age;<br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">method</span><span class="hljs-params">()</span>&#123;<br>            data++;<br>            methodOne();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>上面的类中定义了一个静态内部类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StaticInnerTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        StaticInnerClass.<span class="hljs-type">InnerClass</span> <span class="hljs-variable">innerClass</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StaticInnerClass</span>.InnerClass();<br>        innerClass.method();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">Hello world<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="1-2-5-内部类的使用"><a href="#1-2-5-内部类的使用" class="headerlink" title="1.2.5 内部类的使用"></a>1.2.5 内部类的使用</h3><p>我们经常在外部类中创建内部类的对象，但也可以从另外的类中创建内部类的对象。如果内部类是非静态的，<br>必须先创建外部类的实例，然后使用下列语法创建内部类的对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">外部类.内部类   内部类对象名 = 外部类对象.new 内部类();<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ShowInnerClass</span> &#123;<br>    <span class="hljs-keyword">public</span> ShowInnerClass.InnerClass InnerClass;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> data;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> num;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">methodOne</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;Hello world&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">ShowInnerClass</span><span class="hljs-params">()</span>&#123;<br>        InnerClass = <span class="hljs-keyword">new</span> <span class="hljs-title class_">InnerClass</span>();<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * InnerClass是ShowInnerClass的内部类</span><br><span class="hljs-comment">     */</span><br>     <span class="hljs-keyword">class</span> <span class="hljs-title class_">InnerClass</span>&#123;<br>         <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> num2;<br>         <span class="hljs-keyword">protected</span> <span class="hljs-type">int</span> age;<br>         <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">method</span><span class="hljs-params">()</span>&#123;<br>            data++;<br>            methodOne();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>上面的类中定义了非静态内部类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">InnerTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">ShowInnerClass</span> <span class="hljs-variable">showInnerClass</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ShowInnerClass</span>();<br>        ShowInnerClass.<span class="hljs-type">InnerClass</span> <span class="hljs-variable">innerClass</span> <span class="hljs-operator">=</span> showInnerClass.<span class="hljs-keyword">new</span> <span class="hljs-title class_">InnerClass</span>();<br>        innerClass.method();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">Hello world<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<h1 id="2-我们为什么需要内部类？"><a href="#2-我们为什么需要内部类？" class="headerlink" title="2.我们为什么需要内部类？"></a>2.我们为什么需要内部类？</h1><p>有人有问题：内部类要实现的东西，用前面已学的东西也可以实现，为什么要用它？</p>
+<p>这个问题粗略的来讲可以从使用环境来解释它。<br>有的地方我们用内部类的方法会更方便，至于是那些地方，现在本人并没有很深的理解。<br>但是，下面的场景我们可以考虑使用：<br>在定义POJO接收Json数据时，如果存在嵌套结构，我们可以使用内部类来定义接收，如下实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BackRequest</span> &#123;<br>    <span class="hljs-keyword">private</span> String transactionId;<br>    <span class="hljs-keyword">private</span> List&lt;Report&gt; reports;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Report</span>&#123;<br>        <span class="hljs-keyword">private</span> String uuid;<br>        <span class="hljs-keyword">private</span> String errorCode;<br>        <span class="hljs-keyword">private</span> String errorDesc;<br>        <span class="hljs-keyword">private</span> String time;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用上面的定义，让我们很容易的将Json数据和实体一一对应。</p>
+<h1 id="3-匿名内部类"><a href="#3-匿名内部类" class="headerlink" title="3.匿名内部类"></a>3.匿名内部类</h1><p>匿名类就是没有名字的子类。因为没有名字，可以使代码更简洁。</p>
+<p>例如<br>Bank是类，下面代码用Bank的一个子类创建对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">new</span> <span class="hljs-title class_">Bnak</span>()&#123;<br>...类体<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">NoNameClass</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> num;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> age;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">say</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;say hello&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>       <span class="hljs-type">NoNameClass</span> <span class="hljs-variable">noNameClass</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NoNameClass</span>() &#123;<br>           <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">say</span><span class="hljs-params">()</span> &#123;<br>               System.out.println(<span class="hljs-string">&quot;I am no body&quot;</span>);<br>           &#125;<br>       &#125;;<br>       noNameClass.say();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">I am no body<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<p>我们可以看出这样使子类的对象的创建更简洁了。但也有一个的局限性，就是一次使用。<br>不能在使用第二次这个类，因为没有名字。</p>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/exa15">Java基础学习&#x2F;src&#x2F;main&#x2F;java&#x2F;exa15 · 严家豆&#x2F;Study - 码云 - 开源中国 (gitee.com)</a></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/15/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E5%9F%BA%E7%A1%80/15-%E5%86%85%E9%83%A8%E7%B1%BB,%E5%8C%BF%E5%90%8D%E7%B1%BB/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;15&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;15-%E5%86%85%E9%83%A8%E7%B1%BB,%E5%8C%BF%E5%90%8D%E7%B1%BB&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;15&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;15-%E5%86%85%E9%83%A8%E7%B1%BB,%E5%8C%BF%E5%90%8D%E7%B1%BB&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80/" rel="tag">Java基础</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2023/05/15/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E5%9F%BA%E7%A1%80/14-%E6%8E%A5%E5%8F%A3%E7%BC%96%E7%A8%8B/"><i class="iconfont iconleft"></i>14.接口编程</a>
+    <a href="/2023/05/15/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E5%9F%BA%E7%A1%80/16-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%9A%84%E4%B8%89%E5%A4%A7%E9%94%99%E8%AF%AF,%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%92%8C%E6%96%AD%E8%A8%80/">16.程序设计的三大错误,异常类和断言<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%86%85%E9%83%A8%E7%B1%BB%EF%BC%9F"><span class="toc-text">1.什么是内部类？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%86%85%E9%83%A8%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">1.1 内部类的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E5%86%85%E9%83%A8%E7%B1%BB%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-text">1.2 内部类的特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-%E5%86%85%E9%83%A8%E7%B1%BB%E6%9C%89%E5%A4%96%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AE%E6%9D%83"><span class="toc-text">1.2.1 内部类有外部变量的直接访问权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-%E5%86%85%E9%83%A8%E7%B1%BB%E7%9A%84%E7%BC%96%E8%AF%91%E6%96%87%E4%BB%B6"><span class="toc-text">1.2.2 内部类的编译文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3-%E5%86%85%E9%83%A8%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98"><span class="toc-text">1.2.3 内部类的成员</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-4-%E9%9D%99%E6%80%81%E5%86%85%E9%83%A8%E7%B1%BB"><span class="toc-text">1.2.4 静态内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-5-%E5%86%85%E9%83%A8%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">1.2.5 内部类的使用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E6%88%91%E4%BB%AC%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%86%85%E9%83%A8%E7%B1%BB%EF%BC%9F"><span class="toc-text">2.我们为什么需要内部类？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB"><span class="toc-text">3.匿名内部类</span></a></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

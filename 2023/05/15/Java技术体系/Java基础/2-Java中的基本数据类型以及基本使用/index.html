@@ -1,0 +1,445 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>2.Java的基本数据类型的声明与使用 - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="1.基础部分1.1 Java的基本数据类型的声明与使用...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">2.Java的基本数据类型的声明与使用</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">2.Java的基本数据类型的声明与使用</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 15, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>3430</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="1-基础部分"><a href="#1-基础部分" class="headerlink" title="1.基础部分"></a>1.基础部分</h1><h2 id="1-1-Java的基本数据类型的声明与使用"><a href="#1-1-Java的基本数据类型的声明与使用" class="headerlink" title="1.1 Java的基本数据类型的声明与使用"></a>1.1 Java的基本数据类型的声明与使用</h2><p>Java基本数据类型有四类，分别是：<br></p>
+<p>整数型：byte(1字节)  short(2字节) int(4字节) long(8字节)<br><br>浮点型：float(4字节) double(8字节)<br><br>字符型：char(2字节)<br><br>布尔型：boolean(1位)<br><br>一共8个,其中整数型有四个，浮点型有两个，字符型一个，布尔型一个。</p>
+<p><strong>对于基本数据类型，我们可以不对其进行赋值操作，如果不对其进行赋值，java会自动帮其赋予初始值</strong>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs shell">byte: 0<br>short: 0<br>int: 0<br>long: 0<br>float: 0.0<br>double: 0.0<br>char:  <br> <br>boolean: false<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<h2 id="1-2-类型转换"><a href="#1-2-类型转换" class="headerlink" title="1.2 类型转换"></a>1.2 类型转换</h2><p>一般来说，低精度可自动转换为高精度</p>
+<p>当然我们也可以强制转换将高精度数值赋给低精度变量，不过强制转换可能出现精度损失的状况</p>
+<p>下面属于低转高，不会出现精度损失</p>
+<pre class="mermaid">graph LR
+byte-->short
+short-->int
+int-->long
+char-->int
+int-->double
+float-->double</pre>
+
+
+<p>而高精度转低精度可能会有精度损失:</p>
+<p>例如</p>
+<pre class="mermaid">graph LR
+int--lose-->float
+long--lose-->float
+long--lose-->double</pre>
+
+<p>下面是char转为其他类型时的表现：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell">char value: ￿<br>char to int: 65535<br>char to short: -1<br>char to long: 65535<br>char to float: 65535.0<br>char to double: 65535.0<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<h2 id="1-3-控制台输入，输出数据"><a href="#1-3-控制台输入，输出数据" class="headerlink" title="1.3 控制台输入，输出数据"></a>1.3 控制台输入，输出数据</h2><p>开始只需知道两个语句即可</p>
+<p><strong>输入</strong>：<br>Scanner reader &#x3D; new Scanner(System.in) ;<br>reader.nextDouble（）;<br>这里的nextDouble可以换成nextShort….等等根据数据类型定义。</p>
+<p><strong>Java是个严格区分大小写的语言</strong></p>
+<p><strong>输出</strong>：System.out.println();或System.out.print();<br>前者和后者的差别就是前者在输出后自动换行，后者不会。<br>还有  System.out.printf(); 用法和C语言的一样。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Scanner;<br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 让程序获取控制台用户输入的数据</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ScannerStudy</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">Scanner</span> <span class="hljs-variable">in</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>        System.out.println(<span class="hljs-string">&quot;请输入数据，回车结束：&quot;</span>);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">firstIn</span> <span class="hljs-operator">=</span> in.nextLine();<br>        System.out.println(<span class="hljs-string">&quot;获取控制台用户输入的字符串: &quot;</span>+firstIn);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">firstInt</span> <span class="hljs-operator">=</span> in.nextInt();<br>        System.out.println(<span class="hljs-string">&quot;获取控制台用户输入的int类型的数据： &quot;</span>+firstInt);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">firstLong</span> <span class="hljs-operator">=</span> in.nextInt();<br>        System.out.println(<span class="hljs-string">&quot;获取控制台用户输入的Long类型的数据： &quot;</span>+firstLong);<br>        <span class="hljs-type">double</span> <span class="hljs-variable">firstDouble</span> <span class="hljs-operator">=</span> in.nextDouble();<br>        System.out.println(<span class="hljs-string">&quot;获取控制台用户输入的double类型的数据：&quot;</span>+firstDouble);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs shell">请输入数据，回车结束：<br>你好<br>获取控制台用户输入的字符串: 你好<br>12<br>获取控制台用户输入的int类型的数据： 12<br>2332<br>获取控制台用户输入的Long类型的数据： 2332<br>2323.342<br>获取控制台用户输入的double类型的数据：2323.342<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<h2 id="1-4-数组"><a href="#1-4-数组" class="headerlink" title="1.4 数组"></a>1.4 数组</h2><p>在这里数组的使用有几个步骤：</p>
+<h3 id="1-4-1-声明"><a href="#1-4-1-声明" class="headerlink" title="1.4.1 声明"></a>1.4.1 声明</h3><p>声明数组的语法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">数组的元素类型  数组名[];<br>或者<br>数组的元素类型 [] 数组名;<br></code></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">float</span> boy[];<br>或者<br><span class="hljs-type">float</span>[] boy;<br></code></pre></td></tr></table></figure>
+
+<p><strong>(注意Java不允许在声明数组中的方括号内指定数组元素的个数)</strong></p>
+<h3 id="1-4-2-为数组分配内存空间"><a href="#1-4-2-为数组分配内存空间" class="headerlink" title="1.4.2 为数组分配内存空间"></a>1.4.2 为数组分配内存空间</h3><p>语法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">数组名 = <span class="hljs-keyword">new</span> 数组元素的类型[数组元素的个数];<br><br>例如：<br>        boy = <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[<span class="hljs-number">4</span>];<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="1-4-3-数组的使用"><a href="#1-4-3-数组的使用" class="headerlink" title="1.4.3 数组的使用"></a>1.4.3 数组的使用</h3><p>使用示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArrayStudy</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">int</span>[] nums;<br>        nums = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">5</span>];<br>        nums[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        nums[<span class="hljs-number">1</span>] = <span class="hljs-number">2</span>;<br>        System.out.println(<span class="hljs-string">&quot;nums[0]: &quot;</span>+nums[<span class="hljs-number">0</span>]);<br>        System.out.println(<span class="hljs-string">&quot;nums[1]: &quot;</span>+nums[<span class="hljs-number">1</span>]);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">nums[0]: 1<br>nums[1]: 2<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<h1 id="2-实践积累部分"><a href="#2-实践积累部分" class="headerlink" title="2.实践积累部分"></a>2.实践积累部分</h1><h2 id="2-1-数据的转换与赋值问题"><a href="#2-1-数据的转换与赋值问题" class="headerlink" title="2.1 数据的转换与赋值问题"></a>2.1 数据的转换与赋值问题</h2><p>只需弄懂下面程序的错误点即可：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">E</span>&#123;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String args[])</span>&#123;<br>      <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> <span class="hljs-number">8</span>;<span class="hljs-comment">//【代码１】</span><br>      <span class="hljs-type">byte</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span><span class="hljs-number">128</span>;<span class="hljs-comment">//【代码２】//超出范围</span><br>      x = <span class="hljs-number">12L</span>;<span class="hljs-comment">//【代码３】//12L表示long型数，需要强制转换才可以赋给int型</span><br>      <span class="hljs-type">long</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> <span class="hljs-number">8</span>;<span class="hljs-comment">//【代码４】//虽然可以，但不规范</span><br>      <span class="hljs-type">float</span> <span class="hljs-variable">z</span> <span class="hljs-operator">=</span> <span class="hljs-number">6.89</span>;<span class="hljs-comment">//【代码５】//float类型赋值应该在数的后面加f</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-2-注意System-out-println-与System-out-print-的区别"><a href="#2-2-注意System-out-println-与System-out-print-的区别" class="headerlink" title="2.2 注意System.out.println()与System.out.print()的区别"></a>2.2 注意System.out.println()与System.out.print()的区别</h2><p>虽然二者都是输出函数，但前者是输出自动换行，后者则不换行</p>
+<h2 id="2-3-要熟悉数组工作原理"><a href="#2-3-要熟悉数组工作原理" class="headerlink" title="2.3 要熟悉数组工作原理"></a>2.3 要熟悉数组工作原理</h2><p>下面的例子较好的说明了数组的基本工作原理：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">E</span> &#123;<br> <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String args[])</span> &#123;<br>        <span class="hljs-type">int</span> [] a=&#123;<span class="hljs-number">10</span>,<span class="hljs-number">20</span>,<span class="hljs-number">30</span>,<span class="hljs-number">40</span>&#125;,b[] = &#123;&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>&#125;,&#123;<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>&#125;&#125;;<br>        b[<span class="hljs-number">0</span>] = a;<br>        b[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>] = b[<span class="hljs-number">1</span>][<span class="hljs-number">3</span>];<br>        System.out.println(b[<span class="hljs-number">0</span>][<span class="hljs-number">3</span>]);<br>        System.out.println(a[<span class="hljs-number">1</span>]);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>如果你能正确推算出这个程序的输出结果，那么你对数组的内部工作原理了解不错了。<br>正确答案是：40　７</p>
+<p>代码地址：<br><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/exa02">https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/exa02</a></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/15/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E5%9F%BA%E7%A1%80/2-Java%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8A%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;15&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;2-Java%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8A%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;15&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;2-Java%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8A%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80/" rel="tag">Java基础</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2023/05/15/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E5%9F%BA%E7%A1%80/1-Java%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8/"><i class="iconfont iconleft"></i>1.Java小白入门</a>
+    <a href="/2023/05/15/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E5%9F%BA%E7%A1%80/3-%E4%BD%8D%E8%BF%90%E7%AE%97%EF%BC%8C%E7%89%B9%E6%9C%89%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%8C%E8%BF%90%E7%AE%97%E7%AC%A6/">3.位运算符,特有表达式,运算符<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86"><span class="toc-text">1.基础部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Java%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%A3%B0%E6%98%8E%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="toc-text">1.1 Java的基本数据类型的声明与使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">1.2 类型转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%85%A5%EF%BC%8C%E8%BE%93%E5%87%BA%E6%95%B0%E6%8D%AE"><span class="toc-text">1.3 控制台输入，输出数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E6%95%B0%E7%BB%84"><span class="toc-text">1.4 数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-1-%E5%A3%B0%E6%98%8E"><span class="toc-text">1.4.1 声明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-2-%E4%B8%BA%E6%95%B0%E7%BB%84%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4"><span class="toc-text">1.4.2 为数组分配内存空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-3-%E6%95%B0%E7%BB%84%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">1.4.3 数组的使用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%AE%9E%E8%B7%B5%E7%A7%AF%E7%B4%AF%E9%83%A8%E5%88%86"><span class="toc-text">2.实践积累部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BD%AC%E6%8D%A2%E4%B8%8E%E8%B5%8B%E5%80%BC%E9%97%AE%E9%A2%98"><span class="toc-text">2.1 数据的转换与赋值问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E6%B3%A8%E6%84%8FSystem-out-println-%E4%B8%8ESystem-out-print-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">2.2 注意System.out.println()与System.out.print()的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E8%A6%81%E7%86%9F%E6%82%89%E6%95%B0%E7%BB%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">2.3 要熟悉数组工作原理</span></a></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

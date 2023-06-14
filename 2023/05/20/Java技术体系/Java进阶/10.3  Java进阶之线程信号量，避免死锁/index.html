@@ -1,0 +1,429 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>10.3 Java进阶之线程信号量 - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="1.信号量1.1 什么是信号量？信号量指的是对共享资源...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">10.3 Java进阶之线程信号量</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">10.3 Java进阶之线程信号量</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 20, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>5747</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="1-信号量"><a href="#1-信号量" class="headerlink" title="1.信号量"></a>1.信号量</h1><h2 id="1-1-什么是信号量？"><a href="#1-1-什么是信号量？" class="headerlink" title="1.1 什么是信号量？"></a>1.1 什么是信号量？</h2><p>信号量指的是对共享资源进行访问控制的对象。<br>在访问资源之前，线程必须从信号量获取许可证，访问完之后，将许可证归还给信号量。</p>
+<p>流程如图：</p>
+<pre class="mermaid">graph TD
+
+seaphore.acquire-->visit_resource-->semaphore.release;</pre>
+
+<p>这样有助于资源的正确的有效利用，也能保证资源数据的安全性。</p>
+<h2 id="1-2-创建信号量"><a href="#1-2-创建信号量" class="headerlink" title="1.2 创建信号量"></a>1.2 创建信号量</h2><p>创建信号量必须确定许可数量，可以选用公平策略。<br>Java中信号量是用Semaphore类声明的对象。<br>类图如下：</p>
+<p>&#96;<pre class="mermaid">classDiagram<br>    class Semaphore{<br>      +Semaphore(numberOfPermits: int)<br>      +Semaphore(numberOfPermits:int, fair: boolean)<br>      +acquires() void<br>      +release() void<br>    }</pre></p>
+<p>`</p>
+<h3 id="1-2-1-使用实例"><a href="#1-2-1-使用实例" class="headerlink" title="1.2.1 使用实例"></a>1.2.1 使用实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs java"><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SemaphoreStudy</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">Account</span> <span class="hljs-variable">account</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Account</span>();<br>        <span class="hljs-type">ExecutorService</span> <span class="hljs-variable">executorService</span> <span class="hljs-operator">=</span> Executors.newFixedThreadPool(<span class="hljs-number">10</span>);<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;<span class="hljs-number">200</span>;j++)&#123;<br>            executorService.execute(()-&gt;&#123;<br>                <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;i&lt;<span class="hljs-number">100</span>;i++)<br>                    account.deposit(<span class="hljs-number">100</span>);<br>            &#125;);<br>        &#125;<br>        executorService.execute(()-&gt;&#123;<br>            <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)<br>                account.getBalance();<br>        &#125;);<br><br>    &#125;<br><br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Account</span> &#123;<br><br>        <span class="hljs-comment">//创建写信号量</span><br>        <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">Semaphore</span> <span class="hljs-variable">writeSemaphore</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Semaphore</span>(<span class="hljs-number">1</span>);<br><br>        <span class="hljs-comment">//创建读信号量</span><br>        <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">Semaphore</span> <span class="hljs-variable">readSemaphore</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Semaphore</span>(<span class="hljs-number">5</span>);<br><br>        <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">balance</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<span class="hljs-comment">//余额</span><br><br>        <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getBalance</span><span class="hljs-params">()</span> &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">try</span> &#123;<br>                readSemaphore.acquire();<br>                res = balance;<br>                System.out.println(<span class="hljs-string">&quot;获取余额：&quot;</span>+res);<br>                Thread.sleep(<span class="hljs-number">1000</span>);<br>            &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>                e.printStackTrace();<br>            &#125;<span class="hljs-keyword">finally</span> &#123;<br>                readSemaphore.release();<br>            &#125;<br>            <span class="hljs-keyword">return</span> res;<br>        &#125;<br><br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">deposit</span><span class="hljs-params">(<span class="hljs-type">int</span> amount)</span> &#123;<br>            <span class="hljs-keyword">try</span>&#123;<br>                writeSemaphore.acquire();<span class="hljs-comment">//获得许可</span><br>                <span class="hljs-type">int</span> <span class="hljs-variable">newBalance</span> <span class="hljs-operator">=</span> balance+amount;<span class="hljs-comment">//访问余额</span><br>                balance = newBalance;<span class="hljs-comment">//更新余额</span><br>                <span class="hljs-comment">//Thread.sleep(1000);</span><br>            &#125;<span class="hljs-keyword">catch</span>(InterruptedException ex) &#123;<br><br>            &#125; <span class="hljs-keyword">finally</span> &#123;<br>                writeSemaphore.release();<span class="hljs-comment">//归还信号量</span><br>            &#125;<br>        &#125;<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+<h1 id="2-避免死锁"><a href="#2-避免死锁" class="headerlink" title="2.避免死锁"></a>2.避免死锁</h1><h2 id="2-1-发生死锁"><a href="#2-1-发生死锁" class="headerlink" title="2.1 发生死锁"></a>2.1 发生死锁</h2><p>死锁发生的条件是某个线程一直不释放自己的锁而导致其他很多线程一直在等待阻塞状态。<br>简单来说，就是锁资源无法被其他线程获取，就是这个锁死了，俗称死锁。</p>
+<h3 id="2-1-1-死锁程序再现"><a href="#2-1-1-死锁程序再现" class="headerlink" title="2.1.1 死锁程序再现"></a>2.1.1 死锁程序再现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//完整代码地址在文章底部</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">write</span><span class="hljs-params">(<span class="hljs-type">int</span> value)</span> &#123;<br>    lock.lock();<span class="hljs-comment">//上锁</span><br>    <span class="hljs-keyword">try</span>&#123;<br>        <span class="hljs-keyword">while</span>(queue.size()==CAPACITY)&#123;<br>            System.out.println(<span class="hljs-string">&quot;缓冲区满了，等待读取&quot;</span>);<br>            <span class="hljs-comment">//释放锁，线程进入等待状态</span><br>            notFull.await();<br>        &#125;<br>        queue.offer(value);<span class="hljs-comment">//添加value到queue</span><br>        notEmpty.signal();<span class="hljs-comment">//唤醒read</span><br>        <br>        <span class="hljs-comment">//在这里添加循环，让线程一直不释放锁</span><br>        <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)&#123;<br>        &#125;<br>        <br>    &#125;<span class="hljs-keyword">catch</span>(InterruptedException ex) &#123;<br>        ex.printStackTrace();<br>    &#125; <span class="hljs-keyword">finally</span>&#123;<br>        lock.unlock();<span class="hljs-comment">//解锁</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p>可以发现，读取数据线程因为没获取到锁，所以没办法进行数据读取。</p>
+<p>死锁产生的经典场景是相互等待：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Thread1</span> &#123;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">synchronized</span> (object1) &#123;<br>            <span class="hljs-comment">// do something here</span><br>            <span class="hljs-keyword">synchronized</span> (object2) &#123;<br>                <span class="hljs-comment">// do something</span><br>            &#125;<br>        &#125;<br>        <br>        <br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Thread2</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">synchronized</span> (object2) &#123;<br>            <span class="hljs-comment">// do something here</span><br>            <span class="hljs-keyword">synchronized</span> (object1) &#123;<br>                <span class="hljs-comment">// do something</span><br>            &#125;<br>        &#125;<br>        <br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>如果出现上面的情况，就可能出现线程1在等线程2释放锁，而线程2又在等线程1释放锁，但是线程1和线程2谁也不释放锁，故而出现死锁。</p>
+<h2 id="2-2-如何避免死锁"><a href="#2-2-如何避免死锁" class="headerlink" title="2.2 如何避免死锁"></a>2.2 如何避免死锁</h2><p>我们可以采用正确的资源排序来避免死锁，或者引入合理的中断机制，让一些线程在无法长时间停留在获取锁或释放锁的阻塞状态。</p>
+<h1 id="3-同步集合"><a href="#3-同步集合" class="headerlink" title="3.同步集合"></a>3.同步集合</h1><h2 id="3-1-什么是同步集合？"><a href="#3-1-什么是同步集合？" class="headerlink" title="3.1 什么是同步集合？"></a>3.1 什么是同步集合？</h2><p>同步集合就是线程安全的集合，我们可以将同步集合使用在多线程编程上，无需对其进行同步编程(无需考虑锁的问题)<br>前面学习Java合集框架的类并不一定是线程安全的，就是说如果它们同时被多个线程访问和更新可能会破坏其数据。<br>那么怎么保证集合中数据的安全性呢？<br>这时候我们可以通过Collections来保护合集中的数据。<br>所以Collections提供6个静态方法来将合集建成同步版本，使用这些方法创建的合集称为同步集合类</p>
+<p>我们来看下类图：（将集合转换成同步版本的方法）</p>
+<pre class="mermaid">classDiagram 
+    class Collections{
+      +synchronizedCollection(c:Collection) Collection
+      +synchronizedList(list:List) List
+      +synchronizedMap(m:Map) Map
+      +synchronizedSet(s:Set) Set
+      +synchronizedSortedMap(s:SortedMap) SortedMap
+      +synchronizedSortedSet(s:SortedSet) SortedSet
+    }</pre>
+
+<h2 id="3-2-Collections类"><a href="#3-2-Collections类" class="headerlink" title="3.2 Collections类"></a>3.2 Collections类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//Collection参数封装为一个安全的集合并返回,这是一个比较通用的方法</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; Collection&lt;T&gt; <span class="hljs-title function_">synchronizedCollection</span><span class="hljs-params">(Collection&lt;T&gt; c)</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SynchronizedCollection</span>&lt;&gt;(c);<br>&#125;<br><span class="hljs-comment">//将List对象封装为线程安全的List并返回</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; List&lt;T&gt; <span class="hljs-title function_">synchronizedList</span><span class="hljs-params">(List&lt;T&gt; list)</span> &#123;<br>    <span class="hljs-keyword">return</span> (list <span class="hljs-keyword">instanceof</span> RandomAccess ?<br>            <span class="hljs-keyword">new</span> <span class="hljs-title class_">SynchronizedRandomAccessList</span>&lt;&gt;(list) :<br>            <span class="hljs-keyword">new</span> <span class="hljs-title class_">SynchronizedList</span>&lt;&gt;(list));<br>&#125;<br><span class="hljs-comment">//将Map对象封装为线程安全的Map并返回</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;K,V&gt; Map&lt;K,V&gt; <span class="hljs-title function_">synchronizedMap</span><span class="hljs-params">(Map&lt;K,V&gt; m)</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SynchronizedMap</span>&lt;&gt;(m);<br>&#125;<br><span class="hljs-comment">//将传入的Set对象封装为线程安全的Set并返回</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; Set&lt;T&gt; <span class="hljs-title function_">synchronizedSet</span><span class="hljs-params">(Set&lt;T&gt; s)</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SynchronizedSet</span>&lt;&gt;(s);<br>&#125;<br><span class="hljs-comment">//将传入的SortedMap封装为线程安全的并返回</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;K,V&gt; SortedMap&lt;K,V&gt; <span class="hljs-title function_">synchronizedSortedMap</span><span class="hljs-params">(SortedMap&lt;K,V&gt; m)</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SynchronizedSortedMap</span>&lt;&gt;(m);<br>&#125;<br><span class="hljs-comment">//将传入的SortSet对象封装为线程安全的SortedSet并返回</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; SortedSet&lt;T&gt; <span class="hljs-title function_">synchronizedSortedSet</span><span class="hljs-params">(SortedSet&lt;T&gt; s)</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SynchronizedSortedSet</span>&lt;&gt;(s);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>想要了解更多大家可以看看源码，看看它是怎么把普通集合变为同步集合的。</p>
+<p>其实就是让对于的Synchronized…实现和实现类相同的接口，然后进行重写，在重写的方法中调用传入对象的方法的时候加入同步操作。<br>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> E <span class="hljs-title function_">set</span><span class="hljs-params">(<span class="hljs-type">int</span> index, E element)</span> &#123;<br>    <span class="hljs-keyword">synchronized</span> (mutex) &#123;<span class="hljs-keyword">return</span> list.set(index, element);&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>学到这里，应该算是入门多线程了，如果想要深入学习多线程，还需要另外花时间去研究和学习。</p>
+<h1 id="4-代码地址"><a href="#4-代码地址" class="headerlink" title="4 代码地址"></a>4 代码地址</h1><p><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/Progress/exa28_3">Java基础学习&#x2F;src&#x2F;main&#x2F;java&#x2F;Progress&#x2F;exa28_3 · 严家豆&#x2F;Study - 码云 - 开源中国 (gitee.com)</a></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/10.3%20%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E7%BA%BF%E7%A8%8B%E4%BF%A1%E5%8F%B7%E9%87%8F%EF%BC%8C%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;10.3%20%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E7%BA%BF%E7%A8%8B%E4%BF%A1%E5%8F%B7%E9%87%8F%EF%BC%8C%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;10.3%20%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E7%BA%BF%E7%A8%8B%E4%BF%A1%E5%8F%B7%E9%87%8F%EF%BC%8C%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%BF%9B%E9%98%B6/" rel="tag">Java进阶</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/10.2%20%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E7%BA%BF%E7%A8%8B%E9%97%B4%E5%8D%8F%E4%BD%9C%EF%BC%8C%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85Demo%EF%BC%8C%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/"><i class="iconfont iconleft"></i>10.1 Java进阶之线程的概念</a>
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/19%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E5%8A%A8%E6%80%81%E7%BC%96%E8%AF%91/">19 Java进阶之动态编译<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E4%BF%A1%E5%8F%B7%E9%87%8F"><span class="toc-text">1.信号量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E4%BF%A1%E5%8F%B7%E9%87%8F%EF%BC%9F"><span class="toc-text">1.1 什么是信号量？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E5%88%9B%E5%BB%BA%E4%BF%A1%E5%8F%B7%E9%87%8F"><span class="toc-text">1.2 创建信号量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B"><span class="toc-text">1.2.1 使用实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81"><span class="toc-text">2.避免死锁</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%8F%91%E7%94%9F%E6%AD%BB%E9%94%81"><span class="toc-text">2.1 发生死锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-%E6%AD%BB%E9%94%81%E7%A8%8B%E5%BA%8F%E5%86%8D%E7%8E%B0"><span class="toc-text">2.1.1 死锁程序再现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81"><span class="toc-text">2.2 如何避免死锁</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E5%90%8C%E6%AD%A5%E9%9B%86%E5%90%88"><span class="toc-text">3.同步集合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%90%8C%E6%AD%A5%E9%9B%86%E5%90%88%EF%BC%9F"><span class="toc-text">3.1 什么是同步集合？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-Collections%E7%B1%BB"><span class="toc-text">3.2 Collections类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E4%BB%A3%E7%A0%81%E5%9C%B0%E5%9D%80"><span class="toc-text">4 代码地址</span></a></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

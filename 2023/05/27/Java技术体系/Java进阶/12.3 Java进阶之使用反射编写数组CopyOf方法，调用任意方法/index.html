@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="@[TOC]
+总结自《Java核心技术卷Ⅰ》
+1.使用...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title"></h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 27, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>3550</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <p>@[TOC]</p>
+<p>总结自《Java核心技术卷Ⅰ》</p>
+<h1 id="1-使用反射编写泛型数组代码"><a href="#1-使用反射编写泛型数组代码" class="headerlink" title="1.使用反射编写泛型数组代码"></a>1.使用反射编写泛型数组代码</h1><p>java.lang.reflect包中的Array类允许根据Class动态地创建数组。<br>比如Array类中的copyOf方法实现就是用了这个类，这个copyOf方法可以用于扩展一个已经填满的数组。</p>
+<p><strong>我们下面学习学习的是如何让一个特殊类型的数组转换成一个Object类型的数组的更加通用的copyOf方法。</strong></p>
+<p>实现这一目的我们需要用到的方法有：<br><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/20200512135519270.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2MxNzc2MTY3MDEy,size_16,color_FFFFFF,t_70" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">在这里插入图片描述</span></p>
+<h2 id="1-1-学习例子"><a href="#1-1-学习例子" class="headerlink" title="1.1 学习例子"></a>1.1 学习例子</h2><p><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/83173eb84908423aa4c5e630f1c1337a.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">在这里插入图片描述</span></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.lang.reflect.*;<br><span class="hljs-keyword">import</span> java.util.*;<br><br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CopyOfTest</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">int</span>[] a = &#123; <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span> &#125;;<br>        a = (<span class="hljs-type">int</span>[]) goodCopyOf(a, <span class="hljs-number">10</span>);<br>        System.out.println(Arrays.toString(a));<br><br>        String[] b = &#123; <span class="hljs-string">&quot;Tom&quot;</span>, <span class="hljs-string">&quot;Dick&quot;</span>, <span class="hljs-string">&quot;Harry&quot;</span> &#125;;<br>        System.out.println(<span class="hljs-string">&quot;好的copyOf实现方式：&quot;</span>);<br>        b = (String[]) goodCopyOf(b, <span class="hljs-number">10</span>);<br>        System.out.println(Arrays.toString(b));<br><br>        System.out.println(<span class="hljs-string">&quot;不好的copyOf实现方式访问数组：&quot;</span>);<br>        Object[] bad = badCopyOf(b, <span class="hljs-number">10</span>);<br>        System.out.println(Arrays.toString(bad));<br>    &#125;<br><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     *  数组复制方法实现</span><br><span class="hljs-comment">     * （并不推荐这种做法,因为这样创建的是Object的数组，不能进行数组类型强转操作，也就是说每次取出元素使用都要进行强转）</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> a</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> newLength</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Object[] badCopyOf(Object[] a, <span class="hljs-type">int</span> newLength)&#123;<br>        Object[] newArray = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[newLength];<br>        System.arraycopy(a, <span class="hljs-number">0</span>, newArray, <span class="hljs-number">0</span>, Math.min(a.length, newLength));<br>        <span class="hljs-keyword">return</span> newArray;<br>    &#125;<br><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 数组复制方法实现</span><br><span class="hljs-comment">     * 这种方式的好处是可以对数组类型进行强转的</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> a</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> newLength</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Object <span class="hljs-title function_">goodCopyOf</span><span class="hljs-params">(Object a, <span class="hljs-type">int</span> newLength)</span> &#123;<br>        Class&lt;?&gt; cl = a.getClass();<br>        <span class="hljs-keyword">if</span> (!cl.isArray()) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-comment">//获得数组元素类型</span><br>        Class&lt;?&gt; componentType = cl.getComponentType();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">length</span> <span class="hljs-operator">=</span> Array.getLength(a);<span class="hljs-comment">//获得数组长度</span><br>        <span class="hljs-type">Object</span> <span class="hljs-variable">newArray</span> <span class="hljs-operator">=</span> Array.newInstance(componentType, newLength);<br>        System.arraycopy(a, <span class="hljs-number">0</span>, newArray, <span class="hljs-number">0</span>, Math.min(length, newLength));<br>        <span class="hljs-keyword">return</span> newArray;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="2-使用反射调用任意方法"><a href="#2-使用反射调用任意方法" class="headerlink" title="2.使用反射调用任意方法"></a>2.使用反射调用任意方法</h1><p>反射机制允许我们能不通过调用对象的方法调用对象中我们想要调用的方法。</p>
+<p><strong>在Method中有一个invoke的方法，它允许调用包装在当前Method对象中的方法。</strong></p>
+<h2 id="2-1-例子"><a href="#2-1-例子" class="headerlink" title="2.1 例子"></a>2.1 例子</h2><p><img   class="lazyload" data-original="https://img-blog.csdnimg.cn/0adad404420a40aa9774af2e5278ed7b.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">在这里插入图片描述</span></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.lang.reflect.*;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MethodTableTest</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br><br>        <span class="hljs-comment">//获取类MethodTableTest中定义的square(double x)方法对象</span><br>        <span class="hljs-type">Method</span> <span class="hljs-variable">square</span> <span class="hljs-operator">=</span> MethodTableTest.class.getMethod(<span class="hljs-string">&quot;square&quot;</span>, <span class="hljs-type">double</span>.class);<br>        <span class="hljs-comment">//获取类Math中定义的sqrt(double x)方法对象</span><br>        <span class="hljs-type">Method</span> <span class="hljs-variable">sqrt</span> <span class="hljs-operator">=</span> Math.class.getMethod(<span class="hljs-string">&quot;sqrt&quot;</span>, <span class="hljs-type">double</span>.class);<br>        <span class="hljs-comment">//通过反射执行</span><br>        printTable(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, square);<br>        printTable(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, sqrt);<br>    &#125;<br><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 定义计算一个数值的平方的方法</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> x</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">double</span> <span class="hljs-title function_">square</span><span class="hljs-params">(<span class="hljs-type">double</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x * x;<br>    &#125;<br><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 这个方法打印出区间 from-to 指定步长的值，并打印出其平方数</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> from 小边界值</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> to 大边界值</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> n 个数</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> f 方法对象</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">printTable</span><span class="hljs-params">(<span class="hljs-type">double</span> from, <span class="hljs-type">double</span> to, <span class="hljs-type">int</span> n, Method f)</span> &#123;<br>        <span class="hljs-comment">//打印出Method所描述的方法</span><br>        System.out.println(f);<br>        <span class="hljs-comment">//步长</span><br>        <span class="hljs-type">double</span> <span class="hljs-variable">dx</span> <span class="hljs-operator">=</span> (to - from) / (n - <span class="hljs-number">1</span>);<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">double</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> from; x &lt;= to; x += dx) &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                <span class="hljs-comment">//执行Method所描述的方法</span><br>                <span class="hljs-type">double</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> (Double) f.invoke(<span class="hljs-literal">null</span>, x);<br>                System.out.printf(<span class="hljs-string">&quot;%10.4f | %10.4f%n&quot;</span>, x, y);<br>            &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>                e.printStackTrace();<br>            &#125;<br>        &#125;<br><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="3-代码仓库链接"><a href="#3-代码仓库链接" class="headerlink" title="3.代码仓库链接"></a>3.代码仓库链接</h1><p><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/Progress/exa30_3">Java基础学习&#x2F;src&#x2F;main&#x2F;java&#x2F;Progress&#x2F;exa30_3 · 严家豆&#x2F;Study - 码云 - 开源中国 (gitee.com)</a></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/27/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/12.3%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E7%BC%96%E5%86%99%E6%95%B0%E7%BB%84CopyOf%E6%96%B9%E6%B3%95%EF%BC%8C%E8%B0%83%E7%94%A8%E4%BB%BB%E6%84%8F%E6%96%B9%E6%B3%95/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;27&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;12.3%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E7%BC%96%E5%86%99%E6%95%B0%E7%BB%84CopyOf%E6%96%B9%E6%B3%95%EF%BC%8C%E8%B0%83%E7%94%A8%E4%BB%BB%E6%84%8F%E6%96%B9%E6%B3%95&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;27&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;12.3%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E7%BC%96%E5%86%99%E6%95%B0%E7%BB%84CopyOf%E6%96%B9%E6%B3%95%EF%BC%8C%E8%B0%83%E7%94%A8%E4%BB%BB%E6%84%8F%E6%96%B9%E6%B3%95&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+        
+  <nav class="nav">
+    <a href="/2023/05/27/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/12.2%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E5%8F%8D%E5%B0%84%E6%9F%A5%E7%9C%8B%E5%B1%9E%E6%80%A7%E7%9A%84%E5%80%BC%EF%BC%8C%E6%9F%A5%E7%9C%8B%E4%BB%BB%E6%84%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E9%83%A8%E4%BF%A1%E6%81%AF/"><i class="iconfont iconleft"></i></a>
+    <a href="/2023/05/27/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/11.1%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E7%BD%91%E7%BB%9CIP,DNS,TCP,UDP,%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B%EF%BC%8C%E5%A5%97%E6%8E%A5%E5%AD%97/"><i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E7%BC%96%E5%86%99%E6%B3%9B%E5%9E%8B%E6%95%B0%E7%BB%84%E4%BB%A3%E7%A0%81"><span class="toc-text">1.使用反射编写泛型数组代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%AD%A6%E4%B9%A0%E4%BE%8B%E5%AD%90"><span class="toc-text">1.1 学习例子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E8%B0%83%E7%94%A8%E4%BB%BB%E6%84%8F%E6%96%B9%E6%B3%95"><span class="toc-text">2.使用反射调用任意方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E4%BE%8B%E5%AD%90"><span class="toc-text">2.1 例子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93%E9%93%BE%E6%8E%A5"><span class="toc-text">3.代码仓库链接</span></a></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>4.文件读写-字节流 - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="1.什么是字节流字节流最大的特点是，每次调用read或...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">4.文件读写-字节流</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">4.文件读写-字节流</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 20, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>7443</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="1-什么是字节流"><a href="#1-什么是字节流" class="headerlink" title="1.什么是字节流"></a>1.什么是字节流</h1><p>字节流最大的特点是，每次调用read或write读入或写出的数据是以字节为单位的，而有的字符需要两个字节去存储，<br>所以字节流读取数据会发生读到的数据不准确的情况。(就会看到乱码的效果)<br>在Java中的字节流的类命名一般是以Stream结尾的,比如FileInputStream.</p>
+<h2 id="1-1-字节数组流"><a href="#1-1-字节数组流" class="headerlink" title="1.1 字节数组流"></a>1.1 字节数组流</h2><p>输入输出流的源 和 目的地除了可以是“文件”（硬盘）外，还可以是计算机内存，我们也可以使用数组流来将数据输入输出到内存。<br>字节数组流就是用来将内存中的数据输入到程序中,或者将程序的数据输出到内存中去的字节流。</p>
+<h3 id="1-1-1-ByteArrayInputStream-字节数组输入流"><a href="#1-1-1-ByteArrayInputStream-字节数组输入流" class="headerlink" title="1.1.1 ByteArrayInputStream 字节数组输入流"></a>1.1.1 ByteArrayInputStream 字节数组输入流</h3><p>ByteArrayInputStream是输入流InputStream的一种实现，它的源只能是字节数组byte[]，它支持mark。</p>
+<h4 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h4><p><strong>ByteArrayInputStream(byte[]  buf);</strong><br>此构造方法的字节数组流的源是参数buf指定的数组的全部字节单元。<br><strong>ByteArrayInputStream(byte[]  buf ,int offset,int length);</strong><br>此方法构造的字节数组流的源是buf指定的数组从offset处按顺序取length个字节单元。</p>
+<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><p><strong>public int read();</strong><br>该方法可以顺序地从源中读取一个字节，返回读出的字节值。<br><strong>public int read(byte[] b,int off,int len);</strong><br>该方法可以顺序地从源中读出参数len指定的字节数，并将读出的字节存放在参数b指定的数组中，参数off指定数组b读出字节的起始位置，返回实际读出的字节个数，若未读出字节read方法返回-1.</p>
+<h4 id="使用示例："><a href="#使用示例：" class="headerlink" title="使用示例："></a>使用示例：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">readStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-comment">//定义字节数组输入流的源</span><br>    <span class="hljs-type">byte</span>[] bytes = <span class="hljs-string">&quot;我是四郎&quot;</span>.getBytes(StandardCharsets.UTF_8);<br>    <span class="hljs-comment">//根据源创建字节数组输入流</span><br>    <span class="hljs-type">ByteArrayInputStream</span> <span class="hljs-variable">inputStream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayInputStream</span>(bytes);<br>    <span class="hljs-comment">//读取源bytes中的数据</span><br>    <span class="hljs-type">int</span> n;<br>    <span class="hljs-keyword">while</span> ((n=inputStream.read())!=-<span class="hljs-number">1</span>)&#123;<br>        System.out.print((<span class="hljs-type">char</span>)n);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">ææ¯åé<br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="1-1-2-ByteArrayOutputStream-字节数组输出流"><a href="#1-1-2-ByteArrayOutputStream-字节数组输出流" class="headerlink" title="1.1.2 ByteArrayOutputStream 字节数组输出流"></a>1.1.2 ByteArrayOutputStream 字节数组输出流</h3><p>ByteArrayOutputStream是输出流的一种实现，它的目的地只能是字节数组byte[]，它支持mark。</p>
+<h4 id="构造方法-1"><a href="#构造方法-1" class="headerlink" title="构造方法"></a>构造方法</h4><p><strong>ByteArrayOutputStream();</strong><br>该方法构造的字节数组输出空间指向一个默认大小为32字节的缓冲区，若输出流向缓冲区写入的字节个数大于缓冲区时，缓冲区的容量会自动增加。<br><strong>ByteArrayOutputStream(int size);</strong><br>此方法构造的字节数组输出流指向的缓冲区的初始大小由参数size指定，若输出流向缓冲区写入的字节个数大于缓冲区时，缓冲区的容量会自动的增加。</p>
+<h4 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h4><p><strong>public void write(int b);</strong><br>字节数组输出流可调用该方法顺序地向缓冲区写入一个字节。<br><strong>public void write(byte[] b, int off, int len);</strong><br>该方法可以将参数b中指定的len个字节顺序地写入缓冲区，参数off指定从b中写出的字节的起始位置。<br><strong>public byte[] toByteArray();</strong><br>该方法可以返回输出流写入到缓冲区的全部字节，通过它我们可以获取写出的数据。</p>
+<h4 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">toByteArrayStudy</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>    <span class="hljs-type">byte</span>[] result;<br>    <span class="hljs-type">byte</span>[] bytes = <span class="hljs-string">&quot;我是四郎&quot;</span>.getBytes(StandardCharsets.UTF_8);<br>    <span class="hljs-type">ByteArrayOutputStream</span> <span class="hljs-variable">outputStream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayOutputStream</span>();<br>    outputStream.write(bytes);<br>    result = outputStream.toByteArray();<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">byte</span> a:bytes)&#123;<br>        System.out.print(a);<br>    &#125;<br>    System.out.println();<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">byte</span> b:result)&#123;<br>        System.out.print(b);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">-26-120-111-26-104-81-27-101-101-23-125-114<br>-26-120-111-26-104-81-27-101-101-23-125-114<br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="1-2-字节数据流"><a href="#1-2-字节数据流" class="headerlink" title="1.2 字节数据流"></a>1.2 字节数据流</h2><p>数据流能让我们读取或写出指定类型的数据，它是普通字节流的一种增强。<br>它可以有其他类型的输入流作为构造函数的参数进行构造。</p>
+<h3 id="1-2-1-DataInputStream-数据输入流"><a href="#1-2-1-DataInputStream-数据输入流" class="headerlink" title="1.2.1 DataInputStream 数据输入流"></a>1.2.1 DataInputStream 数据输入流</h3><p>由DataInputStream类创建的对象称为数据输入流。</p>
+<p>它们允许程序按着机器无关的风格读取java原始数据，也就是说，当读取一个数值时，不必再关心这个数值应当是多少字节。<br>它算是对其他字节输入流的一种增强，但是也有一定的局限，比如用它读取readChar只能读取编码为UTF-16的文件，<br>读取其他文件将会乱码。</p>
+<h4 id="构造方法-2"><a href="#构造方法-2" class="headerlink" title="构造方法"></a>构造方法</h4><p><strong>DataInputStream(InputStream in);</strong></p>
+<p>此构造方法创建的数据输入流指向一个由参数in指定的底层输入流。</p>
+<h4 id="常用方法-2"><a href="#常用方法-2" class="headerlink" title="常用方法"></a>常用方法</h4><p><strong>close();关闭流。<br>readBoolean();读取一个布尔值。<br>readByte();读取一个字节。<br>readChar();读取一个字符。<br>readDouble();读取一个双精度浮点值。<br>readFloat();读取一个单精度浮点值。<br>readInt();读取一个整型值。<br>readLong();读取一个长整型值。<br>readShort();读取一个短整型值。<br>readUnsignedByte();读取一个无符号字节。<br>readUnsignedShort();读取一个无符号短整型值。<br>readUTF();读取一个UTF字符串。</strong></p>
+<h4 id="使用实例："><a href="#使用实例：" class="headerlink" title="使用实例："></a>使用实例：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>    <span class="hljs-comment">// 将文件输入流作为参数构造数据输入流</span><br>    <span class="hljs-type">DataInputStream</span> <span class="hljs-variable">inputStream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DataInputStream</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(<span class="hljs-string">&quot;麻子.txt&quot;</span>));<br>    <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">builder</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>    <span class="hljs-comment">// 从文件读数据</span><br>    <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)&#123;<br>        <span class="hljs-keyword">try</span>&#123;<br>           builder.append(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Character</span>(inputStream.readChar()));<br>        &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>            inputStream.close();<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>    &#125;<br>    System.out.println(builder.toString());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">鏥邍㨠ꃩ못逍૦肧꯯벚⃧钷ഊ듩뺄㨠㈸ഊꫦ袑蓤뮷騠뷥ꖽ諥ꖽ뷥ꖽ蠍૥꒧ꛦ袐ꧯ벚䄠䄠䄍૦꾕髩馢ꄺ⃩뮄铥蚛ꄍ૨躷韨꾁ꛯ벚駥뢈蓦ꂼ脬⃦閙飨꾁ഊ뫧钟볨ꢀ㨠곥릳賥薬돯벌飦颯瑭蓥薬댍૤뢓髯벚鏥誫鏤뢚<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="1-2-2-DataOutputStream-数据输出流"><a href="#1-2-2-DataOutputStream-数据输出流" class="headerlink" title="1.2.2 DataOutputStream 数据输出流"></a>1.2.2 DataOutputStream 数据输出流</h3><p>用法和输入流大同小异，它是字节输出流的一种增强。</p>
+<h4 id="1-2-2-1-关键方法"><a href="#1-2-2-1-关键方法" class="headerlink" title="1.2.2.1 关键方法"></a>1.2.2.1 关键方法</h4><p><strong>writeDouble(double v)<br>writeInt(int v)<br>writeUTF(String v)等。</strong></p>
+<p>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>    <span class="hljs-type">DataOutputStream</span> <span class="hljs-variable">outputStream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DataOutputStream</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(<span class="hljs-string">&quot;四郎.txt&quot;</span>));<br>    <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;我是四郎，我爱死麻子了！！&quot;</span>;<br>    outputStream.writeUTF(str);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果：<br>生成了 四郎.txt文件</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">&#x27;我是四郎，我爱死麻子了！！<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-3-字节对象流-比较重要"><a href="#1-3-字节对象流-比较重要" class="headerlink" title="1.3 字节对象流(比较重要)"></a>1.3 字节对象流(比较重要)</h2><p>用ObjectInputStream和ObjectOutputStream类创建的对象称为对象输入（出）流。<br>对象输入（出）流可以将一个对象写入到一个文件中（或从文件读取一个对象到内存中）。<br>这个对象IO流比较常用，它可以将对象状态保存到磁盘中或通过网络发送出去，<br>接收方只需要用相同的机制在需要的时候重新加载， 相当于深拷贝了。</p>
+<h3 id="1-3-1-ObjectInputStream-对象输入流"><a href="#1-3-1-ObjectInputStream-对象输入流" class="headerlink" title="1.3.1 ObjectInputStream 对象输入流"></a>1.3.1 ObjectInputStream 对象输入流</h3><p><strong>ObjectInputStream(InputStream in);</strong><br>此方法是对象输入流的构造方法。<br><strong>readObject();</strong><br>此方法读取一个对象到程序中。</p>
+<h3 id="1-3-2-ObjectOutputStream-对象输出流"><a href="#1-3-2-ObjectOutputStream-对象输出流" class="headerlink" title="1.3.2 ObjectOutputStream 对象输出流"></a>1.3.2 ObjectOutputStream 对象输出流</h3><p><strong>ObjectOutputStream(OutputStream out);</strong><br>此方法是对象输出流的构造方法。</p>
+<p><strong>writeObject(object obj);</strong><br>此方法可以将obj写入到目的地。</p>
+<p>实例：<br>首先使用对象输出流将对象写入磁盘中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>    <span class="hljs-type">ObjectOutputStream</span> <span class="hljs-variable">outputStream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectOutputStream</span><br>    (<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(<span class="hljs-string">&quot;四郎&quot;</span>));<br>    List&lt;String&gt; a = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>    a.add(<span class="hljs-string">&quot;我是四郎，我爱死麻子了&quot;</span>);<br>    outputStream.writeObject(a);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果：<br>生成了 四郎  文件</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">�� sr java.util.ArrayListx����a� I sizexp   w   t !我是四郎，我爱死麻子了x<br></code></pre></td></tr></table></figure>
+
+
+<p>然后使用对象输入流重新加载：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException, ClassNotFoundException &#123;<br>    <span class="hljs-type">ObjectInputStream</span> <span class="hljs-variable">inputStream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectInputStream</span><br>    (<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(<span class="hljs-string">&quot;四郎&quot;</span>));<br>    List&lt;String&gt; a  = (List&lt;String&gt;) inputStream.readObject();<br>    System.out.println(a);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">[我是四郎，我爱死麻子了]<br><br>Process finished with exit code 0<br></code></pre></td></tr></table></figure>
+
+<h2 id="1-3-RandomAccessFile-随机IO流"><a href="#1-3-RandomAccessFile-随机IO流" class="headerlink" title="1.3 RandomAccessFile 随机IO流"></a>1.3 RandomAccessFile 随机IO流</h2><p>在java中，我们也可以只建立一个流，通过该流既能读文件，也能写文件。<br>那就是RandomAccessFile类创建的随机流。<br>RandomAccessFile类创建的流的指向既可以作为流的源，也可以作为流的目的地。<br>随机IO流读取字符是以字节为单位的。</p>
+<h3 id="1-3-1-使用方法"><a href="#1-3-1-使用方法" class="headerlink" title="1.3.1 使用方法"></a>1.3.1 使用方法</h3><h4 id="构造方法-3"><a href="#构造方法-3" class="headerlink" title="构造方法"></a>构造方法</h4><p><strong>RandomAccessFile(String name,String mode);</strong><br><strong>RandomAccessFile(File file ,String mode);</strong><br>参数name用来确定一个文件名，给出创建的流的源（也是目的地）。<br>参数mode取r（只读）或rw（可读写），决定创建流对文件的访问权利。</p>
+<p><strong>注意：随机流指向文件，不刷新文件。</strong></p>
+<h4 id="1-3-1-2-常用方法"><a href="#1-3-1-2-常用方法" class="headerlink" title="1.3.1.2 常用方法"></a>1.3.1.2 常用方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java">close();关闭文件<br>getFilePointer();获取当前读写的位置。<br>length();获取文件的长度。<br>read();从文件中读取一个字节的数据。<br>readBoolean();从文件中读取一个布尔值，<span class="hljs-number">0</span>代表<span class="hljs-literal">false</span>，其他代表<span class="hljs-literal">true</span>。<br>readByte();从文件中读取一个字节。<br>readChar();从文件中读取一个字符。（两个字节）<br>readDouble(); 从文件读取一个双精度浮点值（<span class="hljs-number">8</span>个字节）<br>readFloat(); 从文件读取一个单精度浮点值（<span class="hljs-number">4</span>个字节）<br>readFully(<span class="hljs-type">byte</span> b[]); 读b.length字节放入数组b，完全填满该数组<br>readInt();从文件中读取一个<span class="hljs-type">int</span>值（<span class="hljs-number">4</span>个字节）<br>readLine();从文件中读取一个文本行<br>readLong();从文件中读取一个长整型值（<span class="hljs-number">8</span>个字节）<br>readShort();从文件中读取一个短型值（<span class="hljs-number">2</span>个字节）<br>readUnsignedByte();从文件读取一个无符号字节（<span class="hljs-number">1</span>个字节）<br>readUnsignedShort();从文件读取一个无符号短型值（<span class="hljs-number">2</span>个字节）<br>readUTF();从文件中读取一个UTF字符串<br>seek(<span class="hljs-type">long</span> position);定位读写位置<br>setLength(<span class="hljs-type">long</span> newlength);设置文件的长度。<br>skipBytes(<span class="hljs-type">int</span> n);在文件中跳过给定数量的字节。<br>write(<span class="hljs-type">byte</span> b[]);写b.length个字节到文件<br>writeBoolean(<span class="hljs-type">boolean</span> v);把一个布尔值作为单字节值写入文件<br>writeByte(<span class="hljs-type">int</span> v);向文件写入一个字节<br>writeByte(String s);向文件写入一个字符串<br>writeChar(<span class="hljs-type">char</span> c);向文件写入一个字符<br>writeChars(String s);向文件写入一个作为字符数据的字符串<br>writeDouble(<span class="hljs-type">double</span> v);向文件写入一个双精度浮点值<br>writeFloat(<span class="hljs-type">float</span> v);向文件写入一个单精度浮点值<br>writeInt(<span class="hljs-type">int</span> v);向文件写入一个<span class="hljs-type">int</span>值<br>writeLong(<span class="hljs-type">long</span> v);向文件写入一个长整型值<br>writeShort(<span class="hljs-type">int</span> v);向文件写入一个短整型值<br>writeUTF(String s);向文件写入一个UTF字符串<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="1-3-1-3-使用实例"><a href="#1-3-1-3-使用实例" class="headerlink" title="1.3.1.3 使用实例"></a>1.3.1.3 使用实例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RandomAccessFileStudy</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        <span class="hljs-type">RandomAccessFile</span> <span class="hljs-variable">randomAccessFile</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RandomAccessFile</span>(<span class="hljs-string">&quot;麻子.txt&quot;</span>,<span class="hljs-string">&quot;rw&quot;</span>);<br>        <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)&#123;<br>               <span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> randomAccessFile.readLine();<br>               <span class="hljs-keyword">if</span>(s==<span class="hljs-literal">null</span>) <span class="hljs-keyword">break</span>;<br>               System.out.println(s);<br>        &#125;<br>        randomAccessFile.write(<span class="hljs-string">&quot;\n你好，我是四郎&quot;</span>.getBytes(StandardCharsets.UTF_8));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs text">å§å: å¼ éº»å­<br>æ§å«ï¼ ç·<br>å¹´é¾: 28<br>èªæè¯ä»·ï¼ å¥½å¥½åå¥½å¥½å¥½å<br>å¤§å­¦æç»©ï¼A A A<br>æ¯ä¸é¢æ ¡: é»ååæ ¡<br>è·å¾è¯ä¹¦ï¼æå¸èµæ ¼è¯, æå®è¯<br>äººçæ ¼è¨: å¬å¹³ï¼å¬å¹³ï¼è¿æ¯tmçå¬å¹³<br>ä¸ä¸ï¼æå«ä¸ä¸<br><br>Process finished with exit code 0<br>并且成功向麻子.txt写入下面的内容： 你好，我是四郎<br></code></pre></td></tr></table></figure>
+
+
+<p>代码地址：<br><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/Progress/exa22">Java基础学习&#x2F;src&#x2F;main&#x2F;java&#x2F;Progress&#x2F;exa22 · 严家豆&#x2F;Study - 码云 - 开源中国 (gitee.com)</a></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/4.%20%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%EF%BC%9A%E5%AD%97%E8%8A%82%E6%B5%81/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;4.%20%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%EF%BC%9A%E5%AD%97%E8%8A%82%E6%B5%81&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;20&#x2F;Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB&#x2F;Java%E8%BF%9B%E9%98%B6&#x2F;4.%20%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%EF%BC%9A%E5%AD%97%E8%8A%82%E6%B5%81&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E8%BF%9B%E9%98%B6/" rel="tag">Java进阶</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/3.%20%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%EF%BC%9A%E4%BD%BF%E7%94%A8IO%E6%B5%81%E7%9A%84%E6%AD%A5%E9%AA%A4/"><i class="iconfont iconleft"></i>3.文件读写：使用IO流的步骤</a>
+    <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/5.%20%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%EF%BC%9A%E5%AD%97%E7%AC%A6%E6%B5%81/">5.文件读写-字符流<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%AD%97%E8%8A%82%E6%B5%81"><span class="toc-text">1.什么是字节流</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%AD%97%E8%8A%82%E6%95%B0%E7%BB%84%E6%B5%81"><span class="toc-text">1.1 字节数组流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-ByteArrayInputStream-%E5%AD%97%E8%8A%82%E6%95%B0%E7%BB%84%E8%BE%93%E5%85%A5%E6%B5%81"><span class="toc-text">1.1.1 ByteArrayInputStream 字节数组输入流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-ByteArrayOutputStream-%E5%AD%97%E8%8A%82%E6%95%B0%E7%BB%84%E8%BE%93%E5%87%BA%E6%B5%81"><span class="toc-text">1.1.2 ByteArrayOutputStream 字节数组输出流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E5%AD%97%E8%8A%82%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="toc-text">1.2 字节数据流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-DataInputStream-%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5%E6%B5%81"><span class="toc-text">1.2.1 DataInputStream 数据输入流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-DataOutputStream-%E6%95%B0%E6%8D%AE%E8%BE%93%E5%87%BA%E6%B5%81"><span class="toc-text">1.2.2 DataOutputStream 数据输出流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E5%AD%97%E8%8A%82%E5%AF%B9%E8%B1%A1%E6%B5%81-%E6%AF%94%E8%BE%83%E9%87%8D%E8%A6%81"><span class="toc-text">1.3 字节对象流(比较重要)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-ObjectInputStream-%E5%AF%B9%E8%B1%A1%E8%BE%93%E5%85%A5%E6%B5%81"><span class="toc-text">1.3.1 ObjectInputStream 对象输入流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-ObjectOutputStream-%E5%AF%B9%E8%B1%A1%E8%BE%93%E5%87%BA%E6%B5%81"><span class="toc-text">1.3.2 ObjectOutputStream 对象输出流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-RandomAccessFile-%E9%9A%8F%E6%9C%BAIO%E6%B5%81"><span class="toc-text">1.3 RandomAccessFile 随机IO流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">1.3.1 使用方法</span></a></li></ol></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
