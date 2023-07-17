@@ -1,0 +1,453 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>策略模式 - 牧之的博客空间</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="1.什么是策略模式？策略模式定义了算法族，分别封装起来...">
+  <meta name="author" content="MuZhi">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/rainbow.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '/images/theme/welcome2.png',
+          api: ''
+        },
+        motto: {
+          default: 'public class Hello {public static void main(String[] args) {System.out.println(1+1=n)}}',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="lock-screen">
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">策略模式</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/muzhiIndex/ " class="underline "> 文章归档</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/projectInfo/ " class="underline "> 作者项目</a>
+      </li><li class="menu-item">
+        <a href="/2099/05/20/personinfo/ " class="underline "> 关于作者</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">策略模式</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 15, 2023</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>7000</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h1 id="1-什么是策略模式？"><a href="#1-什么是策略模式？" class="headerlink" title="1.什么是策略模式？"></a>1.什么是策略模式？</h1><p>策略模式定义了算法族，分别封装起来，让他们之间可以相互替换，此模式让算法的变化独立于使用算法的客户。</p>
+<h1 id="2-结合需求案例理解此模式"><a href="#2-结合需求案例理解此模式" class="headerlink" title="2.结合需求案例理解此模式"></a>2.结合需求案例理解此模式</h1><p>借用设计模式head first书本中的例子，我们根据一次简单的项目设计来体现策略模式的优势。</p>
+<h2 id="2-1-首次需求"><a href="#2-1-首次需求" class="headerlink" title="2.1 首次需求"></a>2.1 首次需求</h2><h3 id="2-1-1需求描述"><a href="#2-1-1需求描述" class="headerlink" title="2.1.1需求描述"></a>2.1.1需求描述</h3><p>我们需要做一款模拟鸭子的游戏，游戏中会出现各种鸭子，一边游泳戏水，一般呱呱叫。请提供此游戏的后端支持，提供各种的鸭子api</p>
+<h3 id="2-1-2-程序设计"><a href="#2-1-2-程序设计" class="headerlink" title="2.1.2 程序设计"></a>2.1.2 程序设计</h3><p>从满足需求的方向上去设计，我们可以得到如下设计：</p>
+<p><img   class="lazyload" data-original="/2023/05/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/1.1.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">img.png</span></p>
+<p><strong>Java代码实现如下：</strong></p>
+<p>设计一个鸭子抽象类，用来定义所有鸭子的共有属性行为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 鸭子抽象类</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Duck</span> &#123;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   *外观抽象方法，</span><br><span class="hljs-comment">   因为不同鸭子的外观可能不同，需要具体的鸭子实体类去实现</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">disPlay</span><span class="hljs-params">()</span>;<br>  <br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   *呱呱叫行为</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">Quack</span><span class="hljs-params">()</span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;Quack ! Quack!!&quot;</span>);<br>  &#125;<br>  <br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   *游泳行为</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">swim</span><span class="hljs-params">()</span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;游啊游~~~&quot;</span>);<br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>  然后所有的鸭子实体类去继承它来进行编程，这样就达到了代码复用的效果：<br>  目前游戏中只需要两类鸭子的API： MallardDuck , RedheadDuck</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MallardDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Duck</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">disPlay</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;我是绿头鸭！！&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RedheadDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Duck</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">disPlay</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;我是红头鸭！！&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>好了，这时我们就可以提供API了。<br>第一次需求完美解决了哈哈！！ 又可以摸鱼了呀！！</p>
+<p>可是好景不长，没过几天，新的需求又来了。。。。。。</p>
+<h2 id="2-2-第二次需求"><a href="#2-2-第二次需求" class="headerlink" title="2.2 第二次需求"></a>2.2 第二次需求</h2><h3 id="2-2-1-需求描述"><a href="#2-2-1-需求描述" class="headerlink" title="2.2.1 需求描述"></a>2.2.1 需求描述</h3><p>产品部决定给这个游戏里加上会飞的鸭子来增强游戏的可玩性。<br>这时，我们该怎么做呢？</p>
+<h3 id="2-2-2-程序设计"><a href="#2-2-2-程序设计" class="headerlink" title="2.2.2 程序设计"></a>2.2.2 程序设计</h3><p>这时，你可能会说，这还不简单？<br>直接在抽象类Duck上加一个fly实现方法就好了呀，它的子类都拥有这个行为了呀，搞定！！</p>
+<p><img   class="lazyload" data-original="/2023/05/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/img_1.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">img_1.png</span></p>
+<p>但是，产品说的是给游戏里加上会飞的鸭子，<strong>并不是说给所有鸭子加上飞行技能！！ 于是产品让你返工。</strong></p>
+<p><img   class="lazyload" data-original="/2023/05/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/img.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">img.png</span></p>
+<p>这时，你又可能会说，这简单啊，直接修改那些本不具备飞行能力的鸭子，让他覆盖掉fly方法就好了，覆盖的方法啥都不做不就行了。<br><img   class="lazyload" data-original="/2023/05/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/img_2.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">img_2.png</span></p>
+<p><strong>Java实现如下：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 鸭子抽象类</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Duck</span> &#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">    *外观抽象方法，</span><br><span class="hljs-comment">    因为不同鸭子的外观可能不同，需要具体的鸭子实体类去实现</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">disPlay</span><span class="hljs-params">()</span>;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">    *呱呱叫行为</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">Quack</span><span class="hljs-params">()</span>&#123;<br>       System.out.println(<span class="hljs-string">&quot;Quack ! Quack!!&quot;</span>);<br>    &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">    *游泳行为</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">swim</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;游啊游~~~&quot;</span>);<br>    &#125;<br>    <span class="hljs-comment">//新增一个飞行方法</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;飞呀飞~~~&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MallardDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Duck</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">disPlay</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;我是绿头鸭！！&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//这个鸭子不会飞,则需要单独去覆盖父类的fly方法</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RedheadDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Duck</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">disPlay</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;我是红头鸭！！&quot;</span>);<br>    &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">    *红头鸭不会飞，覆盖掉父类的fly方法</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span>&#123;&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>嗯嗯，这次产品那边没啥好说的了。这次的需求勉强应付过去了吧，可是，在你修改的过程中，你发现了，<br>你要如果要更改以前某些会飞的鸭子为不会飞，这样你需要一个一个鸭子的去覆盖，工作量上来了。。。。</p>
+<h2 id="2-3-第三次需求"><a href="#2-3-第三次需求" class="headerlink" title="2.3 第三次需求"></a>2.3 第三次需求</h2><h3 id="2-3-1-需求描述"><a href="#2-3-1-需求描述" class="headerlink" title="2.3.1 需求描述"></a>2.3.1 需求描述</h3><p>现在需要加入一个诱饵鸭子，这个鸭子及不会飞，也不会叫。</p>
+<h3 id="2-3-2-程序设计"><a href="#2-3-2-程序设计" class="headerlink" title="2.3.2 程序设计"></a>2.3.2 程序设计</h3><p>按照现在的程序设计,需要这样做：<br><img   class="lazyload" data-original="/2023/05/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/img_3.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">img_3.png</span></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DecoyDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Duck</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">disPlay</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;我是诱饵鸭子！！&quot;</span>);<br>    &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">    *诱饵鸭不会飞，覆盖掉父类的fly方法</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span>&#123;&#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">    *诱饵鸭不会叫，覆盖掉父类的方法</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-meta">@Override</span> <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">quack</span><span class="hljs-params">()</span>&#123;&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这样做虽然可以，但是我们很快就意识到不对劲，按照这样的频率进行更新，<br>每当有新的鸭子子类出现，我们就要被迫检查并可能需要覆盖父类的方法, 如果父类的方法有很多 ,这简直是工作量爆炸好吧！！<br>意识到这点后，我们决定优化设计，让其能轻松应对频繁的更新而让我们的工作量尽可能的少增加。</p>
+<h2 id="2-4-设计优化"><a href="#2-4-设计优化" class="headerlink" title="2.4 设计优化"></a>2.4 设计优化</h2><p>于是，技术主管让员工们想出一个较好的设计方案来进行优化，并且悬赏，解决这个问题将奖励10万元。</p>
+<p>员工A的优化方案：<br>我们可以把Duck类的fly方法提取出来，放进一个叫Flyable的接口里，这么一来，只有会飞的鸭子去实现这个接口，同样的方式，<br>我们也可以设计一个Quackable接口。</p>
+<p><img   class="lazyload" data-original="/2023/05/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/img_4.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">img_4.png</span></p>
+<p>主管思考一会儿后回答：<br>你没发现如果这样做重复的代码会变多吗？ 如果你认为覆盖几个方法是差劲的，那么对于你这种做法，<br>对于50个鸭子类都要修改以下飞行的行为，你又怎么说？</p>
+<p>员工A： 好吧，我承认这确实不是个好主意。</p>
+<p>员工B经过思考后，总结出了使用继承并不能很好的解决问题，因为鸭子的行为在子类里是不断改变的，并且让所有的子类都有这些行为是不恰当的。<br>后面员工A的方法虽然解决了一些问题，但是java接口不具有实现代码的特性，所以继承接口无法达到代码的复用。<br>这意味着： 无论何时你需要修改某个行为，你必须得往下追踪并在每一个定义此行为的类中修改它，一不小心就会出现新的错误。<br>这时，他记得一个设计原则：<strong>找出应用中可能需要变化之处，把他们独立出来，不要和那些不需要变化的代码混在一起。</strong></p>
+<p>这个原则可能会有帮助，那么从何开始呢？</p>
+<p>首先分析出变化和非变化的部分：<br>我们知道Duck类的fly() 和 quack() 会随着鸭子的不同而改变。所以它是变化的部分，我们需要将这两个行为从Duck类中分离出来，我们可以建立一组新类来代表每个行为。<br>这时，员工B又想到一个原则：<strong>针对接口编程，而不是针对实现编程。</strong> 所以他决定把这组新类用接口描述，然后又具体的实体类去实现它。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">FlyBehavior</span> &#123;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">QuackBehavior</span> &#123;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">quack</span><span class="hljs-params">()</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>这样，具体的fly和quack的实现实体的动作实体类中就可以了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FlyWithWings</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">FlyBehavior</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;我飞起来了！！&quot;</span>);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Quack</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">QuackBehavior</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">quack</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;呱呱呱！&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>好啦，现在把这些可变的部分从Duck中分离出来了，现在Duck是这样的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 鸭子抽象类</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Duck</span> &#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">    *外观抽象方法，</span><br><span class="hljs-comment">    因为不同鸭子的外观可能不同，需要具体的鸭子实体类去实现</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">disPlay</span><span class="hljs-params">()</span>;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">    *游泳行为</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">swim</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;游啊游~~~&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>经过上面的提取，现在的设计是这样的：<br><img   class="lazyload" data-original="/2023/05/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/img_5.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">img_5.png</span></p>
+<p>员工B卡住了，他想，虽然这些动作抽离出来了，但是要怎样用在具体的鸭子类里呢？<br>这时他想到了一个原则：<strong>多用组合，少用继承</strong></p>
+<p>于是他有了下面的做法：</p>
+<p><img   class="lazyload" data-original="/2023/05/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/img_7.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">img_7.png</span></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MallardDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Duck</span> &#123;<br>    FlyBehavior fly;<br>    QuackBehavior quack;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">disPlay</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;我是绿头鸭！！&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span>&#123;<br>        fly.fly();    <br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">quack</span><span class="hljs-params">()</span>&#123;<br>        quack.quack();    <br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setFlyBehavior</span><span class="hljs-params">(FlyBehavior fly)</span>&#123;<br>        <span class="hljs-built_in">this</span>.fly = fly;    <br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setQuackBehavior</span><span class="hljs-params">(QuackBehavior qb)</span>&#123;<br>        <span class="hljs-built_in">this</span>.quack = qb;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RedheadDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Duck</span> &#123;<br>    FlyBehavior fly;<br>    QuackBehavior quack;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">disPlay</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;我是红头鸭！！&quot;</span>);<br>    &#125;<br>     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span>&#123;<br>        fly.fly();    <br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">quack</span><span class="hljs-params">()</span>&#123;<br>        quack.quack();    <br>    &#125;<br>     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setFlyBehavior</span><span class="hljs-params">(FlyBehavior fly)</span>&#123;<br>        <span class="hljs-built_in">this</span>.fly = fly;    <br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setQuackBehavior</span><span class="hljs-params">(QuackBehavior qb)</span>&#123;<br>        <span class="hljs-built_in">this</span>.quack = qb;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>员工B仔细一看，不对啊，还是又一些重复的代码，能不能不要彻底丢弃继承呢？ 适当的时候还是用一下，于是他进行了优化，得到下面的做法：<br>将组合的动作在父类做了，子类直接使用即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 鸭子抽象类，组合了飞行接口和呱呱接口，</span><br><span class="hljs-comment"> * 实现了面对抽象编程</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Duck</span> &#123;<br>    <br>    <span class="hljs-comment">//接口，实现可变</span><br>    FlyBehavior flyBehavior;<br>    <span class="hljs-comment">//接口，实现可变</span><br>    QuackBehavior quackBehavior;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Duck</span><span class="hljs-params">()</span>&#123;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">disPlay</span><span class="hljs-params">()</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">performFly</span><span class="hljs-params">()</span>&#123;<br>        flyBehavior.fly();<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">performQuack</span><span class="hljs-params">()</span>&#123;<br>        quackBehavior.quack();<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">swim</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;All ducks float , even decoys!!&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setFlyBehavior</span><span class="hljs-params">(FlyBehavior fb)</span>&#123;<br>        <span class="hljs-built_in">this</span>.flyBehavior = fb;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setQuackBehavior</span><span class="hljs-params">(QuackBehavior qb)</span>&#123;<br>        <span class="hljs-built_in">this</span>.quackBehavior = qb;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这时,每一个子类的编写可以写成如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MallardDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Duck</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">disPlay</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;我是绿头鸭！！&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MallardDuck</span><span class="hljs-params">()</span>&#123;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MallardDuck</span><span class="hljs-params">(QuackBehavior quackBehavior, FlyBehavior flyBehavior)</span>&#123;<br>        setQuackBehavior(quackBehavior);<br>        setFlyBehavior(flyBehavior);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>至此，一个模式就此诞生！！ 策略模式！！ 员工B的这个模式得到了老板的认同，他拿到了奖金！！</p>
+<p>可真不容易啊, 优化后的策略模式完整代码如下：<br><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/design-mode/blob/master/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/src/main/java/StrategyPattern/MiniDuckSimulator.java">策略模式示例代码</a></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>MuZhi</li>
+    <li><strong>本文链接：</strong><a href="https://1776167012.github.io/2023/05/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/1.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/index.html" title="https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;15&#x2F;%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F&#x2F;1.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F&#x2F;index.html">https:&#x2F;&#x2F;1776167012.github.io&#x2F;2023&#x2F;05&#x2F;15&#x2F;%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F&#x2F;1.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2023/05/15/resource/"><i class="iconfont iconleft"></i>resource</a>
+    <a href="/2023/05/15/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E5%8A%A8%E6%89%8B%E5%AE%9E%E6%88%98%E5%AD%A6%E4%B9%A0/Java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/1.%E8%8E%B7%E5%8F%96%E6%9C%AC%E6%9C%BAIP%E5%9C%B0%E5%9D%80,%E4%B8%BB%E6%9C%BA%E5%90%8D,%E5%9F%9F%E5%90%8D/">1.获取本机IP地址,主机名,域名<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk" class="gitalk"></div>
+<script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  window.onload = function () {
+    var gitalk = new Gitalk({
+      clientID: 'cf1a88bb18f217ba4273',
+      clientSecret: 'a318855f6fbec72927c2c0dd565e61ab6f79cbf0',
+      id: window.location.pathname,
+      repo: 'muzhi-resource',
+      owner: '1776167012',
+      admin: '1776167012'
+    });
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        gitalk.render('gitalk');
+      });
+    } else {
+      gitalk.render('gitalk');
+    }
+  }
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%EF%BC%9F"><span class="toc-text">1.什么是策略模式？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E7%BB%93%E5%90%88%E9%9C%80%E6%B1%82%E6%A1%88%E4%BE%8B%E7%90%86%E8%A7%A3%E6%AD%A4%E6%A8%A1%E5%BC%8F"><span class="toc-text">2.结合需求案例理解此模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E9%A6%96%E6%AC%A1%E9%9C%80%E6%B1%82"><span class="toc-text">2.1 首次需求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1%E9%9C%80%E6%B1%82%E6%8F%8F%E8%BF%B0"><span class="toc-text">2.1.1需求描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1"><span class="toc-text">2.1.2 程序设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E7%AC%AC%E4%BA%8C%E6%AC%A1%E9%9C%80%E6%B1%82"><span class="toc-text">2.2 第二次需求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-%E9%9C%80%E6%B1%82%E6%8F%8F%E8%BF%B0"><span class="toc-text">2.2.1 需求描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1"><span class="toc-text">2.2.2 程序设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E7%AC%AC%E4%B8%89%E6%AC%A1%E9%9C%80%E6%B1%82"><span class="toc-text">2.3 第三次需求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-%E9%9C%80%E6%B1%82%E6%8F%8F%E8%BF%B0"><span class="toc-text">2.3.1 需求描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1"><span class="toc-text">2.3.2 程序设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E8%AE%BE%E8%AE%A1%E4%BC%98%E5%8C%96"><span class="toc-text">2.4 设计优化</span></a></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a
+        href="https://gitee.com/yan-jiadou "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a
+        href="mailto:1776167012@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#00CCFF"
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+
+
+  
+<script src="/lib/mermaid/mermaid.min.js"></script>
+  <!-- 或者使用CDN -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

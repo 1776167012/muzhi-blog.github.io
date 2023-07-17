@@ -193,7 +193,7 @@
     <div class="head-info">
       <span class="post-info-item"><i class="iconfont iconcalendar"></i>五月 20, 2023</span>
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>9679</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>9626</span>
     </div>
   </div>
 </section>
@@ -201,8 +201,7 @@
       <section class="content">
         
         <h1 id="1-我们为何要操作文件？"><a href="#1-我们为何要操作文件？" class="headerlink" title="1.我们为何要操作文件？"></a>1.我们为何要操作文件？</h1><p>首先,我们思考一个问题，在没学习JDBC之前，我们怎么将程序产生的数据持久化(存储)到硬盘&#x2F;磁盘中呢？<br>并且我们如何去读取硬盘中的文件呢？<br>答案就是Java的文件操作机制和输入输出流机制，Java提供了丰富的API让我们能对文件进行操作，其中最基础的类就是File类。</p>
-<h1 id="2-File类能干啥？"><a href="#2-File类能干啥？" class="headerlink" title="2.File类能干啥？"></a>2.File类能干啥？</h1><p>File类主要用来获取文件本身的一些信息，例如文件所在的目录、文件的大小(也可称为长度)或文件读写权限等，<br><strong>但不涉及对文件的读写操作，但是对文件读写操作是基于文件的。</strong></p>
-<p>用户界面和操作系统使用依赖于系统的路径名 字符串命名文件和目录，<strong>这个类提供了一个抽象的，<br>独立于系统的层次化路径名的视图。</strong></p>
+<h1 id="2-File类能干啥？"><a href="#2-File类能干啥？" class="headerlink" title="2.File类能干啥？"></a>2.File类能干啥？</h1><p>File类主要用来获取文件本身的一些信息，例如文件所在的目录、文件的大小(也可称为长度)或文件读写权限等，<br><strong>但不涉及对文件的读写操作，但是一些对文件读写操作是基于文件的。</strong></p>
 <h1 id="3-File类中的方法"><a href="#3-File类中的方法" class="headerlink" title="3.File类中的方法"></a>3.File类中的方法</h1><h2 id="3-1构造方法"><a href="#3-1构造方法" class="headerlink" title="3.1构造方法"></a>3.1构造方法</h2><h3 id="File-String-filename"><a href="#File-String-filename" class="headerlink" title="File(String filename);"></a>File(String filename);</h3><p>根据文件名构造File对象,其中，filename是文件名字，<br>使用File(String filename)创建文件时，该文件被认为与当前应用程序在同一目录中。</p>
 <h3 id="File-String-directoryPath-String-filename"><a href="#File-String-directoryPath-String-filename" class="headerlink" title="File(String directoryPath,String filename);"></a>File(String directoryPath,String filename);</h3><p>根据路径名称和文件名构造File对象，其中，filename是文件名字，directoryPath是文件的路径</p>
 <h3 id="File-File-dir-String-filename"><a href="#File-File-dir-String-filename" class="headerlink" title="File(File dir,String filename);"></a>File(File dir,String filename);</h3><p>dir为一个目录File对象，filename是文件名</p>
@@ -307,8 +306,7 @@
 <h3 id="public-boolean-detele"><a href="#public-boolean-detele" class="headerlink" title="public boolean detele();"></a>public boolean detele();</h3><p>此方法为删除一个文件的方法。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">deleteStudy</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;四郎.txt&quot;</span>);<br>    <span class="hljs-type">boolean</span> <span class="hljs-variable">sus</span> <span class="hljs-operator">=</span> file.delete();<br>    <span class="hljs-keyword">if</span>(sus) System.out.println(<span class="hljs-string">&quot;四郎.txt 文件删除完成！！&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 
-
-<p><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/Progress/exa01">Java基础学习&#x2F;src&#x2F;main&#x2F;java&#x2F;Progress&#x2F;exa01 · 严家豆&#x2F;Study - 码云 - 开源中国 (gitee.com)</a></p>
+<p>完整代码地址：<br><a target="_blank" rel="noopener" href="https://gitee.com/yan-jiadou/study/tree/master/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/src/main/java/Progress/exa01">Java基础学习&#x2F;src&#x2F;main&#x2F;java&#x2F;Progress&#x2F;exa01 · 严家豆&#x2F;Study - 码云 - 开源中国 (gitee.com)</a></p>
 <p>如果想动手做点东西，可以参考Java动手做一做之文件编程专栏：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/c1776167012/category_10987539.html">Java动手做一做之文件编程</a></p>
 
       </section>
@@ -328,7 +326,7 @@
 
         
   <nav class="nav">
-    <a href="/2023/05/27/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/11.2%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E7%BD%91%E7%BB%9CInetAddress%E7%B1%BB%EF%BC%8C%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"><i class="iconfont iconleft"></i></a>
+    <a href="/2023/05/27/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/11.1%20Java%E8%BF%9B%E9%98%B6%E4%B9%8B%E7%BD%91%E7%BB%9CIP,DNS,TCP,UDP,%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B%EF%BC%8C%E5%A5%97%E6%8E%A5%E5%AD%97/"><i class="iconfont iconleft"></i></a>
     <a href="/2023/05/20/Java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB/Java%E8%BF%9B%E9%98%B6/2.1%20Java%E8%AF%BB%E6%96%87%E4%BB%B6%E4%B9%8BInputStream%E5%AD%A6%E4%B9%A0/">2.1 Java读文件之InputStream学习<i class="iconfont iconright"></i></a>
   </nav>
 
